@@ -32,7 +32,6 @@ public class BallBar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D ball) 
     {    
-        Debug.Log(ball.ToString()+ "Enter");
         if (ball.gameObject.tag == "ball") 
         {    
             OnBallEnter(ball.gameObject);
@@ -41,7 +40,6 @@ public class BallBar : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D ball) 
     {    
-        Debug.Log(ball.ToString()+ "Enter");
         if (ball.gameObject.tag == "ball") 
         {    
             OnBallEnter(ball.gameObject);

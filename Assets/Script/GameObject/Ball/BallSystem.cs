@@ -34,7 +34,17 @@ public class BallSystem : IGameSystem
         return Balls;
     }
 
+    public int GetBallCount(){
+        return Balls.Count;
+    }
+
+    public void RemoveAllBall(){
+        foreach(Ball ball in Balls){
+            ball.Release();
+        }
+    }
     public void RemoveBall(Ball ball){
         Balls.Remove(ball);
     }
+
 }

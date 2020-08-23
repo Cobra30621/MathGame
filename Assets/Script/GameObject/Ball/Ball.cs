@@ -104,6 +104,8 @@ public class Ball : MonoBehaviour
         BallFactory ballFactory = MainFactory.GetBallFactory();
         if (ballColor == BallColor.Purple)
             ballFactory.CreateTwoBossBall(this);
+        if (ballColor == BallColor.Green) // 綠色產生兩個Ball
+            ballFactory.CreateTwoBossBall(this);
         else if(ballColor == BallColor.Orange)
             ballFactory.CreateTwoPlusBall(this);
         else if(ballColor == BallColor.Blue)

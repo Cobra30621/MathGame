@@ -7,12 +7,18 @@ public class GradeInfoUI : MonoBehaviour
 {
     private static GradeInfoUI instance;
 
-    [SerializeField] private Text lab_point, lab_combol, lab_combolPlus, lab_Time;
+    [SerializeField] private Text lab_point, lab_combol, lab_combolPlus, lab_Time, lab_FullCombol, lab_stageName;
 
     void Start()
     {
         instance = this;
         Refresh();
+        Initialize();
+    }
+
+    public static void Initialize(){
+        instance.CloseFullCombol();
+        RefreshInfo();
     }
 
     public static void RefreshInfo(){
@@ -34,6 +40,9 @@ public class GradeInfoUI : MonoBehaviour
             lab_combolPlus.text = "";
         else
             lab_combolPlus.text = $"+{combolPlus}%";
+
+        string stageName = GameMeditor.Instance.GetStageName();
+        lab_stageName.text = stageName;
         
     }
 
@@ -50,7 +59,26 @@ public class GradeInfoUI : MonoBehaviour
             time = Mathf.FloorToInt(Rawtime) + 1;
 
         lab_Time.text = $"{time}";
+    }
 
+    public static void ShowWhetherFullCombol(){
+        instance.ShowFullCombol();
+    }
+
+    public void ShowFullCombol(){
+        int MissCombol = GameMeditor.Instance.GetMissCombol();
+        lab_FullCombol.gameObject.SetActive(true);
+        if (MissCombol == 0)
+            lab_FullCombol.text = "Full Combol";
+        else
+            lab_FullCombol.text = $"Miss Combol: {MissCombol}";
+        
+        lab_Time.gameObject.SetActive(false); // 影藏時間
+    }
+
+    public void CloseFullCombol(){
+        lab_FullCombol.gameObject.SetActive(false);
+        lab_Time.gameObject.SetActive(true); // 顯示時間
     }
 
 

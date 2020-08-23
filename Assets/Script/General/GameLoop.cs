@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
-    public int num = 2;
+    public int level ;
+
     private BallFactory ballFactory;
     
     int [] numList =  {2, 3, 4,5,6,7,8,9};
@@ -18,13 +19,9 @@ public class GameLoop : MonoBehaviour
         GameMeditor.Instance.Update();
     }
 
-    public void CreateBalls(){
-        int index = Random.Range(0, numList.Length);
-        num = numList[index];
-        ballFactory.CreateBall(num);
-    }
 
     public void ResetStage(){
+        GameMeditor.Instance.SetStageData(level);
 		GameMeditor.Instance.ResetStage();
 	}
 

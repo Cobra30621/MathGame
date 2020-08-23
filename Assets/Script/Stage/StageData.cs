@@ -6,37 +6,43 @@ public class StageData : IStageData
 {
 	private float m_CoolDown = 0;		// 產生球的間隔時間
 	private float m_MaxCoolDown = 0;	// 
+    private float m_startCoolDown = 1f;
     private float m_gameTime = 0;
     private float m_MaxGameTime = 30f;
+    private int missConbol;
 	private bool timeUp = false;
     private int[] m_primes;
     private int[] m_composites;
     private int[] m_plusNums;
     private int[] m_bossNums;
+    private string stageName;
     private BallFactory ballFactory;
     public bool hasSet = false;
     private bool hasCreateBoss = false;
 
 	// 設定相關數據
-	public StageData(float CoolDown ,int[] primes, int[] composites, int[] plusNums, int[] bossNums)
+	public StageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
 		m_MaxCoolDown = CoolDown;
-		m_CoolDown = m_MaxCoolDown;
+		m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
+        stageName = name;
 
         m_primes = primes;
         m_composites = composites;
         m_bossNums = bossNums;
         m_plusNums = plusNums;
+        missConbol = 0;
         hasSet = true;
 	}
 
 	// 重置
 	public override	void Reset()
 	{
-        m_CoolDown = m_MaxCoolDown;
+        m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
 		timeUp = false;
+        missConbol = 0;
         hasCreateBoss = false;
 	}
 
@@ -49,6 +55,13 @@ public class StageData : IStageData
                 CreateBossBall();
                 hasCreateBoss = true;
             } 
+
+            if (hasCreateBoss == true && timeUp == true) // 跑結束畫面
+            {
+                int BallCounts = GameMeditor.Instance.GetBallCount();
+                if(BallCounts == 0)
+                    GameEnd(); // 遊戲結束
+            }
             timeUp = true;
             return;
         }
@@ -65,6 +78,10 @@ public class StageData : IStageData
         CreateBall();
 	}
 
+    public void GameEnd(){
+        GradeInfoUI.ShowWhetherFullCombol(); // 顯示是否Full Combol
+    }
+
     public void CreateBall(){ // 隨機產生球
         int PrimeOrComposite = Random.Range(0,5);
         if(PrimeOrComposite >= 0 && PrimeOrComposite < 2) // 2/5
@@ -77,7 +94,8 @@ public class StageData : IStageData
 
     public void CreatePrimeBall(){ // 建立質數球
         if(m_primes.Length == 0){
-            Debug.Log("primes是空的");
+            Debug.Log("primes是空的，產生plusBall");
+            CreatePlusBall();
             return;
         }
         int index = Random.Range(0, m_primes.Length);
@@ -87,7 +105,8 @@ public class StageData : IStageData
 
     public void CreateCompositeBall(){ // 建立合數球
         if(m_composites.Length == 0){
-            Debug.Log("primes是空的");
+            Debug.Log("Composites是空的，產生plusBall");
+            CreatePlusBall();
             return;
         }
         int index = Random.Range(0, m_composites.Length);
@@ -96,8 +115,9 @@ public class StageData : IStageData
     }
 
     public void CreatePlusBall(){ // 建立加分數球
-        if(m_composites.Length == 0){
-            Debug.Log("primes是空的");
+        if(m_plusNums.Length == 0){
+            Debug.Log("PlusBalls是空的，改產生compositeBall");
+            CreateCompositeBall();
             return;
         }
         int index = Random.Range(0, m_plusNums.Length);
@@ -107,7 +127,7 @@ public class StageData : IStageData
 
     public void CreateBossBall(){ // 建立魔王球
         if(m_bossNums.Length == 0){
-            Debug.Log("primes是空的");
+            Debug.LogError("BossBalls是空的");
             return;
         }
         int index = Random.Range(0, m_bossNums.Length);
@@ -119,9 +139,21 @@ public class StageData : IStageData
         return m_gameTime;
     }
 
+    public void AddMissCombol(){
+        missConbol ++;
+    }
+
+    public int GetMissCombol(){
+        return missConbol;
+    }
+
 	// 是否完成
 	public override	bool IsFinished()
 	{
 		return timeUp;
 	}
+
+    public string GetStageName(){
+        return stageName;
+    }
 }

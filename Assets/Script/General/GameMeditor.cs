@@ -51,6 +51,14 @@ public class GameMeditor
 		ballSystem.RemoveBall(ball);
 	}
 
+	public void RemoveAllBall(){
+		ballSystem.RemoveAllBall();
+	}
+
+	public int GetBallCount(){
+		return ballSystem.GetBallCount();
+	}
+
 	// ----------------StageSystem------------------
 	public void ResetStage(){
 		stageSystem.ReSet();
@@ -80,6 +88,18 @@ public class GameMeditor
 
 	public float GetGameTime(){
 		return stageSystem.GetGameTime();
+	}
+
+	public int GetMissCombol(){
+		return stageSystem.GetMissCombol();
+	}
+
+	public void SetStageData(int num){
+		stageSystem.SetStageData(num);
+	}
+
+	public string GetStageName(){
+		return stageSystem.GetStageName();
 	}
 
 }

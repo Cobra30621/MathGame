@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: {x: 0, y: 0, z: 0}
   NumText: {fileID: 5626038792334948247}
-  point: 0
+  img_ball: {fileID: 5626038792217989324}
   ballType: 0
 --- !u!50 &7282107318763762085
 Rigidbody2D:

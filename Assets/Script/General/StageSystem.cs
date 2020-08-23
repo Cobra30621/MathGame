@@ -18,7 +18,7 @@ public class StageSystem : IGameSystem
 
     public override void Initialize(){
         InitializeStageData();
-        nowStageData = stageDatas[3]; // 設定現在是第幾關
+        nowStageData = stageDatas[0]; // 設定現在是第幾關
     }
 
     public override void Update(){

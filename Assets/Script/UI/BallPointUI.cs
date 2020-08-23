@@ -19,7 +19,7 @@ public class BallPointUI : MonoBehaviour
     }
 
     public static void CreateNoPointLabel(Vector3 vector){
-        CreatePointLabelRed(vector, $"combolEnd");
+        CreatePointLabelRed(vector, $"Miss");
     }
 
     public static void CreateLossPointLabel(Vector3 vector, int point){

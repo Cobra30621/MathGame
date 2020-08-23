@@ -97,7 +97,7 @@ public class StageData : IStageData
         }
         int index = Random.Range(0, m_bossNums.Length);
         int num = m_bossNums[index];
-        ballFactory.CreateBall(num);
+        ballFactory.CreateBossBall(num);
     }
 
     public float GetGameTime(){

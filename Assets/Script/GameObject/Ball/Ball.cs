@@ -19,9 +19,10 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private Text NumText;
     [SerializeField]
-    private int point = 0;
     private Image img_ball;
+    private int point = 0;
     private BallColor ballColor;
+    private bool WhetherBossBall = false;
     private bool WhetherTouch;
 
 
@@ -48,6 +49,14 @@ public class Ball : MonoBehaviour
         return point;
     }
 
+    public void SetWhetherBossBall(bool bo){
+        WhetherBossBall = bo;
+    }
+
+    public bool GetWhetherBossBall(){
+        return WhetherBossBall;
+    }
+
     public void SetSpeed(Vector3 vec){
         speed = vec;
     }
@@ -68,8 +77,8 @@ public class Ball : MonoBehaviour
         this.ballColor = ballColor;
     }
 
-    public void SetBallImage(Image img){
-        img_ball = img;
+    public void SetBallImage(Sprite img){
+        img_ball.sprite = img;
     }
 
     public bool GetWhetherTouch(){
@@ -98,7 +107,10 @@ public class Ball : MonoBehaviour
 
     public void BecomeTwoBall(){
         BallFactory ballFactory = MainFactory.GetBallFactory();
-        ballFactory.CreateTwoBall(this);
+        if (WhetherBossBall)
+            ballFactory.CreateTwoBossBall(this);
+        else
+            ballFactory.CreateTwoBall(this);
     }
 
     public void Release(){

@@ -11,7 +11,7 @@ public class BallFactory : IBallFactory
     private Vector3 StartPosition  = new Vector3(0,4,0);
 
     // BallImage
-    private Image img_blue, img_gray, img_purple, img_orange;
+    private Sprite img_blue, img_gray, img_purple, img_orange;
 
     // 設定球的分數
     private Dictionary< BallColor, int > points = new Dictionary< BallColor, int >()
@@ -27,6 +27,7 @@ public class BallFactory : IBallFactory
         ball.SetBallColor(BallColor.Purple);
         ball.SetBallImage(img_purple);
         ball.SetPoint(points[BallColor.Purple]);
+        ball.SetWhetherBossBall(true);
     }
 
     public void CreateTwoBossBall(Ball ball){
@@ -53,10 +54,12 @@ public class BallFactory : IBallFactory
         ball1.SetBallColor(BallColor.Orange);
         ball1.SetBallImage(img_orange);
         ball1.SetPoint(points[BallColor.Orange]);
+        ball1.SetWhetherBossBall(true);
 
         ball2.SetBallColor(BallColor.Orange);
         ball2.SetBallImage(img_orange);
         ball2.SetPoint(points[BallColor.Orange]);
+        ball2.SetWhetherBossBall(true);
 
         // 刪除目前的球
         ball.Release();
@@ -109,6 +112,8 @@ public class BallFactory : IBallFactory
         // 設定球類型與圖片
         Ball.SetBallColor(BallColor.Blue);
         Ball.SetBallImage(img_blue);
+        Ball.SetWhetherBossBall(false);
+        Ball.SetPoint(points[BallColor.Blue]);
 
         // 設定數值
         Ball.SetNumber(num);
@@ -152,10 +157,11 @@ public class BallFactory : IBallFactory
     }
 
     private void SetImage(){
-        img_blue = Resources.Load<Image>("Image/BlueBall");
-        img_gray = Resources.Load<Image>("Image/GrayBall");
-        img_purple = Resources.Load<Image>("Image/PurpleBall");
-        img_orange = Resources.Load<Image>("Image/OrangeBall");
+        Debug.Log("Resources.Load<Sprite>:"+ Resources.Load<Sprite>("BallImage/BlueBall"));
+        img_blue = Resources.Load<Sprite>("BallImage/BlueBall");
+        img_gray = Resources.Load<Sprite>("BallImage/GrayBall");
+        img_purple = Resources.Load<Sprite>("BallImage/PurpleBall");
+        img_orange = Resources.Load<Sprite>("BallImage/OrangeBall");
 
         if (img_blue == null)
             Debug.LogError("找不到img_blue");

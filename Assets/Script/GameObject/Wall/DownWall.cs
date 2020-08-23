@@ -12,15 +12,15 @@ public class DownWall : IWall
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
-                int pointWithCombol = point + (point /10) * GameMeditor.Instance.GetCombol(); // combol分數加分
-                GameMeditor.Instance.AddPoint(pointWithCombol);
-                BallPointUI.CreateGetPointLabel(onBall.GetPosition(), pointWithCombol); // 顯示加分
+                GameMeditor.Instance.AddPoint(onBall.GetPoint());
+                BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint()); // 顯示加分
                 onBall.Release();
                 break;
             case BallType.Composite:
-                GameMeditor.Instance.LessPoint(point);
+                // GameMeditor.Instance.LessPoint(point);
                 GameMeditor.Instance.EndCombol();
-                BallPointUI.CreateLossPointLabel(onBall.GetPosition(), 100); // 顯示扣分
+                BallPointUI.CreateNoPointLabel(onBall.GetPosition());
+                // BallPointUI.CreateLossPointLabel(onBall.GetPosition(), 100); // 顯示扣分
                 onBall.Release();
                 break;
             case BallType.Black:

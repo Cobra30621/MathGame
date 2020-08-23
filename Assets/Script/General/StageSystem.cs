@@ -37,20 +37,24 @@ public class StageSystem : IGameSystem
 	private void InitializeStageData()
 	{
         CreateStageData1();
+        /*
         CreateStageData2();
         CreateStageData3();
         CreateStageData4();
+        */
 
     }
 
     private void CreateStageData1(){// 第一關
         int[] primes ={2, 3, 5};
-        int[] composites = {4,6,8,9};
-        int[] bossNums = {11,12,16,18};
-        StageData stageData = new StageData(3f ,primes, composites, bossNums);
+        int[] composites = {4,6,9};
+        int[] plusNums = {8, 12,16, 18};
+        int[] bossNums = {13,14, 15,19, 21,22};
+        StageData stageData = new StageData(3f ,primes, composites, plusNums, bossNums);
         stageDatas.Add(stageData);
     }
 
+    /*
     private void CreateStageData2(){// 第二關
         int[] primes2 ={ 11, 13, 17, 23, 29, 31, 37};
         int[] composites2 = {10,12,16,18,21, 24, 30};
@@ -74,6 +78,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(2f ,primes4, composites4, bossNums4);
         stageDatas.Add(stageData);
     }
+    */
 
     // -------------------分數相關--------------------
 
@@ -104,6 +109,10 @@ public class StageSystem : IGameSystem
     }
     public int GetCombol(){
         return combol;
+    }
+
+    public float GetGameTime(){
+        return nowStageData.GetGameTime();
     }
 
 }

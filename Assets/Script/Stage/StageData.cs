@@ -11,13 +11,14 @@ public class StageData : IStageData
 	private bool timeUp = false;
     private int[] m_primes;
     private int[] m_composites;
+    private int[] m_plusNums;
     private int[] m_bossNums;
     private BallFactory ballFactory;
     public bool hasSet = false;
     private bool hasCreateBoss = false;
 
 	// 設定相關數據
-	public StageData(float CoolDown ,int[] primes, int[] composites, int[] bossNums)
+	public StageData(float CoolDown ,int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
 		m_MaxCoolDown = CoolDown;
 		m_CoolDown = m_MaxCoolDown;
@@ -26,6 +27,7 @@ public class StageData : IStageData
         m_primes = primes;
         m_composites = composites;
         m_bossNums = bossNums;
+        m_plusNums = plusNums;
         hasSet = true;
 	}
 
@@ -51,6 +53,7 @@ public class StageData : IStageData
             return;
         }
         m_gameTime -= Time.deltaTime;
+        GradeInfoUI.UpdateTime(); // 更新介面時間
 
 		// 是否可以產生
 		m_CoolDown -= Time.deltaTime;
@@ -62,15 +65,17 @@ public class StageData : IStageData
         CreateBall();
 	}
 
-    public void CreateBall(){
-        int PrimeOrComposite = Random.Range(0,2);
-        if(PrimeOrComposite == 0)
+    public void CreateBall(){ // 隨機產生球
+        int PrimeOrComposite = Random.Range(0,5);
+        if(PrimeOrComposite >= 0 && PrimeOrComposite < 2) // 2/5
             CreatePrimeBall();
-        else
-            CreateCompositeBall();        
+        else if(PrimeOrComposite >= 2 && PrimeOrComposite < 4) // 2/5
+            CreateCompositeBall();
+        else // 1/5
+            CreatePlusBall();      
     }
 
-    public void CreatePrimeBall(){
+    public void CreatePrimeBall(){ // 建立質數球
         if(m_primes.Length == 0){
             Debug.Log("primes是空的");
             return;
@@ -80,7 +85,7 @@ public class StageData : IStageData
         ballFactory.CreateBall(num);
     }
 
-    public void CreateCompositeBall(){
+    public void CreateCompositeBall(){ // 建立合數球
         if(m_composites.Length == 0){
             Debug.Log("primes是空的");
             return;
@@ -90,7 +95,17 @@ public class StageData : IStageData
         ballFactory.CreateBall(num);
     }
 
-    public void CreateBossBall(){
+    public void CreatePlusBall(){ // 建立加分數球
+        if(m_composites.Length == 0){
+            Debug.Log("primes是空的");
+            return;
+        }
+        int index = Random.Range(0, m_plusNums.Length);
+        int num = m_plusNums[index];
+        ballFactory.CreatePlusBall(num);
+    }
+
+    public void CreateBossBall(){ // 建立魔王球
         if(m_bossNums.Length == 0){
             Debug.Log("primes是空的");
             return;

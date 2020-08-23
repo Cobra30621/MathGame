@@ -78,4 +78,8 @@ public class GameMeditor
 		return stageSystem.GetCombol();
 	}
 
+	public float GetGameTime(){
+		return stageSystem.GetGameTime();
+	}
+
 }

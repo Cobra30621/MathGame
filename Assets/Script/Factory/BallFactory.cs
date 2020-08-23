@@ -11,7 +11,7 @@ public class BallFactory : IBallFactory
     private Vector3 StartPosition  = new Vector3(0,4,0);
 
     // BallImage
-    private Sprite img_blue, img_gray, img_purple, img_orange;
+    private Sprite img_blue, img_gray, img_purple, img_orange, img_green;
 
     // 設定球的分數
     private Dictionary< BallColor, int > points = new Dictionary< BallColor, int >()
@@ -19,15 +19,73 @@ public class BallFactory : IBallFactory
             {BallColor.Blue, 100},
             {BallColor.Gray, 50},
             {BallColor.Purple, 500},
-            {BallColor.Orange, 250}
+            {BallColor.Orange, 100},
+            {BallColor.Green, 250}
         };
+    
+    // ---------------------------------
+    // ------------產生加成球-------------
+    // ---------------------------------
+
+    public void CreatePlusBall(int num){ // 建立魔王球
+        Ball ball = CreateBall(num);
+        ball.SetBallColor(BallColor.Orange);
+        ball.SetBallImage(img_orange);
+        ball.SetPoint(points[BallColor.Orange]);
+        
+    }
+
+    public void CreateTwoPlusBall(Ball ball){
+        List<int> nums = FactorizeToTwoNum(ball.GetNumber());
+
+        // 產生球
+        Ball ball1 = CreateBall(nums[0]);
+        Ball ball2 = CreateBall(nums[1]);
+
+        //  設定球的球的位置
+        Vector3 vec = ball.transform.position;
+        ball1.SetPosition(vec);
+        ball2.SetPosition(vec);
+
+        // 設定球的速度
+        ball1.SetSpeed(GetBallVectory(-1));
+        ball2.SetSpeed(GetBallVectory(-1));
+
+        // 球還無法回擊
+        ball1.SetWhetherTouch(false);
+        ball2.SetWhetherTouch(false);
+
+        // 設定球類型與圖片
+        ball1.SetBallColor(BallColor.Gray);
+        ball1.SetBallImage(img_gray);
+        ball1.SetPoint(points[BallColor.Gray]);
+
+        if(WhetherPrime(ball2.GetNumber()))  // 如果ball2是質數，變灰色
+        {
+            ball2.SetBallColor(BallColor.Gray);
+            ball2.SetBallImage(img_gray);
+            ball2.SetPoint(points[BallColor.Gray]);
+        }
+        else // 如果ball2是合數，變菊色
+        {
+            ball2.SetBallColor(BallColor.Orange);
+            ball2.SetBallImage(img_orange);
+            ball2.SetPoint(points[BallColor.Orange]);
+        }
+
+        // 刪除目前的球
+        ball.Release();
+    }
+
+    // ---------------------------------
+    // ------------產生魔王球-------------
+    // ---------------------------------
 
     public void CreateBossBall(int num){ // 建立魔王球
         Ball ball = CreateBall(num);
         ball.SetBallColor(BallColor.Purple);
         ball.SetBallImage(img_purple);
         ball.SetPoint(points[BallColor.Purple]);
-        ball.SetWhetherBossBall(true);
     }
 
     public void CreateTwoBossBall(Ball ball){
@@ -51,19 +109,21 @@ public class BallFactory : IBallFactory
         ball2.SetWhetherTouch(false);
 
         // 設定球類型與圖片
-        ball1.SetBallColor(BallColor.Orange);
-        ball1.SetBallImage(img_orange);
-        ball1.SetPoint(points[BallColor.Orange]);
-        ball1.SetWhetherBossBall(true);
+        ball1.SetBallColor(BallColor.Green);
+        ball1.SetBallImage(img_green);
+        ball1.SetPoint(points[BallColor.Green]);
 
-        ball2.SetBallColor(BallColor.Orange);
-        ball2.SetBallImage(img_orange);
-        ball2.SetPoint(points[BallColor.Orange]);
-        ball2.SetWhetherBossBall(true);
+        ball2.SetBallColor(BallColor.Green);
+        ball2.SetBallImage(img_green);
+        ball2.SetPoint(points[BallColor.Green]);
 
         // 刪除目前的球
         ball.Release();
     }
+
+    // ---------------------------------
+    // ------------產生一般球-------------
+    // ---------------------------------
 
     public void CreateTwoBall(Ball ball){
         List<int> nums = FactorizeToTwoNum(ball.GetNumber());
@@ -112,7 +172,6 @@ public class BallFactory : IBallFactory
         // 設定球類型與圖片
         Ball.SetBallColor(BallColor.Blue);
         Ball.SetBallImage(img_blue);
-        Ball.SetWhetherBossBall(false);
         Ball.SetPoint(points[BallColor.Blue]);
 
         // 設定數值
@@ -157,11 +216,17 @@ public class BallFactory : IBallFactory
     }
 
     private void SetImage(){
-        Debug.Log("Resources.Load<Sprite>:"+ Resources.Load<Sprite>("BallImage/BlueBall"));
+        /*skin1
         img_blue = Resources.Load<Sprite>("BallImage/BlueBall");
         img_gray = Resources.Load<Sprite>("BallImage/GrayBall");
         img_purple = Resources.Load<Sprite>("BallImage/PurpleBall");
         img_orange = Resources.Load<Sprite>("BallImage/OrangeBall");
+        */
+        img_blue = Resources.Load<Sprite>("SnowBall/blue");
+        img_gray = Resources.Load<Sprite>("SnowBall/gray");
+        img_purple = Resources.Load<Sprite>("SnowBall/purple");
+        img_orange = Resources.Load<Sprite>("SnowBall/orange");
+        img_green = Resources.Load<Sprite>("SnowBall/green");
 
         if (img_blue == null)
             Debug.LogError("找不到img_blue");
@@ -182,6 +247,11 @@ public class BallFactory : IBallFactory
             Debug.LogError("找不到img_orange");
         else 
             Debug.Log("找到img_orange" );
+
+        if (img_green == null)
+            Debug.LogError("找不到img_green");
+        else 
+            Debug.Log("找到img_green" );
     }
 
     //-------------數學方法--------------

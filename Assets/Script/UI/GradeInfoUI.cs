@@ -7,7 +7,7 @@ public class GradeInfoUI : MonoBehaviour
 {
     private static GradeInfoUI instance;
 
-    [SerializeField] private Text lab_point, lab_combol, lab_combolPlus;
+    [SerializeField] private Text lab_point, lab_combol, lab_combolPlus, lab_Time;
 
     void Start()
     {
@@ -35,7 +35,22 @@ public class GradeInfoUI : MonoBehaviour
         else
             lab_combolPlus.text = $"+{combolPlus}%";
         
-    
+    }
+
+    public static void UpdateTime(){
+        instance.RefreshTime();
+    }
+
+    public void RefreshTime(){
+        float Rawtime = GameMeditor.Instance.GetGameTime();
+        int time;
+        if (Rawtime <= 0)
+            time = 0;
+        else
+            time = Mathf.FloorToInt(Rawtime) + 1;
+
+        lab_Time.text = $"{time}";
+
     }
 
 

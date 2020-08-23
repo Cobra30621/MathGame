@@ -8,7 +8,7 @@ public enum BallType{
 }
 
 public enum BallColor{//White, Red, Orange, Yellow, Green
-    Blue, Gray, Black , Purple, Orange
+    Blue, Gray, Black , Purple, Orange, Green, Red
 }
 
 public class Ball : MonoBehaviour
@@ -22,7 +22,6 @@ public class Ball : MonoBehaviour
     private Image img_ball;
     private int point = 0;
     private BallColor ballColor;
-    private bool WhetherBossBall = false;
     private bool WhetherTouch;
 
 
@@ -49,14 +48,6 @@ public class Ball : MonoBehaviour
         return point;
     }
 
-    public void SetWhetherBossBall(bool bo){
-        WhetherBossBall = bo;
-    }
-
-    public bool GetWhetherBossBall(){
-        return WhetherBossBall;
-    }
-
     public void SetSpeed(Vector3 vec){
         speed = vec;
     }
@@ -75,6 +66,10 @@ public class Ball : MonoBehaviour
 
     public void SetBallColor(BallColor ballColor){
         this.ballColor = ballColor;
+    }
+
+    public BallColor GetBallColor(){
+        return ballColor;
     }
 
     public void SetBallImage(Sprite img){
@@ -107,10 +102,14 @@ public class Ball : MonoBehaviour
 
     public void BecomeTwoBall(){
         BallFactory ballFactory = MainFactory.GetBallFactory();
-        if (WhetherBossBall)
+        if (ballColor == BallColor.Purple)
             ballFactory.CreateTwoBossBall(this);
-        else
+        else if(ballColor == BallColor.Orange)
+            ballFactory.CreateTwoPlusBall(this);
+        else if(ballColor == BallColor.Blue)
             ballFactory.CreateTwoBall(this);
+        else
+            Debug.Log("不該出現的球產生兩顆："+ this);
     }
 
     public void Release(){

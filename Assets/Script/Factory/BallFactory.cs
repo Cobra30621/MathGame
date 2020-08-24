@@ -27,7 +27,7 @@ public class BallFactory : IBallFactory
     // ------------產生加成球-------------
     // ---------------------------------
 
-    public void CreatePlusBall(int num){ // 建立魔王球
+    public void CreatePlusBall(int num){ // 建立加成球
         Ball ball = CreateBall(num);
         ball.SetBallColor(BallColor.Orange);
         ball.SetBallImage(img_orange);
@@ -36,7 +36,7 @@ public class BallFactory : IBallFactory
     }
 
     public void CreateTwoPlusBall(Ball ball){
-        List<int> nums = FactorizeToTwoNum(ball.GetNumber());
+        List<int> nums = FactorizeToTwoCloseNum(ball.GetNumber());
 
         // 產生球
         Ball ball1 = CreateBall(nums[0]);
@@ -56,9 +56,18 @@ public class BallFactory : IBallFactory
         ball2.SetWhetherTouch(false);
 
         // 設定球類型與圖片
-        ball1.SetBallColor(BallColor.Gray);
-        ball1.SetBallImage(img_gray);
-        ball1.SetPoint(points[BallColor.Gray]);
+        if(WhetherPrime(ball1.GetNumber()))  // 如果ball1是質數，變灰色
+        {
+            ball1.SetBallColor(BallColor.Gray);
+            ball1.SetBallImage(img_gray);
+            ball1.SetPoint(points[BallColor.Gray]);
+        }
+        else // 如果ball2是合數，變菊色
+        {
+            ball1.SetBallColor(BallColor.Orange);
+            ball1.SetBallImage(img_orange);
+            ball1.SetPoint(points[BallColor.Orange]);
+        }
 
         if(WhetherPrime(ball2.GetNumber()))  // 如果ball2是質數，變灰色
         {
@@ -86,10 +95,11 @@ public class BallFactory : IBallFactory
         ball.SetBallColor(BallColor.Purple);
         ball.SetBallImage(img_purple);
         ball.SetPoint(points[BallColor.Purple]);
+        ball.SetBossSize(); // 球變大
     }
 
     public void CreateTwoBossBall(Ball ball){
-        List<int> nums = FactorizeToTwoNum(ball.GetNumber());
+        List<int> nums = FactorizeToTwoCloseNum(ball.GetNumber());
 
         // 產生球
         Ball ball1 = CreateBall(nums[0]);
@@ -112,10 +122,12 @@ public class BallFactory : IBallFactory
         ball1.SetBallColor(BallColor.Green);
         ball1.SetBallImage(img_green);
         ball1.SetPoint(points[BallColor.Green]);
+        ball1.SetBossSize(); // 球變大
 
         ball2.SetBallColor(BallColor.Green);
         ball2.SetBallImage(img_green);
         ball2.SetPoint(points[BallColor.Green]);
+        ball2.SetBossSize(); // 球變大
 
         // 刪除目前的球
         ball.Release();
@@ -224,7 +236,8 @@ public class BallFactory : IBallFactory
         */
         img_blue = Resources.Load<Sprite>("SnowBall/blue");
         img_gray = Resources.Load<Sprite>("SnowBall/gray");
-        img_purple = Resources.Load<Sprite>("SnowBall/purple");
+        //img_purple = Resources.Load<Sprite>("SnowBall/purple");
+        img_purple = Resources.Load<Sprite>("SnowBall/red");
         img_orange = Resources.Load<Sprite>("SnowBall/orange");
         img_green = Resources.Load<Sprite>("SnowBall/green");
 
@@ -256,6 +269,46 @@ public class BallFactory : IBallFactory
 
     //-------------數學方法--------------
 
+    public List<int> FactorizeToTwoCloseNum(int num){
+        if(WhetherPrime(num))
+        {
+            Debug.LogError("質數被輸入");
+            return new List<int>{2, 2};
+        }
+
+        List<int> numsList = new List<int>();
+        bool WhetherFind = false;
+
+        // 找出所有因數
+        for(int i = 1; i <= num; i++){
+            if (num % i == 0)
+                numsList.Add(i);
+        }
+
+        // 數字1與數字2
+        int num1 = 2;
+        int num2 = 2;
+        int Count = numsList.Count;
+
+        if( Count % 2 == 0) // 總質數個數為偶數
+        {
+            num1 = numsList[(Count / 2) -1 ];
+            num2 = numsList[(Count / 2)  ];
+        }
+        else // 總質數個數為基數
+        {
+            num1 = numsList[(Count -1) / 2 ];
+            num2 = numsList[(Count -1) / 2 ];
+        }
+        
+        
+        Debug.Log($"num{num}>num1:{num1}+num2:{num2}");
+
+        List<int> nums = new List<int>{num1, num2};
+
+        return nums;
+    }
+
     public List<int> FactorizeToTwoNum(int num){
         if(WhetherPrime(num))
         {
@@ -284,7 +337,6 @@ public class BallFactory : IBallFactory
         List<int> nums = new List<int>{num1, num2};
 
         return nums;
-
     }
 
     public bool WhetherPrime(int num){

@@ -13,14 +13,13 @@ public class DownWall : IWall
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
                 GameMeditor.Instance.AddPoint(onBall.GetPoint());
-                BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint()); // 顯示加分
+                JudgeCreateWhichLabel(onBall); // 顯示加分
                 onBall.Release();
                 break;
             case BallType.Composite:
                 // GameMeditor.Instance.LessPoint(point);
-                GameMeditor.Instance.EndCombol();
-                BallPointUI.CreateNoPointLabel(onBall.GetPosition());
-                // BallPointUI.CreateLossPointLabel(onBall.GetPosition(), 100); // 顯示扣分
+                GameMeditor.Instance.MissCombol();
+                BallPointUI.CreateMissLabel(onBall.GetPosition());
                 onBall.Release();
                 break;
             case BallType.Black:
@@ -30,5 +29,20 @@ public class DownWall : IWall
                 Debug.LogError("無法找到BallType");
                 break;
         }
+    }
+
+    public void JudgeCreateWhichLabel(Ball onBall){
+        BallColor color = onBall.GetBallColor();
+
+        if(color == BallColor.Purple || color == BallColor.Green) // 魔王球
+        {
+            BallPointUI.CreatePointLabelBoss(onBall.GetPosition(), onBall.GetPoint());// 顯示加分
+        }
+        else // 一般球
+        {
+            BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint()); // 顯示加分
+        }
+
+
     }
 }

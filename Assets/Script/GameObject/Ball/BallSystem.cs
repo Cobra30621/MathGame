@@ -39,8 +39,12 @@ public class BallSystem : IGameSystem
     }
 
     public void RemoveAllBall(){
-        foreach(Ball ball in Balls){
+        /*
+        foreach(Ball ball in Balls){ // 過程中會改變Balls的長度，因此換方法
             ball.Release();
+        }*/
+        for(int index = Balls.Count ; index > 0; index--){ // 從後面開始刪除
+            Balls[index -1].Release();
         }
     }
     public void RemoveBall(Ball ball){

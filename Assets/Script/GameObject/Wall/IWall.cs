@@ -15,6 +15,7 @@ public class IWall : MonoBehaviour
         }
     }
 
+
     public virtual void OnBallEnter(GameObject ball){
         Ball onBall = ball.gameObject.GetComponent<Ball>();
         BallType ballType = onBall.ballType;

@@ -15,8 +15,8 @@ public class UpWall : IWall
                 onBall.SetWhetherTouch(true);
                 break;
             case BallType.Black:
-                GameMeditor.Instance.EndCombol();
-                BallPointUI.CreateNoPointLabel(onBall.GetPosition());
+                GameMeditor.Instance.MissCombol();
+                BallPointUI.CreateMissLabel(onBall.GetPosition());
                 onBall.Release(); 
                 break;
             default :

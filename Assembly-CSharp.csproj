@@ -60,8 +60,6 @@
      <Compile Include="Assets\Script\Factory\MainFactory.cs" />
      <Compile Include="Assets\Script\GameObject\Ball\Ball.cs" />
      <Compile Include="Assets\Script\GameObject\Ball\BallSystem.cs" />
-     <Compile Include="Assets\Script\GameObject\Ball\CompositeBall.cs" />
-     <Compile Include="Assets\Script\GameObject\Ball\PrimeBall.cs" />
      <Compile Include="Assets\Script\GameObject\Bar\BallBar.cs" />
      <Compile Include="Assets\Script\GameObject\Label\PointLabel.cs" />
      <Compile Include="Assets\Script\GameObject\Wall\DownWall.cs" />

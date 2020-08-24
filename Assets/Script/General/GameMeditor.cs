@@ -74,8 +74,8 @@ public class GameMeditor
         stageSystem.AddCombol();
     }
     
-    public void EndCombol (){
-        stageSystem.EndCombol();
+    public void MissCombol (){
+        stageSystem.MissCombol();
     }
 
 	public int GetPoint(){
@@ -101,5 +101,9 @@ public class GameMeditor
 	public string GetStageName(){
 		return stageSystem.GetStageName();
 	}
+
+	public void BossComingAnimeEnd(){  // Boss球動畫播完
+        stageSystem.BossComingAnimeEnd();
+    }
 
 }

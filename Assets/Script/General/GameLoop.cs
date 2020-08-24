@@ -21,7 +21,7 @@ public class GameLoop : MonoBehaviour
 
 
     public void ResetStage(){
-        GameMeditor.Instance.SetStageData(level);
+        GameMeditor.Instance.SetStageData(level - 1);
 		GameMeditor.Instance.ResetStage();
 	}
 

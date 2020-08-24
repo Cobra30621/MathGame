@@ -76,6 +76,12 @@ public class Ball : MonoBehaviour
         img_ball.sprite = img;
     }
 
+    public void SetBossSize(){
+        float rawScaleX = transform.localScale.x;
+        float scale = 1.2f * rawScaleX;
+        transform.localScale = new Vector3(scale , scale, scale);
+    }
+
     public bool GetWhetherTouch(){
         return WhetherTouch;
     }

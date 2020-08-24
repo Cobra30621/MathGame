@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class GradeInfoUI : MonoBehaviour
 {
     private static GradeInfoUI instance;
+    private Animator m_animator;
 
-    [SerializeField] private Text lab_point, lab_combol, lab_combolPlus, lab_Time, lab_FullCombol, lab_stageName;
+    [SerializeField] private Text lab_point, lab_combol, lab_Time, lab_FullCombol, lab_stageName;
 
     void Start()
     {
         instance = this;
+        m_animator = GetComponent<Animator>();
         Refresh();
         Initialize();
     }
@@ -35,11 +37,13 @@ public class GradeInfoUI : MonoBehaviour
         int combol = GameMeditor.Instance.GetCombol();
         lab_combol.text = $"{combol}";
 
+        /* combol加成
         int combolPlus = combol * 10;
         if (combol == 0)
             lab_combolPlus.text = "";
         else
             lab_combolPlus.text = $"+{combolPlus}%";
+        */
 
         string stageName = GameMeditor.Instance.GetStageName();
         lab_stageName.text = stageName;
@@ -81,6 +85,12 @@ public class GradeInfoUI : MonoBehaviour
         lab_Time.gameObject.SetActive(true); // 顯示時間
     }
 
+    public static void PlayBossComingAnime(){
+		instance.m_animator.Play("BossComing", 0 , 0f);
+	}
 
+    public void BossComingAnimeEnd(){  // Boss球動畫播完
+        GameMeditor.Instance.BossComingAnimeEnd();
+    }
 
 }

@@ -1,24 +1,33 @@
 using UnityEngine;
 using System.Collections.Generic;
-
 // 遊戲流程
 public enum GameProcess{
-   Normol, TimeUp, BossComingAnime, NoNormalBall, BossTime, GameEnd, WaitStart
+   	Start, NormalTime,  TimeUp, BossComingAnime, NoNormalBall, BossTime, GameEnd, WaitStart
+}
+
+// 關卡解鎖狀態
+public enum StageState{
+    Open, NeedMoney , UnOpen
+}
+
+// 關卡完成度
+public enum StageComplete{
+    UnComplete, Complete, FullCombol
 }
 
 // 一般關卡資訊
-public class StageData : IStageData 
+public class StageData 
 {
     // 關卡資訊
-    private string stageName;
-    private int[] m_primes;
-    private int[] m_composites;
-    private int[] m_plusNums;
-    private int[] m_bossNums;
+    public string stageName;
+    public int[] m_primes;
+    public int[] m_composites;
+    public int[] m_plusNums;
+    public int[] m_bossNums;
 
     // 球產生的機率，為 P / 10
-    private int m_P_prime = 4;
-    private int m_P_composite = 4;
+    public int m_P_prime = 4;
+    public int m_P_composite = 4;
     
     // 產生球的間隔時間
 	private float m_CoolDown = 0;		
@@ -28,39 +37,66 @@ public class StageData : IStageData
     // 遊戲時間與流程
     private float m_gameTime = 0;
     private float m_MaxGameTime = 30f;
+    public GameProcess m_gameProcess;
 
-    private GameProcess m_gameProcess;
+    // 解鎖相關
+    public StageState m_stageState;
+    public int m_openStageMoney = 0;
 
+	// 分數相關
+    public StageComplete m_stageComplete; 
+	public int m_bestPoint;
 
-    // 其他
+	// 其他
     private BallFactory ballFactory;
     public bool hasSet = false;
 
-	// 設定關卡資訊
+	// ================= 方法 ===================
+
 	public StageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
+		// 設定冷卻時間
 		m_MaxCoolDown = CoolDown;
 		m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
-        stageName = name;
 
+		// 設定關卡資訊
+        stageName = name;
         m_primes = primes;
         m_composites = composites;
         m_bossNums = bossNums;
         m_plusNums = plusNums;
-        hasSet = true;
+
+		// 設定遊戲狀況
+		m_stageState = StageState.Open;
+		m_stageComplete = StageComplete.UnComplete;
+		m_bestPoint = 0;
+
+		hasSet = true;
+	}
+
+	// 設定球的機率
+	public void SetBallProbability(int P_prime, int P_composite){
+        m_P_prime = P_prime;
+        m_P_composite = P_composite;
+
+    }
+
+	// 設定解鎖所需要的錢
+	public void SetOpenNeedMoney(int money){
+		m_openStageMoney = money;
 	}
 
 	// 重置
-	public override	void Reset()
+	public void Reset()
 	{
         m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
-        SetGameProcess(GameProcess.Normol);
+        SetGameProcess(GameProcess.Start);
 	}
 
 	// 更新
-	public override void Update()
+	public void Update()
 	{
         PlayGameProcess();
 	}
@@ -68,8 +104,11 @@ public class StageData : IStageData
     // ------------------ 關卡流程 ---------------------- 
     public void PlayGameProcess(){
         switch(m_gameProcess){
-            case GameProcess.Normol : // 遊戲開始
-                NormalProcess();
+			case GameProcess.Start:
+				GameStartProcess();
+				break;
+            case GameProcess.NormalTime : // 遊戲開始
+                NormalTimeProcess();
                 break;
             case GameProcess.TimeUp : // 時間到，等待場上沒球
                 WaitNoBallProcess();
@@ -93,8 +132,13 @@ public class StageData : IStageData
         }
     }
 
+	public void GameStartProcess(){
+		// playStartAnime
+		SetGameProcess( GameProcess.NormalTime);
+	}
+
     // 時間倒數流程
-    public void NormalProcess(){
+    public void NormalTimeProcess(){
         // 判斷時間否到了
         if (m_gameTime <= 0){
             m_gameTime = 0;
@@ -159,11 +203,8 @@ public class StageData : IStageData
         return stageName;
     }
 
-    public void SetBallProbability(int P_prime, int P_composite){
-        m_P_prime = P_prime;
-        m_P_composite = P_composite;
+    // ---------------取的關卡資料------------------
 
-    }
 
     // ------------------產生球相關方法-----------------------
 

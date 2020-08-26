@@ -70,9 +70,9 @@
      <Compile Include="Assets\Script\General\GameController.cs" />
      <Compile Include="Assets\Script\General\GameLoop.cs" />
      <Compile Include="Assets\Script\General\GameMeditor.cs" />
-     <Compile Include="Assets\Script\General\StageSystem.cs" />
-     <Compile Include="Assets\Script\Stage\IStageData.cs" />
+     <Compile Include="Assets\Script\Stage\IStageDataCard.cs" />
      <Compile Include="Assets\Script\Stage\StageData.cs" />
+     <Compile Include="Assets\Script\Stage\StageSystem.cs" />
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
      <Compile Include="Assets\Script\UI\GradeInfoUI.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">

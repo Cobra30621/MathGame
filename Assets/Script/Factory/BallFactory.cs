@@ -95,7 +95,7 @@ public class BallFactory : IBallFactory
         ball.SetBallColor(BallColor.Purple);
         ball.SetBallImage(img_purple);
         ball.SetPoint(points[BallColor.Purple]);
-        ball.SetBossSize(); // 球變大
+        // ball.SetBossSize(); // 球變大
     }
 
     public void CreateTwoBossBall(Ball ball){
@@ -122,12 +122,12 @@ public class BallFactory : IBallFactory
         ball1.SetBallColor(BallColor.Green);
         ball1.SetBallImage(img_green);
         ball1.SetPoint(points[BallColor.Green]);
-        ball1.SetBossSize(); // 球變大
+        // ball1.SetBossSize(); // 球變大
 
         ball2.SetBallColor(BallColor.Green);
         ball2.SetBallImage(img_green);
         ball2.SetPoint(points[BallColor.Green]);
-        ball2.SetBossSize(); // 球變大
+        // ball2.SetBossSize(); // 球變大
 
         // 刪除目前的球
         ball.Release();
@@ -228,18 +228,12 @@ public class BallFactory : IBallFactory
     }
 
     private void SetImage(){
-        /*skin1
-        img_blue = Resources.Load<Sprite>("BallImage/BlueBall");
-        img_gray = Resources.Load<Sprite>("BallImage/GrayBall");
-        img_purple = Resources.Load<Sprite>("BallImage/PurpleBall");
-        img_orange = Resources.Load<Sprite>("BallImage/OrangeBall");
-        */
-        img_blue = Resources.Load<Sprite>("SnowBall/blue");
-        img_gray = Resources.Load<Sprite>("SnowBall/gray");
-        //img_purple = Resources.Load<Sprite>("SnowBall/purple");
-        img_purple = Resources.Load<Sprite>("SnowBall/red");
-        img_orange = Resources.Load<Sprite>("SnowBall/orange");
-        img_green = Resources.Load<Sprite>("SnowBall/green");
+        
+        img_blue = Resources.Load<Sprite>("SnowBall/normal");
+        img_gray = Resources.Load<Sprite>("SnowBall/normal2");
+        img_purple = Resources.Load<Sprite>("SnowBall/boss");
+        img_green = Resources.Load<Sprite>("SnowBall/boss2");
+        img_orange = Resources.Load<Sprite>("SnowBall/plus");
 
         if (img_blue == null)
             Debug.LogError("找不到img_blue");
@@ -360,7 +354,7 @@ public class BallFactory : IBallFactory
 
     public Vector3 GetBallVectory(int direction){
         float x = Random.Range(-2f, 2f);
-        float y = direction * Random.Range(-2f, -1.5f);
+        float y = direction * Random.Range(-2.2f, -1.7f);
         return new Vector3(x, y, 0);
     }
 

@@ -20,7 +20,7 @@ public class StageSystem : IGameSystem
     public Dictionary<string, StageData> stages = new Dictionary<string, StageData>(); 
 
 
-    // Dictionary方法
+    // ============== Dictionary方法 ======================= 
     public void EnterStage(string stageID){
         StageData stageData;
         if(stages.ContainsKey(stageID))
@@ -33,6 +33,7 @@ public class StageSystem : IGameSystem
 
         nowStageData = stageData;
         SceneManager.LoadScene("MainGame");
+        nowStageData.SetGameProcess(GameProcess.Start); // 遊戲開始
     }
 
     public void SetStageData(string id){
@@ -57,7 +58,9 @@ public class StageSystem : IGameSystem
         missCombol = 0;
         GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
         GradeInfoUI.Initialize(); // 重置分數介面
+         
     }
+
 
     public void SetStageData(int level){
         nowStageData = stageDatas[level];
@@ -66,6 +69,10 @@ public class StageSystem : IGameSystem
 
     public int GetStageDataCount(){
         return stageDatas.Count;
+    }
+
+    public void SetGameProcess(GameProcess gameProcess){
+        nowStageData.SetGameProcess(gameProcess);
     }
 
     // 初始所有關卡
@@ -107,7 +114,7 @@ public class StageSystem : IGameSystem
     }
 
     private void CreateStageData3(){// 第三關
-        string stageName = "困難：數學面";
+        string stageName = "中高：數學面";
         int[] primes ={29, 31, 37,41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127};
         int[] composites = {33, 39, 46, 49, 51, 51, 55, 57, 65 , 69,77,82,85, 87,91,95,99,106,  111, 115 , 123,129};
         int[] plusNums = {};
@@ -119,7 +126,7 @@ public class StageSystem : IGameSystem
     }
 
     private void CreateStageData4(){// 第四關
-        string stageName = "困難：遊戲面";
+        string stageName = "中高：遊戲面";
         int[] primes = {};
         int[] composites =  {};
         int[] plusNums = {24, 30, 36, 42, 48, 54, 60, 64};
@@ -138,6 +145,7 @@ public class StageSystem : IGameSystem
         int[] bossNums = {3628800};
         StageData stageData = new StageData(1f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(4,4); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetBGM(BGM.Boss);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -150,6 +158,7 @@ public class StageSystem : IGameSystem
         int[] bossNums = { 1009, 1013, 1019, 1021, 1031, 1033, 1039, 1049, 1051, 1061, 1063, 1069, 1087, 1091, 1093, 1097, 1103, 1109, 1117, 1123, 1129, 1151, 1153, 1163, 1171, 1181, 1187, 1193, 1201, 1213, 1217, 1223};
         StageData stageData = new StageData(3f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(5,5); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetBGM(BGM.Boss);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -162,18 +171,20 @@ public class StageSystem : IGameSystem
         int[] bossNums = {3628800};
         StageData stageData = new StageData(1f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(0,0); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetBGM(BGM.Boss);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
 
     private void CreateStageData8(){// 第五關
-        string stageName = "地獄:這出球率";
+        string stageName = "這出球率我的電腦要掛了";
         int[] primes = { };//
         int[] composites =  { };
         int[] plusNums = {24, 30, 36, 42, 48, 54, 60, 64, 128};
         int[] bossNums = {3628800};
         StageData stageData = new StageData(0.4f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(0,0); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetBGM(BGM.Boss);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }

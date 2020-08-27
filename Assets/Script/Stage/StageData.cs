@@ -47,6 +47,8 @@ public class StageData
     public StageComplete m_stageComplete; 
 	public int m_bestPoint;
 
+    public BGM m_bgm;
+
 	// 其他
     private BallFactory ballFactory;
     public bool hasSet = false;
@@ -72,6 +74,10 @@ public class StageData
 		m_stageComplete = StageComplete.UnComplete;
 		m_bestPoint = 0;
 
+        m_bgm = BGM.Normal;
+
+        // 遊戲流程
+        m_gameProcess = GameProcess.WaitStart;
 		hasSet = true;
 	}
 
@@ -86,6 +92,11 @@ public class StageData
 	public void SetOpenNeedMoney(int money){
 		m_openStageMoney = money;
 	}
+
+    // 設定bgm;
+    public void SetBGM(BGM bgm){
+        m_bgm = bgm;
+    }
 
 	// 重置
 	public void Reset()
@@ -135,6 +146,12 @@ public class StageData
 	public void GameStartProcess(){
 		// playStartAnime
 		SetGameProcess( GameProcess.NormalTime);
+
+        // 播放音樂
+        MusicManager.SwitchMusic(m_bgm);
+        MusicManager.PlayMusic();
+        //Reset();
+        // GameMeditor.Instance.ResetStage(); // 重置關卡
 	}
 
     // 時間倒數流程
@@ -183,8 +200,31 @@ public class StageData
     }
 
     public void GameEndProcess(){
-         GradeInfoUI.ShowWhetherFullCombol(); // 顯示是否Full Combol
-         SetGameProcess(GameProcess.WaitStart);
+
+        int point = GameMeditor.Instance.GetPoint();
+        if(point > m_bestPoint)
+            m_bestPoint = point; // 記下最高紀錄
+
+        JudgeStateComplete(); // 紀錄遊戲完成度
+        
+        GradeInfoUI.ShowWhetherFullCombol(); // 顯示是否Full Combol
+        SetGameProcess(GameProcess.WaitStart);
+    }
+
+    public void JudgeStateComplete(){
+        switch (m_stageComplete){
+            case StageComplete.FullCombol:
+                break;
+            case StageComplete.Complete:
+                if (GameMeditor.Instance.GetMissCombol() == 0)
+                    m_stageComplete = StageComplete.FullCombol;
+                break;
+            case StageComplete.UnComplete:
+                m_stageComplete = StageComplete.Complete;
+                if (GameMeditor.Instance.GetMissCombol() == 0)
+                    m_stageComplete = StageComplete.FullCombol;
+                break;
+        }
     }
 
     // 設置遊戲狀態

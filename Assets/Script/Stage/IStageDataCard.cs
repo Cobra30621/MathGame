@@ -10,12 +10,18 @@ public class IStageDataCard : MonoBehaviour
     [SerializeField] private Button startButt;
     private StageData stageData;
 
+    public void Initialize(StageData stageData){
+        this.stageData = stageData;
+        RefreshInfo(new StageInfoValue(stageData));
+    }
+
     public void Show(){
         RefreshInfo(new StageInfoValue(stageData));
     }
 
+    // 進入遊戲
     public void EnterStage(){
-
+        GameMeditor.Instance.EnterStage(stageData.stageName);
     }
 
     public void RefreshInfo(StageInfoValue stageInfoValue){
@@ -42,26 +48,46 @@ public class StageInfoValue{
     public StageInfoValue(StageData stageData){
         Text_stageName = stageData.stageName;
 
-        int primeStart = stageData.m_primes[0];
-        int primeEnd = stageData.m_primes[-1];
-        Text_primeRange = $"質數:{primeStart}~{primeEnd}";
+        // 設定質數文字
+        if (stageData.m_primes.Length == 0){
+            Text_primeRange = "技巧型關卡";
+        }
+        else
+        {
+            int primeStart = stageData.m_primes[0];
+            int primeEnd = stageData.m_primes[stageData.m_primes.Length - 1]; // 最後的數字
+            Text_primeRange = $"質數: {primeStart}~{primeEnd}";
+        }
+        
+        // 設定合數文字
+        if (stageData.m_composites.Length == 0)
+        {
+            // 改設定加分球
+            int plusStart = stageData.m_plusNums[0];
+            int plusEnd = stageData.m_plusNums[stageData.m_plusNums.Length - 1]; // 最後的數字
+            Text_compositeRange = $"合數: {plusStart}~{plusEnd}";
+        }
+        else
+        {
+            int compositeStart = stageData.m_composites[0];
+            int compositeEnd = stageData.m_composites[stageData.m_composites.Length - 1]; // 取最後的數字
+            Text_compositeRange = $"合數: {compositeStart}~{compositeEnd}";
 
-        int compositeStart = stageData.m_composites[0];
-        int compositeEnd = stageData.m_composites[-1];
-        Text_compositeRange = $"質數:{compositeStart}~{compositeEnd}";
+        }
+        Text_bestpoint = $"最佳紀錄 : {stageData.m_bestPoint}";
 
-        Text_bestpoint = $"最佳紀錄{stageData.m_bestPoint}";
+        
 
         // 關卡完成狀況
         switch (stageData.m_stageComplete){
             case StageComplete.UnComplete:
-                Text_compositeRange = "UnComplete";
+                Text_stageComplete = "UnComplete";
                 break;
             case StageComplete.Complete:
-                Text_compositeRange = "Complete";
+                Text_stageComplete = "Complete";
                 break;
             case StageComplete.FullCombol:
-                Text_compositeRange = "FullCombol";
+                Text_stageComplete = "FullCombol";
                 break;
         }
 

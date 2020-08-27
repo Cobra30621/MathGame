@@ -10,7 +10,7 @@ public class GradeInfoUI : MonoBehaviour
 
     [SerializeField] private Text lab_point, lab_combol, lab_Time, lab_FullCombol, lab_stageName;
 
-    void Start()
+    void Awake()
     {
         instance = this;
         m_animator = GetComponent<Animator>();

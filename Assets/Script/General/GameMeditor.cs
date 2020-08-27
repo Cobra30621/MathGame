@@ -60,6 +60,9 @@ public class GameMeditor
 	}
 
 	// ----------------StageSystem------------------
+	public StageSystem GetStageSystem(){
+		return stageSystem;
+	}
 	public void ResetStage(){
 		stageSystem.ReSet();
 	}
@@ -105,5 +108,14 @@ public class GameMeditor
 	public void BossComingAnimeEnd(){  // Boss球動畫播完
         stageSystem.BossComingAnimeEnd();
     }
+
+	// 以ID進入關卡
+	public void EnterStage(string stageID){
+		stageSystem.EnterStage(stageID);
+	}
+	
+	public void SetGameProcess(GameProcess gameProcess){
+		stageSystem.SetGameProcess(gameProcess);
+	}
 
 }

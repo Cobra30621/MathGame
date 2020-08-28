@@ -20,18 +20,21 @@ public class GameMeditor
 	// 遊戲系統
 	private BallSystem ballSystem; 
 	private StageSystem stageSystem;
+	private ShopSystem shopSystem;
 
 	private GameMeditor(){}
 
 	public void Initinal(){
 		ballSystem = new BallSystem(this);
 		stageSystem = new StageSystem(this);
+		shopSystem = new ShopSystem(this);
 
 	}
 
 	public void Update(){
 		ballSystem.Update();
 		stageSystem.Update();
+		shopSystem.Update();
 	}
 
 	// ----------------BallSystem------------------
@@ -59,13 +62,16 @@ public class GameMeditor
 		return ballSystem.GetBallCount();
 	}
 
+	// 依照策略取得球的分數
+    public int GetBallPoint(BallColor color, Ball ball){
+        return ballSystem.GetBallPoint(color, ball);
+    }
+
 	// ----------------StageSystem------------------
 	public StageSystem GetStageSystem(){
 		return stageSystem;
 	}
-	public void ResetStage(){
-		stageSystem.ReSet();
-	}
+
     public void AddPoint(int poi){
         stageSystem.AddPoint(poi);
     }
@@ -97,6 +103,10 @@ public class GameMeditor
 		return stageSystem.GetMissCombol();
 	}
 
+	public StageComplete GetStageComplete(){
+        return stageSystem.GetStageComplete();
+    }
+
 	public void SetStageData(int num){
 		stageSystem.SetStageData(num);
 	}
@@ -113,9 +123,41 @@ public class GameMeditor
 	public void EnterStage(string stageID){
 		stageSystem.EnterStage(stageID);
 	}
+
+	// 離開關卡
+	public void LeaveStage(){
+		stageSystem.LeaveStage();
+	}
 	
 	public void SetGameProcess(GameProcess gameProcess){
 		stageSystem.SetGameProcess(gameProcess);
 	}
+
+	public void ResetStage(){
+		stageSystem.ReSet();
+	}
+
+	
+
+	// =============ShopSystem================
+	public bool BuyThing(int price){
+        return shopSystem.BuyThing(price);
+    }
+
+    public bool WhetherBuyStage(int price){
+        return shopSystem.WhetherBuyStage(price);
+    }
+
+	public void AddMoney(int money){
+        shopSystem.AddMoney(money);
+    }
+
+    public void LessMoney(int money){
+        shopSystem.LessMoney(money);
+    }
+
+    public int GetMoney(){
+        return shopSystem.GetMoney();
+    }
 
 }

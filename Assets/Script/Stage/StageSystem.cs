@@ -33,12 +33,11 @@ public class StageSystem : IGameSystem
 
         nowStageData = stageData;
         SceneManager.LoadScene("MainGame");
-        nowStageData.SetGameProcess(GameProcess.Start); // 遊戲開始
+        ReSet(); // 重置關卡
     }
 
     public void SetStageData(string id){
         nowStageData = stages[id];
-        // ReSet(); // 關卡重置 :不知道哪邊出了問題
     }
 
     public override void Initialize(){
@@ -52,13 +51,11 @@ public class StageSystem : IGameSystem
     }
 
     public void ReSet(){
-        nowStageData.Reset(); // 關卡CD重開
-        point = 0;
-        combol = 0;
-        missCombol = 0;
-        GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
-        GradeInfoUI.Initialize(); // 重置分數介面
-         
+        nowStageData.Reset(); // 關卡重置
+    }
+
+    public void LeaveStage(){
+        nowStageData.LeaveStage();
     }
 
 
@@ -75,6 +72,8 @@ public class StageSystem : IGameSystem
         nowStageData.SetGameProcess(gameProcess);
     }
 
+    // ================= 設定關卡資料 ===================
+
     // 初始所有關卡
 	private void InitializeStageData()
 	{
@@ -88,6 +87,7 @@ public class StageSystem : IGameSystem
         CreateStageData8();
 
     }
+
 
     private void CreateStageData1(){// 第一關
         string stageName = "基礎";
@@ -146,6 +146,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(1f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(4,4); // P_prime, P_composites ，三顆球出現機率加總為10
         stageData.SetBGM(BGM.Boss);
+        stageData.SetStagePrice(500); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -159,6 +160,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(3f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(5,5); // P_prime, P_composites ，三顆球出現機率加總為10
         stageData.SetBGM(BGM.Boss);
+        stageData.SetStagePrice(3000); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -172,6 +174,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(1f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(0,0); // P_prime, P_composites ，三顆球出現機率加總為10
         stageData.SetBGM(BGM.Boss);
+        stageData.SetStagePrice(3000); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -185,6 +188,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(0.4f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(0,0); // P_prime, P_composites ，三顆球出現機率加總為10
         stageData.SetBGM(BGM.Boss);
+        stageData.SetStagePrice(10000); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -256,33 +260,33 @@ public class StageSystem : IGameSystem
     // -------------------分數相關--------------------
 
     public void AddPoint(int poi){
-        point += poi;
+        nowStageData.point += poi;
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
 
     public void LessPoint(int poi){
-        point -= poi;
-        if(point < 0)
-            point = 0;
+        nowStageData.point -= poi;
+        if(nowStageData.point < 0)
+            nowStageData.point = 0;
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
 
     public void AddCombol(){
-        combol ++ ;
+        nowStageData.combol ++ ;
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
     
     public void MissCombol (){
-        combol = 0;
-        missCombol ++;
+        nowStageData.combol = 0;
+        nowStageData.missCombol ++;
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
 
     public int GetPoint(){
-        return point;
+        return nowStageData.point;
     }
     public int GetCombol(){
-        return combol;
+        return nowStageData.combol;
     }
 
     public float GetGameTime(){
@@ -290,7 +294,7 @@ public class StageSystem : IGameSystem
     }
 
     public int GetMissCombol(){
-        return missCombol;
+        return nowStageData.missCombol;
     }
 
     public string GetStageName(){
@@ -299,6 +303,11 @@ public class StageSystem : IGameSystem
 
     public void BossComingAnimeEnd(){  // Boss球動畫播完
         nowStageData.BossComingAnimeEnd();
+    }
+
+    // ======== 服務方法========
+    public StageComplete GetStageComplete(){
+        return nowStageData.m_stageComplete;
     }
 
     

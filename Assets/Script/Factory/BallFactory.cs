@@ -22,6 +22,7 @@ public class BallFactory : IBallFactory
             {BallColor.Orange, 100},
             {BallColor.Green, 250}
         };
+
     
     // ---------------------------------
     // ------------產生加成球-------------
@@ -31,7 +32,8 @@ public class BallFactory : IBallFactory
         Ball ball = CreateBall(num);
         ball.SetBallColor(BallColor.Orange);
         ball.SetBallImage(img_orange);
-        ball.SetPoint(points[BallColor.Orange]);
+        // ball.SetPoint(points[BallColor.Orange]);
+        SetBallPoint(BallColor.Orange, ball);
         
     }
 
@@ -60,26 +62,30 @@ public class BallFactory : IBallFactory
         {
             ball1.SetBallColor(BallColor.Gray);
             ball1.SetBallImage(img_gray);
-            ball1.SetPoint(points[BallColor.Gray]);
+            // ball1.SetPoint(points[BallColor.Gray]);
+            SetBallPoint(BallColor.Gray, ball1);
         }
         else // 如果ball2是合數，變菊色
         {
             ball1.SetBallColor(BallColor.Orange);
             ball1.SetBallImage(img_orange);
-            ball1.SetPoint(points[BallColor.Orange]);
+            // ball1.SetPoint(points[BallColor.Orange]);
+            SetBallPoint(BallColor.Orange, ball1);
         }
 
         if(WhetherPrime(ball2.GetNumber()))  // 如果ball2是質數，變灰色
         {
             ball2.SetBallColor(BallColor.Gray);
             ball2.SetBallImage(img_gray);
-            ball2.SetPoint(points[BallColor.Gray]);
+            // ball2.SetPoint(points[BallColor.Gray]);
+            SetBallPoint(BallColor.Gray, ball2);
         }
         else // 如果ball2是合數，變菊色
         {
             ball2.SetBallColor(BallColor.Orange);
             ball2.SetBallImage(img_orange);
-            ball2.SetPoint(points[BallColor.Orange]);
+            SetBallPoint(BallColor.Orange, ball2);
+            // ball2.SetPoint(points[BallColor.Orange]);
         }
 
         // 刪除目前的球
@@ -94,7 +100,8 @@ public class BallFactory : IBallFactory
         Ball ball = CreateBall(num);
         ball.SetBallColor(BallColor.Purple);
         ball.SetBallImage(img_purple);
-        ball.SetPoint(points[BallColor.Purple]);
+        SetBallPoint(BallColor.Purple, ball);
+        //ball.SetPoint(points[BallColor.Purple]);
         // ball.SetBossSize(); // 球變大
     }
 
@@ -121,12 +128,14 @@ public class BallFactory : IBallFactory
         // 設定球類型與圖片
         ball1.SetBallColor(BallColor.Green);
         ball1.SetBallImage(img_green);
-        ball1.SetPoint(points[BallColor.Green]);
+        SetBallPoint(BallColor.Green, ball1);
+        // ball1.SetPoint(points[BallColor.Green]);
         // ball1.SetBossSize(); // 球變大
 
         ball2.SetBallColor(BallColor.Green);
         ball2.SetBallImage(img_green);
-        ball2.SetPoint(points[BallColor.Green]);
+        SetBallPoint(BallColor.Green, ball2);
+        // ball2.SetPoint(points[BallColor.Green]);
         // ball2.SetBossSize(); // 球變大
 
         // 刪除目前的球
@@ -160,11 +169,13 @@ public class BallFactory : IBallFactory
         // 設定球類型與圖片
         ball1.SetBallColor(BallColor.Gray);
         ball1.SetBallImage(img_gray);
-        ball1.SetPoint(points[BallColor.Gray]);
+        // ball1.SetPoint(points[BallColor.Gray]);
+        SetBallPoint(BallColor.Gray, ball1);
 
         ball2.SetBallColor(BallColor.Gray);
         ball2.SetBallImage(img_gray);
-        ball2.SetPoint(points[BallColor.Gray]);
+        SetBallPoint(BallColor.Gray, ball2);
+        // ball2.SetPoint(points[BallColor.Gray]);
 
         // 刪除目前的球
         ball.Release();
@@ -184,13 +195,14 @@ public class BallFactory : IBallFactory
         // 設定球類型與圖片
         Ball.SetBallColor(BallColor.Blue);
         Ball.SetBallImage(img_blue);
-        Ball.SetPoint(points[BallColor.Blue]);
+        // Ball.SetPoint(points[BallColor.Blue]);
 
         // 設定數值
         Ball.SetNumber(num);
         Ball.SetSpeed(GetBallVectory(1));
         Ball.SetPosition(GetBallPosition());
         Ball.SetWhetherTouch(true);
+        SetBallPoint(BallColor.Blue, Ball);
 
         Debug.Log("Ball"+ Ball);
         Debug.Log("Ball"+ Ball.ballType);
@@ -260,6 +272,14 @@ public class BallFactory : IBallFactory
         else 
             Debug.Log("找到img_green" );
     }
+
+    // 造球方法
+    public void SetBallPoint(BallColor color, Ball ball){
+        int point = GameMeditor.Instance.GetBallPoint(color, ball);
+        ball.SetPoint(point);
+    }
+
+
 
     //-------------數學方法--------------
 
@@ -362,6 +382,8 @@ public class BallFactory : IBallFactory
         float x = Random.Range(0f, 2f);
         return new Vector3(x, 4f, 0);
     }
+
+
 
     
 }

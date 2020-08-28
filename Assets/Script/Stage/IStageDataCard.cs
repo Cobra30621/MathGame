@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class IStageDataCard : MonoBehaviour
 {
     [SerializeField] private Text lab_Stagename, lab_primeRange, lab_compositeRange;
-    [SerializeField] private Text lab_bestpoint, lab_stageComplete;
+    [SerializeField] private Text lab_bestpoint, lab_stageComplete, lab_ButtonText;
     [SerializeField] private Button startButt;
     private StageData stageData;
 
@@ -19,17 +19,88 @@ public class IStageDataCard : MonoBehaviour
         RefreshInfo(new StageInfoValue(stageData));
     }
 
-    // 進入遊戲
-    public void EnterStage(){
-        GameMeditor.Instance.EnterStage(stageData.stageName);
-    }
-
     public void RefreshInfo(StageInfoValue stageInfoValue){
         lab_Stagename.text = stageInfoValue.Text_stageName;
         lab_primeRange.text = stageInfoValue.Text_primeRange;
         lab_compositeRange.text = stageInfoValue.Text_compositeRange;
         lab_bestpoint.text = stageInfoValue.Text_bestpoint;
         lab_stageComplete.text = stageInfoValue.Text_stageComplete;
+        RefershButton();
+    }
+
+    public void RefershButton(){
+        // 設定按鈕狀態
+        switch (stageData.m_stageState){
+            case StageState.Open:
+                break;
+            case StageState.NeedMoney:
+            case StageState.MoneyEnough:
+                if(GameMeditor.Instance.WhetherBuyStage(stageData.m_stagePrice)) // 如果錢夠
+                {
+                    stageData.m_stageState = StageState.MoneyEnough;
+                }
+                else
+                {
+                    stageData.m_stageState = StageState.NeedMoney;
+                }
+                break;
+        }
+
+        
+        // 設定按鈕顏色
+        ColorBlock cb= startButt.colors;
+        switch (stageData.m_stageState){
+            case StageState.Open:
+                startButt.onClick.AddListener(delegate
+                { 
+                    EnterStage(); // 進入遊戲
+                });
+                lab_ButtonText.text = "開始";
+                cb.normalColor = Color.white; // 按鈕設定為白色
+                cb.highlightedColor = Color.white; //滑鼠觸碰顏色
+                break;
+            case StageState.NeedMoney:
+                startButt.onClick.AddListener(delegate
+                { 
+                    // 沒東西
+                });
+                lab_ButtonText.text = $"$ {stageData.m_stagePrice}";
+                cb.normalColor = Color.gray; // 按鈕設定為灰色
+                cb.highlightedColor = Color.gray; //滑鼠觸碰顏色
+                break;
+            case StageState.MoneyEnough:
+                startButt.onClick.AddListener(delegate
+                { 
+                    BuyStage(); // 購買關卡
+                });
+                lab_ButtonText.text = $"$ {stageData.m_stagePrice}";
+                cb.normalColor = Color.white; // 按鈕設定為灰色
+                cb.highlightedColor = Color.white; //滑鼠觸碰顏色
+                break;
+        }
+        startButt.colors = cb; // 設定按鈕顏色
+    }
+
+
+     // 進入遊戲
+    public void EnterStage(){
+        GameMeditor.Instance.EnterStage(stageData.stageName);
+    }
+
+    // 購買關卡
+    public void BuyStage(){
+        int stagePrice = stageData.m_stagePrice;
+        if(GameMeditor.Instance.WhetherBuyStage(stagePrice)) // 如果錢夠
+        {
+            // PlayBuyAnime()
+            GameMeditor.Instance.BuyThing(stagePrice);
+            stageData.m_stageState = StageState.Open;
+        }
+        else
+        {
+            // 顯示錢不夠
+        }
+        RefershButton();
     }
 
 }
@@ -44,6 +115,8 @@ public class StageInfoValue{
     public string Text_stageStage;
     public string Text_bestpoint;
     public string Text_stageComplete;
+
+    public bool StateOpen;
 
     public StageInfoValue(StageData stageData){
         Text_stageName = stageData.stageName;
@@ -91,8 +164,6 @@ public class StageInfoValue{
                 break;
         }
 
-        // 關卡解鎖：以stagestate判斷
-        Text_stageStage = "開始";
     }
 
 }

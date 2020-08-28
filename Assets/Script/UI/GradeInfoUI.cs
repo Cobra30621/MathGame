@@ -30,9 +30,9 @@ public class GradeInfoUI : MonoBehaviour
     public void Refresh(){
         int point = GameMeditor.Instance.GetPoint();
         if(point < 0)
-            lab_point.text = "Grade:0";
+            lab_point.text = "$ 0";
         else
-            lab_point.text = $"Grade:{point}";
+            lab_point.text = $"$ {point}";
 
         int combol = GameMeditor.Instance.GetCombol();
         lab_combol.text = $"{combol}";

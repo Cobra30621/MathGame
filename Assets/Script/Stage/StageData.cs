@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 // 遊戲流程
 public enum GameProcess{
    	Start, NormalTime,  TimeUp, BossComingAnime, NoNormalBall, BossTime, GameEnd, WaitStart
@@ -7,7 +9,7 @@ public enum GameProcess{
 
 // 關卡解鎖狀態
 public enum StageState{
-    Open, NeedMoney , UnOpen
+    Open, NeedMoney , MoneyEnough
 }
 
 // 關卡完成度
@@ -41,10 +43,13 @@ public class StageData
 
     // 解鎖相關
     public StageState m_stageState;
-    public int m_openStageMoney = 0;
+    public int m_stagePrice = 0;
 
 	// 分數相關
     public StageComplete m_stageComplete; 
+    public int point;
+    public int combol;
+    public int missCombol;
 	public int m_bestPoint;
 
     public BGM m_bgm;
@@ -53,8 +58,7 @@ public class StageData
     private BallFactory ballFactory;
     public bool hasSet = false;
 
-	// ================= 方法 ===================
-
+	// ================= 初始設定方法 ===================
 	public StageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
 		// 設定冷卻時間
@@ -89,8 +93,9 @@ public class StageData
     }
 
 	// 設定解鎖所需要的錢
-	public void SetOpenNeedMoney(int money){
-		m_openStageMoney = money;
+	public void SetStagePrice(int money){
+		m_stagePrice = money;
+        m_stageState = StageState.NeedMoney;
 	}
 
     // 設定bgm;
@@ -98,13 +103,30 @@ public class StageData
         m_bgm = bgm;
     }
 
-	// 重置
+	// ================= 重置 ===================
+
+	// 重置關卡
 	public void Reset()
 	{
         m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
-        SetGameProcess(GameProcess.Start);
+        point = 0;
+        combol = 0;
+        missCombol = 0;
+
+        SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
+        MusicManager.StopMusic();  // 停止音樂
+        GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
+        GradeInfoUI.Initialize(); // 重置分數介面
 	}
+
+    // 離開關卡
+    public void LeaveStage(){
+        MusicManager.StopMusic();  // 停止音樂
+        GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
+        SetGameProcess(GameProcess.WaitStart);  // 遊戲流程改成等待開始
+        SceneManager.LoadScene("StageSelect");
+    }
 
 	// 更新
 	public void Update()
@@ -150,8 +172,6 @@ public class StageData
         // 播放音樂
         MusicManager.SwitchMusic(m_bgm);
         MusicManager.PlayMusic();
-        //Reset();
-        // GameMeditor.Instance.ResetStage(); // 重置關卡
 	}
 
     // 時間倒數流程
@@ -208,6 +228,15 @@ public class StageData
         JudgeStateComplete(); // 紀錄遊戲完成度
         
         GradeInfoUI.ShowWhetherFullCombol(); // 顯示是否Full Combol
+
+        // 增加錢
+        int money = point;
+        if(missCombol == 0)
+            money *= 2;  // Full Combol 錢兩倍
+        GameMeditor.Instance.AddMoney(point); // 增加錢
+        PriceUI.Show(); // 開啟獎勵界面
+        MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
+
         SetGameProcess(GameProcess.WaitStart);
     }
 

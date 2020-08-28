@@ -194,18 +194,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4298186756038654211}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1780644771670179922}
-        m_MethodName: EnterStage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &4041434753949424031
@@ -485,6 +474,7 @@ MonoBehaviour:
   lab_compositeRange: {fileID: 2013246770933716160}
   lab_bestpoint: {fileID: 2098707083056693154}
   lab_stageComplete: {fileID: 2682985480356478483}
+  lab_ButtonText: {fileID: 1442276482263941884}
   startButt: {fileID: 7110032722573845948}
 --- !u!1 &8297182413955636396
 GameObject:

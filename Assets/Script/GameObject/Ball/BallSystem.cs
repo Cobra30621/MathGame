@@ -5,18 +5,26 @@ using UnityEngine;
 public class BallSystem : IGameSystem
 {
     private List<Ball> Balls = new List<Ball>();
+    // 使用的算分策略
+    public IPointStrategy pointStrategy; 
 
     public BallSystem(GameMeditor meditor):base(meditor)
 	{
 		Initialize();
 	}
 
+    public override void Initialize(){
+        SetPointStrategy(new NumPointStrategy()); // 設定成以數字為分數的策略
+        // SetPointStrategy(new HundredPointStrategy());
+    }
 
     public override void Update(){
         foreach(Ball ball in Balls){
             ball.Update();
         }
     }
+
+
 
     public void AddBall(Ball ball){
         Balls.Add(ball);
@@ -49,6 +57,15 @@ public class BallSystem : IGameSystem
     }
     public void RemoveBall(Ball ball){
         Balls.Remove(ball);
+    }
+
+    public void SetPointStrategy(IPointStrategy strategy){
+        pointStrategy = strategy;
+    }
+
+        // 造球方法
+    public int GetBallPoint(BallColor color, Ball ball){
+        return pointStrategy.GetBallPoint(color, ball);
     }
 
 }

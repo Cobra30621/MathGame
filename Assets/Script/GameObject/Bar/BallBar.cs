@@ -6,7 +6,26 @@ public class BallBar : MonoBehaviour
 {
     public int speed = 1;
     private bool WhetherExist;
-    // Update is called once per frame
+
+    private SpriteRenderer spriteRenderer;
+
+    private IBallStrategy _ballStrategy;  // 球回擊策略
+
+    void Awake()
+    {
+        IStageData.SetBallStrategy += SetBallStrategy; // 訂閱設定球回擊策略
+
+        // 設定造型
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        ResourceAssetFactory resourceAssetFactory = MainFactory.GetResourceAssetFactory(); 
+        spriteRenderer.sprite = resourceAssetFactory.LoadImageSprite("Bar");
+    }
+
+    // 設定球回擊得策略
+    public void SetBallStrategy(IBallStrategy ballStrategy){
+        _ballStrategy = ballStrategy;
+    }
+
     void Update()
     {
         InputProcess();
@@ -20,12 +39,12 @@ public class BallBar : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             WhetherExist = false;
-            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.5f);
+            spriteRenderer.color = new Color(1f,1f,1f,0.5f);
         }
         else
         {
             WhetherExist = true;
-            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+            spriteRenderer.color = new Color(1f,1f,1f,1f);
         }
 
     }
@@ -55,6 +74,11 @@ public class BallBar : MonoBehaviour
         if (onBall.GetWhetherTouch() == false){return;}
         onBall.SetWhetherTouch(false);
 
+        if(_ballStrategy == null)
+            Debug.LogError("_ballStrategy為null，請確定有賦值");
+
+        _ballStrategy.BarOnBallEnter(onBall); // 球回擊的方式
+        /*
         switch(ballType){
             case BallType.Prime:
                 onBall.BecomeBlackBall();
@@ -70,6 +94,6 @@ public class BallBar : MonoBehaviour
             default :
                 Debug.LogError("無法找到BallType");
                 break;
-        }
+        }*/
     }
 }

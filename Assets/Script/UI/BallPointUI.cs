@@ -20,6 +20,10 @@ public class BallPointUI : MonoBehaviour
         instance.CreatePointLabelBlue(vector, $"+{point}");
     }
 
+    public static void CreateAddCombolLabel(Vector3 vector){
+        instance.CreatePointLabelBlue(vector, $"Great");
+    }
+
     public static void CreateMissLabel(Vector3 vector){
         instance.CreatePointLabelRed(vector, $"Miss");
     }

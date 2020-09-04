@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class DownWall : IWall
 {
-    private int point = 100;
+
+    private IBallStrategy _ballStrategy;  // 球回擊策略
+
+    void Awake()
+    {
+        IStageData.SetBallStrategy += SetBallStrategy; // 訂閱設定球回擊策略
+    }
+
+    // 設定球回擊得策略
+    public void SetBallStrategy(IBallStrategy ballStrategy){
+        _ballStrategy = ballStrategy;
+    }
+
+
     public override void OnBallEnter(GameObject ball){
         Ball onBall = ball.gameObject.GetComponent<Ball>();
         BallType ballType = onBall.ballType;
+
+        _ballStrategy.DownWallOnBallEnter(onBall);
          
+        /*
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
@@ -28,21 +44,7 @@ public class DownWall : IWall
             default :
                 Debug.LogError("無法找到BallType");
                 break;
-        }
+        }*/
     }
 
-    public void JudgeCreateWhichLabel(Ball onBall){
-        BallColor color = onBall.GetBallColor();
-
-        if(color == BallColor.Purple || color == BallColor.Green) // 魔王球
-        {
-            BallPointUI.CreatePointLabelBoss(onBall.GetPosition(), onBall.GetPoint());// 顯示加分
-        }
-        else // 一般球
-        {
-            BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint()); // 顯示加分
-        }
-
-
-    }
 }

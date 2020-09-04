@@ -8,13 +8,13 @@ public class PriceUI : MonoBehaviour
     private static PriceUI instance;
     private Animator m_animator;
     [SerializeField] private GameObject panel;
-    [SerializeField] private Text lab_addMoney, lab_money, lab_stageComplete, lab_stageName;
+    [SerializeField] private Text lab_addMoney, lab_money, lab_stageComplete, lab_stageName, lab_completeRate;
 
     void Awake()
     {
         instance = this;
         m_animator = GetComponent<Animator>();
-        Initialize();
+        // Initialize();
     }
 
     public static void Initialize(){
@@ -35,6 +35,18 @@ public class PriceUI : MonoBehaviour
         else
             lab_addMoney.text = $"$ +{point}";
 
+        int missCombol = GameMeditor.Instance.GetMissCombol();
+        if(missCombol == 0){
+            lab_stageComplete.text = "FullCombol";
+            // lab_addMoney.text = $"$ +{point *2} (x2)"; // 給錢加成
+        }
+        else{
+            lab_stageComplete.text = "Complete";
+        }
+
+        int rate = GameMeditor.Instance.GetCompletionRate();
+        lab_completeRate.text = $"{rate}%";
+        /*
         // 設定分數狀態
         StageComplete stageComplete = GameMeditor.Instance.GetStageComplete();
         switch (stageComplete){
@@ -47,6 +59,7 @@ public class PriceUI : MonoBehaviour
                 lab_addMoney.text = $"$ +{point} (x2)"; // 給錢加成
                 break;
         }
+        */
 
 
 

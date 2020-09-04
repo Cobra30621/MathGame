@@ -133,13 +133,30 @@ public class GameMeditor
 		stageSystem.SetGameProcess(gameProcess);
 	}
 
+	public GameProcess GetNowGameProcess(){
+        return  stageSystem.GetNowGameProcess();
+    }
+
 	public void ResetStage(){
 		stageSystem.ReSet();
 	}
+	// 給予完成率
+    public int GetCompletionRate(){
+        return stageSystem.GetCompletionRate();
+    }
 
 	
 
 	// =============ShopSystem================
+	public void SetBallStyle(BallStyle ballStyle){
+        shopSystem.SetBallStyle(ballStyle);
+    }
+
+    public BallStyle GetBallStyle(){
+        return shopSystem.GetBallStyle();
+    }
+
+
 	public bool BuyThing(int price){
         return shopSystem.BuyThing(price);
     }

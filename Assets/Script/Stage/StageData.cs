@@ -2,64 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-// 遊戲流程
-public enum GameProcess{
-   	Start, NormalTime,  TimeUp, BossComingAnime, NoNormalBall, BossTime, GameEnd, WaitStart
-}
-
-// 關卡解鎖狀態
-public enum StageState{
-    Open, NeedMoney , MoneyEnough
-}
-
-// 關卡完成度
-public enum StageComplete{
-    UnComplete, Complete, FullCombol
-}
 
 // 一般關卡資訊
-public class StageData 
+public class StageData : IStageData
 {
-    // 關卡資訊
-    public string stageName;
-    public int[] m_primes;
-    public int[] m_composites;
-    public int[] m_plusNums;
-    public int[] m_bossNums;
 
-    // 球產生的機率，為 P / 10
-    public int m_P_prime = 4;
-    public int m_P_composite = 4;
-    
-    // 產生球的間隔時間
-	private float m_CoolDown = 0;		
-	private float m_MaxCoolDown = 0;	// 
-    private float m_startCoolDown = 1f;
-
-    // 遊戲時間與流程
-    private float m_gameTime = 0;
-    private float m_MaxGameTime = 30f;
-    public GameProcess m_gameProcess;
-
-    // 解鎖相關
-    public StageState m_stageState;
-    public int m_stagePrice = 0;
-
-	// 分數相關
-    public StageComplete m_stageComplete; 
-    public int point;
-    public int combol;
-    public int missCombol;
-	public int m_bestPoint;
-
-    public BGM m_bgm;
-
-	// 其他
-    private BallFactory ballFactory;
-    public bool hasSet = false;
-
-	// ================= 初始設定方法 ===================
-	public StageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
+    // ================= 初始設定方法 ===================
+	public StageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums):base(CoolDown , name, primes, composites, plusNums, bossNums)
 	{
 		// 設定冷卻時間
 		m_MaxCoolDown = CoolDown;
@@ -80,65 +29,23 @@ public class StageData
 
         m_bgm = BGM.Normal;
 
+        // 設定球回擊模式，預設回擊兩顆
+        ballStrategy = new CompositeToTwoStrategy();
+
         // 遊戲流程
         m_gameProcess = GameProcess.WaitStart;
 		hasSet = true;
 	}
 
-	// 設定球的機率
-	public void SetBallProbability(int P_prime, int P_composite){
-        m_P_prime = P_prime;
-        m_P_composite = P_composite;
-
-    }
-
-	// 設定解鎖所需要的錢
-	public void SetStagePrice(int money){
-		m_stagePrice = money;
-        m_stageState = StageState.NeedMoney;
-	}
-
-    // 設定bgm;
-    public void SetBGM(BGM bgm){
-        m_bgm = bgm;
-    }
-
-	// ================= 重置 ===================
-
-	// 重置關卡
-	public void Reset()
-	{
-        m_CoolDown = m_startCoolDown;
-        m_gameTime = m_MaxGameTime;
-        point = 0;
-        combol = 0;
-        missCombol = 0;
-
-        SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
-        MusicManager.StopMusic();  // 停止音樂
-        GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
-        GradeInfoUI.Initialize(); // 重置分數介面
-	}
-
-    // 離開關卡
-    public void LeaveStage(){
-        MusicManager.StopMusic();  // 停止音樂
-        GameMeditor.Instance.RemoveAllBall(); // 清除所有的球
-        SetGameProcess(GameProcess.WaitStart);  // 遊戲流程改成等待開始
-        SceneManager.LoadScene("StageSelect");
-    }
-
-	// 更新
-	public void Update()
-	{
-        PlayGameProcess();
-	}
 
     // ------------------ 關卡流程 ---------------------- 
-    public void PlayGameProcess(){
+    public override void PlayGameProcess(){
         switch(m_gameProcess){
 			case GameProcess.Start:
 				GameStartProcess();
+				break;
+            case GameProcess.StartAnime:
+				GameStartAnimeProcess();
 				break;
             case GameProcess.NormalTime : // 遊戲開始
                 NormalTimeProcess();
@@ -148,8 +55,6 @@ public class StageData
                 break;
             case GameProcess.NoNormalBall :
                 PlayBossComingAnime();  // 播放BossComingAnime
-                break;
-            case GameProcess.BossComingAnime : // 等待BossComingAnime播完
                 break;
             case GameProcess.BossTime :  // 以產生Boss球，等待場上沒球
                 WaitNoBossBallProcess();
@@ -165,165 +70,4 @@ public class StageData
         }
     }
 
-	public void GameStartProcess(){
-		// playStartAnime
-		SetGameProcess( GameProcess.NormalTime);
-
-        // 播放音樂
-        MusicManager.SwitchMusic(m_bgm);
-        MusicManager.PlayMusic();
-	}
-
-    // 時間倒數流程
-    public void NormalTimeProcess(){
-        // 判斷時間否到了
-        if (m_gameTime <= 0){
-            m_gameTime = 0;
-            SetGameProcess( GameProcess.TimeUp);
-        }
-        // 更新遊戲時間
-        m_gameTime -= Time.deltaTime;
-        GradeInfoUI.UpdateTime(); // 更新介面時間
-
-		// 是否可以產生球
-		m_CoolDown -= Time.deltaTime;
-		if( m_CoolDown > 0)
-			return ;
-		m_CoolDown = m_MaxCoolDown;
-
-        // 產生球
-        ballFactory = MainFactory.GetBallFactory();
-        CreateBall();
-    }
-
-    public void WaitNoBallProcess(){
-        int ballCount = GameMeditor.Instance.GetBallCount();
-        if (ballCount == 0)
-            SetGameProcess(GameProcess.NoNormalBall);
-
-    }
-
-    public void PlayBossComingAnime(){
-        GradeInfoUI.PlayBossComingAnime();
-        SetGameProcess(GameProcess.BossComingAnime);
-    }
-
-    public void BossComingAnimeEnd(){   // 由anime去操控，產生Boss球
-        CreateBossBall(); // 產生魔王球
-        SetGameProcess(GameProcess.BossTime);
-    }
-
-    public void WaitNoBossBallProcess(){
-        int ballCount = GameMeditor.Instance.GetBallCount();
-        if (ballCount == 0)
-            SetGameProcess(GameProcess.GameEnd);
-    }
-
-    public void GameEndProcess(){
-
-        int point = GameMeditor.Instance.GetPoint();
-        if(point > m_bestPoint)
-            m_bestPoint = point; // 記下最高紀錄
-
-        JudgeStateComplete(); // 紀錄遊戲完成度
-        
-        GradeInfoUI.ShowWhetherFullCombol(); // 顯示是否Full Combol
-
-        // 增加錢
-        int money = point;
-        if(missCombol == 0)
-            money *= 2;  // Full Combol 錢兩倍
-        GameMeditor.Instance.AddMoney(point); // 增加錢
-        PriceUI.Show(); // 開啟獎勵界面
-        MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
-
-        SetGameProcess(GameProcess.WaitStart);
-    }
-
-    public void JudgeStateComplete(){
-        switch (m_stageComplete){
-            case StageComplete.FullCombol:
-                break;
-            case StageComplete.Complete:
-                if (GameMeditor.Instance.GetMissCombol() == 0)
-                    m_stageComplete = StageComplete.FullCombol;
-                break;
-            case StageComplete.UnComplete:
-                m_stageComplete = StageComplete.Complete;
-                if (GameMeditor.Instance.GetMissCombol() == 0)
-                    m_stageComplete = StageComplete.FullCombol;
-                break;
-        }
-    }
-
-    // 設置遊戲狀態
-
-    public void SetGameProcess(GameProcess gameProcess){
-        m_gameProcess = gameProcess;
-    }
-
-    // ---------------取的關卡資料------------------
-
-    public float GetGameTime(){
-        return m_gameTime;
-    }
-
-    public string GetStageName(){
-        return stageName;
-    }
-
-    // ---------------取的關卡資料------------------
-
-
-    // ------------------產生球相關方法-----------------------
-
-    public void CreateBall(){ // 隨機產生球
-        int PrimeOrComposite = Random.Range(0,10);
-        if(PrimeOrComposite >= 0 && PrimeOrComposite < m_P_prime) // 2/5
-            CreatePrimeBall();
-        else if(PrimeOrComposite >= m_P_prime && PrimeOrComposite < m_P_prime + m_P_composite) // 2/5
-            CreateCompositeBall();
-        else // 1/5
-            CreatePlusBall();      
-    }
-
-    public void CreatePrimeBall(){ // 建立質數球
-        if(m_primes.Length == 0){
-            Debug.Log("primes是空的");
-            return;
-        }
-        int index = Random.Range(0, m_primes.Length);
-        int num = m_primes[index];
-        ballFactory.CreateBall(num);
-    }
-
-    public void CreateCompositeBall(){ // 建立合數球
-        if(m_composites.Length == 0){
-            Debug.Log("Composites是空的");
-            return;
-        }
-        int index = Random.Range(0, m_composites.Length);
-        int num = m_composites[index];
-        ballFactory.CreateBall(num);
-    }
-
-    public void CreatePlusBall(){ // 建立加分數球
-        if(m_plusNums.Length == 0){
-            Debug.Log("PlusBalls是空的");
-            return;
-        }
-        int index = Random.Range(0, m_plusNums.Length);
-        int num = m_plusNums[index];
-        ballFactory.CreatePlusBall(num);
-    }
-
-    public void CreateBossBall(){ // 建立魔王球
-        if(m_bossNums.Length == 0){
-            Debug.LogError("BossBalls是空的");
-            return;
-        }
-        int index = Random.Range(0, m_bossNums.Length);
-        int num = m_bossNums[index];
-        ballFactory.CreateBossBall(num);
-    }
 }

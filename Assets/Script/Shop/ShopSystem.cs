@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum BallStyle{
+    tomato, snowBall
+}
+
 public class ShopSystem : IGameSystem
 {
+    // 目前球的造型
+    public BallStyle _ballStyle = BallStyle.tomato;// 暫時先設為tomato
 
     public ShopSystem(GameMeditor meditor):base(meditor)
 	{
@@ -17,6 +23,17 @@ public class ShopSystem : IGameSystem
     public void Initialize(){
         m_money = 0; // 之後改讀取
     }
+
+    // =========造型=========
+    public void SetBallStyle(BallStyle ballStyle){
+        _ballStyle = ballStyle;
+    }
+
+    public BallStyle GetBallStyle(){
+        return _ballStyle;
+    }
+
+    // ===========購買方法==========
 
     public bool BuyThing(int price){
         if(WhetherBuyStage(price)){

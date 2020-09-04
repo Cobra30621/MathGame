@@ -55,6 +55,8 @@
   <ItemGroup>
      <Compile Include="Assets\Script\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Script\BaseClass\IUserInterface.cs" />
+     <Compile Include="Assets\Script\Factory\AssetFactory\IAssetFactory.cs" />
+     <Compile Include="Assets\Script\Factory\AssetFactory\ResourceAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\BallFactory.cs" />
      <Compile Include="Assets\Script\Factory\IBallFactory.cs" />
      <Compile Include="Assets\Script\Factory\MainFactory.cs" />
@@ -74,8 +76,16 @@
      <Compile Include="Assets\Script\General\GameLoop.cs" />
      <Compile Include="Assets\Script\General\GameMeditor.cs" />
      <Compile Include="Assets\Script\General\MusicManager.cs" />
+     <Compile Include="Assets\Script\Practice\BallMove.cs" />
      <Compile Include="Assets\Script\Shop\ShopSystem.cs" />
+     <Compile Include="Assets\Script\Stage\BallStrategy\BarCatchPrimeStrategy.cs" />
+     <Compile Include="Assets\Script\Stage\BallStrategy\CompositeToOneStrategy.cs" />
+     <Compile Include="Assets\Script\Stage\BallStrategy\CompositeToTwoStrategy.cs" />
+     <Compile Include="Assets\Script\Stage\BallStrategy\IBallStrategy.cs" />
+     <Compile Include="Assets\Script\Stage\CatchPrimeStageData.cs" />
+     <Compile Include="Assets\Script\Stage\IStageData.cs" />
      <Compile Include="Assets\Script\Stage\IStageDataCard.cs" />
+     <Compile Include="Assets\Script\Stage\NoBossStageData.cs" />
      <Compile Include="Assets\Script\Stage\NormalStageCard.cs" />
      <Compile Include="Assets\Script\Stage\StageData.cs" />
      <Compile Include="Assets\Script\Stage\StageInfoPanel.cs" />
@@ -83,7 +93,9 @@
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
      <Compile Include="Assets\Script\UI\GradeInfoUI.cs" />
      <Compile Include="Assets\Script\UI\PriceUI.cs" />
+     <Compile Include="Assets\Script\UI\ShowBall.cs" />
      <Compile Include="Assets\Script\UI\StageSelectUI.cs" />
+     <Compile Include="Assets\Script\UI\StartPanel.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/cobra/Unity專案/MathGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -302,6 +314,9 @@
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/cobra/Unity專案/MathGame/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Users/cobra/Unity專案/MathGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
@@ -657,6 +672,10 @@
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{DA94E744-7FC7-9AE2-2AE9-0D22E0EE7AAC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

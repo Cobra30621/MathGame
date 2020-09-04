@@ -15,14 +15,14 @@ public class StageSystem : IGameSystem
     public int point;
     public int combol;
     public int missCombol;
-    public StageData nowStageData;
-    public List<StageData> stageDatas = new List<StageData>();
-    public Dictionary<string, StageData> stages = new Dictionary<string, StageData>(); 
+    public IStageData nowStageData;
+    public List<IStageData> stageDatas = new List<IStageData>();
+    public Dictionary<string, IStageData> stages = new Dictionary<string, IStageData>(); 
 
 
     // ============== Dictionary方法 ======================= 
     public void EnterStage(string stageID){
-        StageData stageData;
+        IStageData stageData;
         if(stages.ContainsKey(stageID))
             stageData = stages[stageID];
         else
@@ -32,9 +32,17 @@ public class StageSystem : IGameSystem
         }
 
         nowStageData = stageData;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene("MainGame");
-        ReSet(); // 重置關卡
     }
+
+    // 等讀取完場景，再執行
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 
     public void SetStageData(string id){
         nowStageData = stages[id];
@@ -42,7 +50,7 @@ public class StageSystem : IGameSystem
 
     public override void Initialize(){
         InitializeStageData();
-        SetStageData(1); // 設定現在是第幾關
+        SetStageData(0); // 設定現在是第幾關
     }
 
     public override void Update(){
@@ -51,7 +59,8 @@ public class StageSystem : IGameSystem
     }
 
     public void ReSet(){
-        nowStageData.Reset(); // 關卡重置
+        // nowStageData.Reset(); // 關卡重置
+        SetGameProcess(GameProcess.Start);
     }
 
     public void LeaveStage(){
@@ -72,12 +81,26 @@ public class StageSystem : IGameSystem
         nowStageData.SetGameProcess(gameProcess);
     }
 
+    public GameProcess GetNowGameProcess(){
+        return nowStageData.m_gameProcess;
+    }
+
     // ================= 設定關卡資料 ===================
 
     // 初始所有關卡
 	private void InitializeStageData()
 	{
-        CreateStageData1();
+        CreateCatchPrimeStageData1();
+        CreateCatchPrimeStageData2();
+        CreateCatchPrimeStageData3();
+        CreateCatchPrimeStageData4();
+        CreateCatchPrimeStageData5();
+        CreateCatchPrimeStageData6();
+        /* 舊的關卡
+        CreateStageDataV1_1();
+        CreateStageDataV1();
+        CreateStageDataV2();
+        CreateStageDataV3();
         CreateStageData2();
         CreateStageData3();
         CreateStageData4();
@@ -85,30 +108,162 @@ public class StageSystem : IGameSystem
         CreateStageData6();
         CreateStageData7();
         CreateStageData8();
+        */
 
     }
 
-
-    private void CreateStageData1(){// 第一關
-        string stageName = "基礎";
+    private void CreateCatchPrimeStageData1 (){// 第一關
+        string stageName = "01 接住紅蕃茄";
         int[] primes ={2, 3};
-        int[] composites = {4,6,9};
+        int[] composites = {};
         int[] plusNums = {};
-        int[] bossNums = {13,14, 15,19};
-        StageData stageData = new StageData(4f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(5,5); // P_prime, P_composites ，三顆球出現機率加總為10
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 10,0); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData._startText = "接住紅番茄";
+        stageData.SetBallSpeed(0.7f);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
 
+    private void CreateCatchPrimeStageData2 (){
+        string stageName = "02 閃避綠蕃茄";
+        int[] primes ={2, 3};
+        int[] composites = {4,6};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 2,8); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData._startText = "閃避綠蕃茄";
+        stageData.SetBallSpeed(0.7f);
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData3 (){
+        string stageName = "03 番茄上的數字代表什麼？";
+        int[] primes ={2, 3, 5};
+        int[] composites = {4, 6, 8};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData._startText = "番茄上的數字代表？";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData4 (){
+        string stageName = "04 紅蕃茄是質數";
+        int[] primes ={2, 3, 5, 7};
+        int[] composites = {4, 6, 8, 9};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(2f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.7f);
+        stageData._startText = "番茄上的數字代表？";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData5 (){
+        string stageName = "05 綠蕃茄是合數";
+        int[] primes ={2, 3, 5, 7};
+        int[] composites = {4, 6, 8, 9};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(2f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(1f);
+        stageData._startText = "番茄上的數字代表？";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData6 (){
+        string stageName = "06 黃番茄登場";
+        int[] primes ={2, 3, 5, 7};
+        int[] composites = {4, 6, 8, 9};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.8f);
+        stageData._startText = "番茄上的數字代表？";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+
+
+    // =============舊的關卡=================
+
+    private void CreateStageDataV1_1(){// 第一關
+        string stageName = "模擬新模式";
+        int[] primes ={2, 3};
+        int[] composites = {4,6};
+        int[] plusNums = {};
+        int[] bossNums = {3,4};
+        NoBossStageData stageData = new NoBossStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetStageBallStrategy(new BarCatchPrimeStrategy());
+        stageData._startText = "擊退未成熟的綠番茄";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateStageDataV1(){// 第一關
+        string stageName = "認識紅綠番茄";
+        int[] primes ={2, 3};
+        int[] composites = {4,6};
+        int[] plusNums = {};
+        int[] bossNums = {3,4};
+        NoBossStageData stageData = new NoBossStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(0,0, 5,5); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetStageBallStrategy(new CompositeToOneStrategy(BallMoveMethon.Straight));
+        stageData._startText = "擊退未成熟的綠番茄";
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateStageDataV2(){// 第一關
+        string stageName = "認識黃番茄";
+        int[] primes ={2, 3};
+        int[] composites = {4,6,9};
+        int[] plusNums = {};
+        int[] bossNums = {5,7, 10,12};
+        NoBossStageData stageData = new NoBossStageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(1,1, 4,4); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData._startText = "以數學判斷黃蕃茄是否成熟";
+        stageData.SetStageBallStrategy(new CompositeToOneStrategy());
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateStageDataV3(){// 第一關
+        string stageName = "彩虹番茄登場";
+        int[] primes ={2, 3, 5};
+        int[] composites = {4,6,9};
+        int[] plusNums = {8, 12,16};
+        int[] bossNums = {13,14, 15,19};
+        StageData stageData = new StageData(4f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(2,2, 3,2); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetStageBallStrategy(new CompositeToOneStrategy());
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+
     private void CreateStageData2(){// 第二關
-        string stageName = "中等";
+        string stageName = "綠番茄會分裂";
         int[] primes ={2, 3, 5};
         int[] composites = {4,6,9};
         int[] plusNums = {8, 12,16, 18};
         int[] bossNums = {21,22, 23, 26,29};
         StageData stageData = new StageData(3f, stageName ,primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(4,4); // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData.SetBallProbability(2,2, 3,2);  // P_prime, P_composites ，三顆球出現機率加總為10
+        stageData._startText = "番茄會分裂！";
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -146,7 +301,7 @@ public class StageSystem : IGameSystem
         StageData stageData = new StageData(1f, stageName ,primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(4,4); // P_prime, P_composites ，三顆球出現機率加總為10
         stageData.SetBGM(BGM.Boss);
-        stageData.SetStagePrice(500); // 設定解鎖所需金錢
+        // stageData.SetStagePrice(500); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -272,7 +427,8 @@ public class StageSystem : IGameSystem
     }
 
     public void AddCombol(){
-        nowStageData.combol ++ ;
+        nowStageData.combol ++ ; // 增加Combol數
+        nowStageData.accumulateCombol ++ ;  // 增加累積Combol數
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
     
@@ -299,6 +455,11 @@ public class StageSystem : IGameSystem
 
     public string GetStageName(){
         return nowStageData.GetStageName();
+    }
+
+    // 給予完成率
+    public int GetCompletionRate(){
+        return nowStageData.GetCompletionRate();
     }
 
     public void BossComingAnimeEnd(){  // Boss球動畫播完

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 public enum BallType{
-    Prime, Composite, Black
+    Prime, Composite, Black, CompostieBlack
 }
 
 public enum BallColor{//White, Red, Orange, Yellow, Green
-    Blue, Gray, Black , Purple, Orange, Green, Red
+    Blue, Gray, Black , Purple, Orange, Green, Red, Judge, Prime, Composite, Boss, Dead
 }
 
 public class Ball : MonoBehaviour
@@ -91,6 +91,8 @@ public class Ball : MonoBehaviour
     }
 
     public void Move(){
+        // int cut = 20;
+        //transform.DOMove(transform.position + speed / cut, 0.1f);
         transform.Translate(speed * Time.deltaTime);
     }
 
@@ -103,12 +105,23 @@ public class Ball : MonoBehaviour
     }
 
     public void BecomeBlackBall(){
-        ballType = BallType.Black;
-        img_ball.color = Color.gray ;
+        BallFactory ballFactory = MainFactory.GetBallFactory();
+        ballType = BallType.Black; // 判定變成死球
+        ballColor = BallColor.Dead; // 造型變成死球
+        ballFactory.SetDeadBallImage(this); // 將造型變成死球
+    }
+
+    public void BecomeBlackBall(BallType ballType){
+        BallFactory ballFactory = MainFactory.GetBallFactory();
+        this.ballType = ballType; // 判定變成死球
+        ballColor = BallColor.Dead; // 造型變成死球
+        ballFactory.SetDeadBallImage(this); // 將造型變成死球
     }
 
     public void BecomeTwoBall(){
         BallFactory ballFactory = MainFactory.GetBallFactory();
+        ballFactory.CreateTwoBall(this);
+        /*
         if (ballColor == BallColor.Purple)
             ballFactory.CreateTwoBossBall(this);
         if (ballColor == BallColor.Green) // 綠色產生兩個Ball
@@ -119,6 +132,7 @@ public class Ball : MonoBehaviour
             ballFactory.CreateTwoBall(this);
         else
             Debug.Log("不該出現的球產生兩顆："+ this);
+        */
     }
 
     public void Release(){

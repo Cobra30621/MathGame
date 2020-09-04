@@ -8,9 +8,9 @@ public class IStageDataCard : MonoBehaviour
     [SerializeField] private Text lab_Stagename, lab_primeRange, lab_compositeRange;
     [SerializeField] private Text lab_bestpoint, lab_stageComplete, lab_ButtonText;
     [SerializeField] private Button startButt;
-    private StageData stageData;
+    private IStageData stageData;
 
-    public void Initialize(StageData stageData){
+    public void Initialize(IStageData stageData){
         this.stageData = stageData;
         RefreshInfo(new StageInfoValue(stageData));
     }
@@ -118,7 +118,7 @@ public class StageInfoValue{
 
     public bool StateOpen;
 
-    public StageInfoValue(StageData stageData){
+    public StageInfoValue(IStageData stageData){
         Text_stageName = stageData.stageName;
 
         // 設定質數文字
@@ -135,10 +135,7 @@ public class StageInfoValue{
         // 設定合數文字
         if (stageData.m_composites.Length == 0)
         {
-            // 改設定加分球
-            int plusStart = stageData.m_plusNums[0];
-            int plusEnd = stageData.m_plusNums[stageData.m_plusNums.Length - 1]; // 最後的數字
-            Text_compositeRange = $"合數: {plusStart}~{plusEnd}";
+            Text_compositeRange = "";
         }
         else
         {
@@ -147,7 +144,7 @@ public class StageInfoValue{
             Text_compositeRange = $"合數: {compositeStart}~{compositeEnd}";
 
         }
-        Text_bestpoint = $"最佳紀錄 : {stageData.m_bestPoint}";
+        Text_bestpoint = $"Best: {stageData.m_bestPoint}%";
 
         
 

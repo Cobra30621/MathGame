@@ -5,6 +5,6 @@ using System.Collections;
 public abstract class IBallFactory
 {
 	// 建立武器
-	public abstract Ball CreateBall( int num);
+	public abstract Ball CreateBall( int num, BallColor ballColor);
 }
 

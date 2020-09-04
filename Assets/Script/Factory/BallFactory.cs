@@ -9,149 +9,63 @@ public class BallFactory : IBallFactory
     public GameObject BallPrefab;
     private Vector3 StartSpeed  = new Vector3(2f,-2f,0);
     private Vector3 StartPosition  = new Vector3(0,4,0);
+    private float ballSpeed = 1f;
 
     // BallImage
-    private Sprite img_blue, img_gray, img_purple, img_orange, img_green;
+    private Sprite img_judge, img_prime, img_boss, img_composite, img_dead;
 
     // 設定球的分數
     private Dictionary< BallColor, int > points = new Dictionary< BallColor, int >()
         { 
-            {BallColor.Blue, 100},
-            {BallColor.Gray, 50},
-            {BallColor.Purple, 500},
-            {BallColor.Orange, 100},
-            {BallColor.Green, 250}
+            {BallColor.Judge, 100},
+            {BallColor.Prime, 50},
+            {BallColor.Boss, 500},
+            {BallColor.Composite, 100},
+            {BallColor.Dead, 250}
         };
 
-    
-    // ---------------------------------
-    // ------------產生加成球-------------
-    // ---------------------------------
-
-    public void CreatePlusBall(int num){ // 建立加成球
-        Ball ball = CreateBall(num);
-        ball.SetBallColor(BallColor.Orange);
-        ball.SetBallImage(img_orange);
-        // ball.SetPoint(points[BallColor.Orange]);
-        SetBallPoint(BallColor.Orange, ball);
-        
-    }
-
-    public void CreateTwoPlusBall(Ball ball){
-        List<int> nums = FactorizeToTwoCloseNum(ball.GetNumber());
-
-        // 產生球
-        Ball ball1 = CreateBall(nums[0]);
-        Ball ball2 = CreateBall(nums[1]);
-
-        //  設定球的球的位置
-        Vector3 vec = ball.transform.position;
-        ball1.SetPosition(vec);
-        ball2.SetPosition(vec);
-
-        // 設定球的速度
-        ball1.SetSpeed(GetBallVectory(-1));
-        ball2.SetSpeed(GetBallVectory(-1));
-
-        // 球還無法回擊
-        ball1.SetWhetherTouch(false);
-        ball2.SetWhetherTouch(false);
-
-        // 設定球類型與圖片
-        if(WhetherPrime(ball1.GetNumber()))  // 如果ball1是質數，變灰色
-        {
-            ball1.SetBallColor(BallColor.Gray);
-            ball1.SetBallImage(img_gray);
-            // ball1.SetPoint(points[BallColor.Gray]);
-            SetBallPoint(BallColor.Gray, ball1);
-        }
-        else // 如果ball2是合數，變菊色
-        {
-            ball1.SetBallColor(BallColor.Orange);
-            ball1.SetBallImage(img_orange);
-            // ball1.SetPoint(points[BallColor.Orange]);
-            SetBallPoint(BallColor.Orange, ball1);
-        }
-
-        if(WhetherPrime(ball2.GetNumber()))  // 如果ball2是質數，變灰色
-        {
-            ball2.SetBallColor(BallColor.Gray);
-            ball2.SetBallImage(img_gray);
-            // ball2.SetPoint(points[BallColor.Gray]);
-            SetBallPoint(BallColor.Gray, ball2);
-        }
-        else // 如果ball2是合數，變菊色
-        {
-            ball2.SetBallColor(BallColor.Orange);
-            ball2.SetBallImage(img_orange);
-            SetBallPoint(BallColor.Orange, ball2);
-            // ball2.SetPoint(points[BallColor.Orange]);
-        }
-
-        // 刪除目前的球
-        ball.Release();
+    public void SetBallSpeed(float speed){
+        ballSpeed = speed;
     }
 
     // ---------------------------------
-    // ------------產生魔王球-------------
+    // ------------產生球-------------
     // ---------------------------------
 
-    public void CreateBossBall(int num){ // 建立魔王球
-        Ball ball = CreateBall(num);
-        ball.SetBallColor(BallColor.Purple);
-        ball.SetBallImage(img_purple);
-        SetBallPoint(BallColor.Purple, ball);
-        //ball.SetPoint(points[BallColor.Purple]);
-        // ball.SetBossSize(); // 球變大
+    // 產生直線行走球 Speed.x = 0
+    public void CreateStraightBall(int num, BallColor ballColor){
+        Ball ball = CreateBall(num, ballColor);
+        ball.SetSpeed(GetBallVectoryXZero());
     }
 
-    public void CreateTwoBossBall(Ball ball){
-        List<int> nums = FactorizeToTwoCloseNum(ball.GetNumber());
-
-        // 產生球
-        Ball ball1 = CreateBall(nums[0]);
-        Ball ball2 = CreateBall(nums[1]);
-
-        //  設定球的球的位置
-        Vector3 vec = ball.transform.position;
-        ball1.SetPosition(vec);
-        ball2.SetPosition(vec);
-
-        // 設定球的速度
-        ball1.SetSpeed(GetBallVectory(-1));
-        ball2.SetSpeed(GetBallVectory(-1));
-
-        // 球還無法回擊
-        ball1.SetWhetherTouch(false);
-        ball2.SetWhetherTouch(false);
-
-        // 設定球類型與圖片
-        ball1.SetBallColor(BallColor.Green);
-        ball1.SetBallImage(img_green);
-        SetBallPoint(BallColor.Green, ball1);
-        // ball1.SetPoint(points[BallColor.Green]);
-        // ball1.SetBossSize(); // 球變大
-
-        ball2.SetBallColor(BallColor.Green);
-        ball2.SetBallImage(img_green);
-        SetBallPoint(BallColor.Green, ball2);
-        // ball2.SetPoint(points[BallColor.Green]);
-        // ball2.SetBossSize(); // 球變大
-
-        // 刪除目前的球
-        ball.Release();
-    }
-
-    // ---------------------------------
-    // ------------產生一般球-------------
-    // ---------------------------------
 
     public void CreateTwoBall(Ball ball){
-        List<int> nums = FactorizeToTwoNum(ball.GetNumber());
+        List<int> nums = FactorizeToTwoCloseNum(ball.GetNumber());
 
-        // 產生球
-        Ball ball1 = CreateBall(nums[0]);
-        Ball ball2 = CreateBall(nums[1]);
+        BallColor MotherBallColor = ball.GetBallColor();
+        Ball ball1;
+        Ball ball2;
+
+        // 產生魔王球
+        if(MotherBallColor == BallColor.Boss)
+        {
+            ball1 = CreateBall(nums[0], BallColor.Boss);
+            ball2 = CreateBall(nums[1], BallColor.Boss);
+        }
+        else // 產生一般球
+        {
+            // 產生Ball1
+            if(WhetherPrime(nums[0]))
+                ball1 = CreateBall(nums[0], BallColor.Prime);
+            else
+                ball1 = CreateBall(nums[0], BallColor.Composite);
+
+            // 產生Ball2
+            if(WhetherPrime(nums[1]))
+                ball2 = CreateBall(nums[1], BallColor.Prime);
+            else
+                ball2 = CreateBall(nums[1], BallColor.Composite);
+        }
 
         //  設定球的球的位置
         Vector3 vec = ball.transform.position;
@@ -166,59 +80,66 @@ public class BallFactory : IBallFactory
         ball1.SetWhetherTouch(false);
         ball2.SetWhetherTouch(false);
 
-        // 設定球類型與圖片
-        ball1.SetBallColor(BallColor.Gray);
-        ball1.SetBallImage(img_gray);
-        // ball1.SetPoint(points[BallColor.Gray]);
-        SetBallPoint(BallColor.Gray, ball1);
-
-        ball2.SetBallColor(BallColor.Gray);
-        ball2.SetBallImage(img_gray);
-        SetBallPoint(BallColor.Gray, ball2);
-        // ball2.SetPoint(points[BallColor.Gray]);
-
         // 刪除目前的球
         ball.Release();
     }
 
-    public override Ball CreateBall(int num){
+    public override Ball CreateBall (int num, BallColor ballColor){
         Initiaize(); // 取得Ball和BallCanvas
         // 建立物件模組
         GameObject ball = GameObject.Instantiate( BallPrefab , BallCanvas.transform);
         Ball Ball = ball.GetComponent<Ball>();
 
+        // 以數字判斷球為質數或合數
         if(WhetherPrime(num))
             Ball.SetBallType(BallType.Prime);
         else
             Ball.SetBallType(BallType.Composite);
         
         // 設定球類型與圖片
-        Ball.SetBallColor(BallColor.Blue);
-        Ball.SetBallImage(img_blue);
-        // Ball.SetPoint(points[BallColor.Blue]);
+        Ball.SetBallColor(ballColor);
+        Ball.SetBallImage(GetBallImage(ballColor));
 
         // 設定數值
         Ball.SetNumber(num);
         Ball.SetSpeed(GetBallVectory(1));
         Ball.SetPosition(GetBallPosition());
         Ball.SetWhetherTouch(true);
-        SetBallPoint(BallColor.Blue, Ball);
+        SetBallPoint(BallColor.Judge, Ball);
 
-        Debug.Log("Ball"+ Ball);
-        Debug.Log("Ball"+ Ball.ballType);
+        Debug.Log("新增Ball"+ Ball.ballType);
         // 加入管理器
         GameMeditor.Instance.AddBall(Ball);
 
         return Ball;
+
     }
 
+    public Sprite GetBallImage(BallColor ballColor){ 
+        Initiaize(); //為了ShowBall的初始化    
+        switch(ballColor){
+            case BallColor.Judge:
+                return img_judge;
+            case BallColor.Prime:
+                return img_prime;
+            case BallColor.Composite:
+                return img_composite;
+            case BallColor.Dead:
+                return img_dead;
+            case BallColor.Boss:
+                return img_boss;
+            default:
+                Debug.LogError("傳入錯誤球的造型");
+                return null;
+        }
+    }
 
     private void Initiaize(){
         if (BallCanvas == null)
             SetBallCanvas();
         if (BallPrefab == null)
             SetBall();
-        if (img_blue == null)
+        if (img_judge == null) // 社啥奇耙的判斷
             SetImage();
     }
 
@@ -232,45 +153,60 @@ public class BallFactory : IBallFactory
     }
 
     private void SetBall(){
+        ResourceAssetFactory resourceAssetFactory = MainFactory.GetResourceAssetFactory();
+        BallPrefab = resourceAssetFactory.LoadBallPrefab("Ball");
+        /*
         BallPrefab = Resources.Load<GameObject>("Prefabs/Ball");
         if (BallPrefab == null)
             Debug.LogError("找不到BallPrefabs");
         else 
             Debug.Log("找到BallPrefab" );
+            */
     }
 
     private void SetImage(){
-        
-        img_blue = Resources.Load<Sprite>("SnowBall/normal");
-        img_gray = Resources.Load<Sprite>("SnowBall/normal2");
-        img_purple = Resources.Load<Sprite>("SnowBall/boss");
-        img_green = Resources.Load<Sprite>("SnowBall/boss2");
-        img_orange = Resources.Load<Sprite>("SnowBall/plus");
+        // string path = "NCUBall/";
+        // string path = "SnowBall/";
+        // string path = "Tomato/";
+        ResourceAssetFactory resourceAssetFactory = MainFactory.GetResourceAssetFactory();
 
-        if (img_blue == null)
-            Debug.LogError("找不到img_blue");
-        else 
-            Debug.Log("找到img_blue" );
+        img_judge = resourceAssetFactory.LoadBallImage("judge") ;
+        img_prime = resourceAssetFactory.LoadBallImage("prime") ;
+        img_boss = resourceAssetFactory.LoadBallImage("boss") ;
+        img_dead = resourceAssetFactory.LoadBallImage("dead") ;
+        img_composite = resourceAssetFactory.LoadBallImage("composite") ;
 
-        if (img_gray == null)
-            Debug.LogError("找不到img_gray");
-        else 
-            Debug.Log("找到img_gray" );
+        /*
 
-        if (img_purple == null)
-            Debug.LogError("找不到img_purple");
+        if (img_judge == null)
+            Debug.LogError("找不到img_judge");
         else 
-            Debug.Log("找到img_purple" );
+            Debug.Log("找到img_judge" );
 
-        if (img_orange == null)
-            Debug.LogError("找不到img_orange");
+        if (img_prime == null)
+            Debug.LogError("找不到img_prime");
         else 
-            Debug.Log("找到img_orange" );
+            Debug.Log("找到img_prime" );
 
-        if (img_green == null)
-            Debug.LogError("找不到img_green");
+        if (img_boss == null)
+            Debug.LogError("找不到img_boss");
         else 
-            Debug.Log("找到img_green" );
+            Debug.Log("找到img_boss" );
+
+        if (img_composite == null)
+            Debug.LogError("找不到img_composite");
+        else 
+            Debug.Log("找到img_composite" );
+
+        if (img_dead == null)
+            Debug.LogError("找不到img_dead");
+        else 
+            Debug.Log("找到img_dead" );*/
+    }
+
+    // 取的死球（灰球圖片）
+    public void SetDeadBallImage(Ball ball){
+        ball.SetBallImage(img_dead);
     }
 
     // 造球方法
@@ -282,6 +218,33 @@ public class BallFactory : IBallFactory
 
 
     //-------------數學方法--------------
+
+    // 取的一顆球最大Combol數（分裂次數 + 拆解的質數個數)
+    public int GetNumMaxCombol(int num){
+        int primeNum = GetPrimeCount(num);
+        return primeNum * 2 -1;
+    }
+
+    // 取得質因數個數 
+    // ex:90 = 2 x 3 x 3 x 5，GetPrimeCount(90) = 1+ 1+1 +1 =4
+    // ex: 2 =2 ，GetPrimeCount(2) = 1 
+    public int GetPrimeCount(int num){
+        int PrimeNume =0;
+        int i = 2;
+        while (i <= num)
+        {
+            if (num % i == 0)
+            {
+                PrimeNume ++ ;
+                num /= i;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        return PrimeNume;
+    }
 
     public List<int> FactorizeToTwoCloseNum(int num){
         if(WhetherPrime(num))
@@ -374,12 +337,20 @@ public class BallFactory : IBallFactory
 
     public Vector3 GetBallVectory(int direction){
         float x = Random.Range(-2f, 2f);
-        float y = direction * Random.Range(-2.2f, -1.7f);
+        // float y = direction * Random.Range(-2.2f, -1.7f);
+        float y = Random.Range(-2f * ballSpeed, -1.5f * ballSpeed);
+        return new Vector3(x, y, 0);
+    }
+
+    public Vector3 GetBallVectoryXZero(){
+        float x = 0;
+        // float y = direction * Random.Range(-2.2f, -1.7f);
+        float y = Random.Range(-2f * ballSpeed, -1.5f * ballSpeed);
         return new Vector3(x, y, 0);
     }
 
     public Vector3 GetBallPosition(){
-        float x = Random.Range(0f, 2f);
+        float x = Random.Range(-2f, 2f);
         return new Vector3(x, 4f, 0);
     }
 

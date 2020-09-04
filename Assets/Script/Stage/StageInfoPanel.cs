@@ -16,7 +16,7 @@ public class StageInfoPanel : MonoBehaviour
 
     private void Initialize(){
         // 讀取關卡資料，產生字卡
-        Dictionary<string, StageData> stages = stageSystem.stages;
+        Dictionary<string, IStageData> stages = stageSystem.stages;
         foreach ( var stage in stages )
         {
             CreateStageDataCard(stage.Value);
@@ -26,7 +26,7 @@ public class StageInfoPanel : MonoBehaviour
         /// <summary>
     /// 製作一個EarnMoneyLabel，自動移動至錢錢顯示位置後加錢
     /// </summary>
-    public void CreateStageDataCard(StageData stageData)
+    public void CreateStageDataCard(IStageData stageData)
     {
         var g = Instantiate(stageDataCardPrefab, transform);
         // g.transform.SetParent(transform);

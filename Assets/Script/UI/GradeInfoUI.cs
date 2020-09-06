@@ -12,7 +12,7 @@ public class GradeInfoUI : MonoBehaviour
 
     [SerializeField] private Text lab_point, lab_combol, lab_Time, lab_FullCombol, lab_stageName, lab_Info;
 
-    float TextShowDur = 1.5f;
+    float TextShowDur = 1f;
 
     void Awake()
     {
@@ -92,6 +92,20 @@ public class GradeInfoUI : MonoBehaviour
         .AppendInterval(1)
         .Append(lab_Info.rectTransform.DOAnchorPos(new Vector2(-900, 0), TextShowDur).SetEase(Ease.OutQuart));
 
+        moveSequence.OnComplete(TextAnimeEnd); 
+    }
+
+    public static void PlayTextShowOnceAnime(string str){
+        instance.PlayTextOneAnime(str);
+    }
+
+    public void PlayTextOneAnime(string str){ // 播放文字動畫
+        _stageData.AnimeHadFinish = false;
+        
+        Sequence moveSequence = DOTween.Sequence()
+        .PrependCallback(() => TextAnimeInit(str)) // 更改文字，初始化動畫位置
+        .Append(lab_Info.rectTransform.DOAnchorPos(new Vector2(0, 0), TextShowDur).SetEase(Ease.OutQuart))
+        .AppendInterval(1);
         moveSequence.OnComplete(TextAnimeEnd); 
     }
 

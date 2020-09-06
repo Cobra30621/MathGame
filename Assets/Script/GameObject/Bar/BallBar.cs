@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MoveType{
+    Stop, Right, Left
+}
+
+
 public class BallBar : MonoBehaviour
 {
     public int speed = 1;
@@ -10,6 +15,7 @@ public class BallBar : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private IBallStrategy _ballStrategy;  // 球回擊策略
+    public MoveType _moveType = MoveType.Stop;
 
     void Awake()
     {
@@ -29,6 +35,7 @@ public class BallBar : MonoBehaviour
     void Update()
     {
         InputProcess();
+        PhoneInputProcess();
     }
 
     private void InputProcess(){
@@ -46,7 +53,16 @@ public class BallBar : MonoBehaviour
             WhetherExist = true;
             spriteRenderer.color = new Color(1f,1f,1f,1f);
         }
+    }
 
+    private void PhoneInputProcess(){
+        if(_moveType == MoveType.Right)
+            transform.position += new Vector3(speed * 0.1f,0,0);
+        if(_moveType == MoveType.Left)
+            transform.position += new Vector3(-speed* 0.1f,0,0);
+        if(_moveType == MoveType.Stop)
+        {
+        }
     }
 
     void OnTriggerEnter2D(Collider2D ball) 

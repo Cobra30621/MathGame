@@ -35,14 +35,18 @@ public class GameLoop : MonoBehaviour
     }
 
     public void Test(){
-        string stageName = "模擬新模式";
-        int[] primes ={2, 3, 5};
-        int[] composites = {4,6, 9};
-        int[] plusNums = {};
-        int[] bossNums = {3,4};
-        NoBossStageData stageData = new NoBossStageData(4f , stageName, primes, composites, plusNums, bossNums);
-        StartPanel.Show(stageData);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene("MainGame");
     }
+
+    // 等讀取完場景，再執行
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameMeditor.Instance.SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
 
 
     public void ResetStage(){

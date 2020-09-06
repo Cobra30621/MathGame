@@ -8,7 +8,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
 {
     // 建構值
     public BarCatchPrimeStrategy():base(){
-        _ballMoveMethon = BallMoveMethon.Straight;
+        _ballMoveMethon = BallMoveMethon.Ramdom;
     }
 
     public BarCatchPrimeStrategy(BallMoveMethon ballMoveMethon):base(ballMoveMethon){
@@ -50,6 +50,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 break;
             case BallType.Composite:
                 BallPointUI.CreateAddCombolLabel(onBall.GetPosition());
+                GameMeditor.Instance.AddCombol();
                 onBall.Release();
                 break;
             case BallType.Black:

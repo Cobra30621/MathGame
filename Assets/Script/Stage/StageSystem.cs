@@ -96,6 +96,11 @@ public class StageSystem : IGameSystem
         CreateCatchPrimeStageData4();
         CreateCatchPrimeStageData5();
         CreateCatchPrimeStageData6();
+        CreateCatchPrimeStageData7();
+        CreateCatchPrimeStageData8();
+        CreateCatchPrimeStageData9();
+        CreateCatchPrimeStageData10();
+        CreateCatchPrimeStageData11();
         /* 舊的關卡
         CreateStageDataV1_1();
         CreateStageDataV1();
@@ -121,7 +126,8 @@ public class StageSystem : IGameSystem
         IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
         stageData.SetBallProbability(0,0, 10,0); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
         stageData._startText = "接住紅番茄";
-        stageData.SetBallSpeed(0.7f);
+        stageData.SetStageBallStrategy(new BarCatchPrimeStrategy(BallMoveMethon.Straight));
+        stageData.SetBallSpeed(0.9f);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
@@ -133,21 +139,22 @@ public class StageSystem : IGameSystem
         int[] plusNums = {};
         int[] bossNums = {};
         IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(0,0, 2,8); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallProbability(0,0, 4,6); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
         stageData._startText = "閃避綠蕃茄";
-        stageData.SetBallSpeed(0.7f);
+        stageData.SetStageBallStrategy(new BarCatchPrimeStrategy(BallMoveMethon.Straight));
+        stageData.SetBallSpeed(0.9f);
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }
 
     private void CreateCatchPrimeStageData3 (){
-        string stageName = "03 番茄上的數字代表什麼？";
+        string stageName = "03 番茄上的數字？";
         int[] primes ={2, 3, 5};
         int[] composites = {4, 6, 8};
         int[] plusNums = {};
         int[] bossNums = {};
         IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallProbability(0,0, 6,4); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
         stageData._startText = "番茄上的數字代表？";
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
@@ -160,8 +167,8 @@ public class StageSystem : IGameSystem
         int[] plusNums = {};
         int[] bossNums = {};
         IStageData stageData = new CatchPrimeStageData(2f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
-        stageData.SetBallSpeed(0.7f);
+        stageData.SetBallProbability(0,0, 6,4); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(1f);
         stageData._startText = "番茄上的數字代表？";
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
@@ -174,8 +181,8 @@ public class StageSystem : IGameSystem
         int[] plusNums = {};
         int[] bossNums = {};
         IStageData stageData = new CatchPrimeStageData(2f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
-        stageData.SetBallSpeed(1f);
+        stageData.SetBallProbability(0,0, 6,4); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.8f);
         stageData._startText = "番茄上的數字代表？";
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
@@ -187,10 +194,86 @@ public class StageSystem : IGameSystem
         int[] composites = {4, 6, 8, 9};
         int[] plusNums = {};
         int[] bossNums = {};
-        IStageData stageData = new CatchPrimeStageData(4f , stageName, primes, composites, plusNums, bossNums);
-        stageData.SetBallProbability(0,0, 5,5); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(1,1, 5,3); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
         stageData.SetBallSpeed(0.8f);
         stageData._startText = "番茄上的數字代表？";
+        stageData.SetStagePrice(10); // 設定解鎖所需金錢
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData7 (){
+        string stageName = "07 黃番茄變多了";
+        int[] primes ={2, 3, 5, 7};
+        int[] composites = {4, 6, 8, 9};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(3,2, 3,2); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.8f);
+        stageData._startText = "番茄上的數字代表？";
+        stageData.SetStagePrice(10); // 設定解鎖所需金錢
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData8 (){
+        string stageName = "08 番茄長大了";
+        int[] primes ={ 5, 7, 11};
+        int[] composites = {8, 9, 10};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(3,2, 3,2); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.8f);
+        stageData._startText = "番茄上的數字代表？";
+        stageData.SetStagePrice(10); // 設定解鎖所需金錢
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData9 (){
+        string stageName = "09 全是黃番茄";
+        int[] primes ={ 5, 7, 11};
+        int[] composites = {8, 9, 10};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(6,4, 0,0); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(0.8f);
+        stageData._startText = "番茄上的數字代表？";
+        stageData.SetStagePrice(10); // 設定解鎖所需金錢
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData10 (){
+        string stageName = "10 番茄掉得好快";
+        int[] primes ={ 5, 7, 11, 13};
+        int[] composites = {8, 9, 10, 12};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(3,2, 3,2); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(1.5f);
+        stageData._startText = "番茄？";
+        stageData.SetStagePrice(10); // 設定解鎖所需金錢
+        stageDatas.Add(stageData);
+        stages.Add(stageName, stageData);
+    }
+
+    private void CreateCatchPrimeStageData11 (){
+        string stageName = "11 番茄長大了";
+        int[] primes ={ 7, 11, 13, 17,19};
+        int[] composites = {8, 9, 10, 12, 14, 15, 16, 18};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new CatchPrimeStageData(3f , stageName, primes, composites, plusNums, bossNums);
+        stageData.SetBallProbability(1,1, 5,3); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData.SetBallSpeed(1f);
+        stageData._startText = "番茄？";
+        stageData.SetStagePrice(20); // 設定解鎖所需金錢
         stageDatas.Add(stageData);
         stages.Add(stageName, stageData);
     }

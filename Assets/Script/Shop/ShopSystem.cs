@@ -38,6 +38,7 @@ public class ShopSystem : IGameSystem
     public bool BuyThing(int price){
         if(WhetherBuyStage(price)){
             LessMoney(price);
+            StageSelectUI.RefreshInfo(); // 更新金錢介面
             return true;
         }
         else

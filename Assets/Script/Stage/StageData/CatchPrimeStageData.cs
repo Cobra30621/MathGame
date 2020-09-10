@@ -23,7 +23,7 @@ public class CatchPrimeStageData : IStageData
         m_plusNums = plusNums;
 
 		// 設定遊戲狀況
-		m_stageState = StageState.Open;
+		m_stageState = StageState.Lock; // 預設為關閉
 		m_stageComplete = StageComplete.UnComplete;
 		m_bestPoint = 0;
 
@@ -67,28 +67,6 @@ public class CatchPrimeStageData : IStageData
             default:
                 Debug.LogError("出現異常程序："+ m_gameProcess);
                 break;
-        }
-    }
-
-    public override void GameStartProcess(){
-        Reset();
-        MusicManager.PlayMusic();
-        SetGameProcess( GameProcess.WaitTouch);
-        PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
-        
-	}
-
-    public override void GameWaitTouchProcess(){
-        if(!AnimeHasPlay)
-        {
-            AnimeHasPlay = true;
-            StartPanel.Show(this);
-        }
-        if(AnimeHadFinish)
-        {
-            SetGameProcess( GameProcess.NormalTime);
-            InitAnimeVariable();
-            PhoneInputUI.EnableMoveBar(true); // 可以透過點擊螢幕來移動Bar
         }
     }
 

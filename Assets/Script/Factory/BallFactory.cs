@@ -338,7 +338,8 @@ public class BallFactory : IBallFactory
     public Vector3 GetBallVectory(int direction){
         float x = Random.Range(-2f, 2f);
         // float y = direction * Random.Range(-2.2f, -1.7f);
-        float y = Random.Range(-2f * ballSpeed, -1.5f * ballSpeed);
+        float y = direction * Random.Range(-2f * ballSpeed, -1.5f * ballSpeed);
+        // Debug.Log($"x:{x}, y:{y}");
         return new Vector3(x, y, 0);
     }
 

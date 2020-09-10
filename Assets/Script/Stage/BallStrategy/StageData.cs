@@ -39,10 +39,15 @@ public class StageData : IStageData
 
 
     // ------------------ 關卡流程 ---------------------- 
+
+    
     public override void PlayGameProcess(){
         switch(m_gameProcess){
 			case GameProcess.Start:
 				GameStartProcess();
+				break;
+            case GameProcess.WaitTouch:
+				GameWaitTouchProcess();
 				break;
             case GameProcess.StartAnime:
 				GameStartAnimeProcess();
@@ -69,5 +74,8 @@ public class StageData : IStageData
                 break;
         }
     }
+
+
+    
 
 }

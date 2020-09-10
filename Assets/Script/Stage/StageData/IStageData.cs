@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 // 遊戲流程
 public enum GameProcess{
    	Start,WaitTouch, StartAnime, NormalTime,  TimeUp, NoNormalBall, BossTime, EndAnime, GameEnd, WaitStart
+       ,GameOver
 }
 
 // 關卡解鎖狀態
 public enum StageState{
-    Open, NeedMoney , MoneyEnough
+    Open, NeedMoney , MoneyEnough, Lock
 }
 
 // 關卡完成度
@@ -56,6 +57,9 @@ public class IStageData
     // 解鎖相關
     public StageState m_stageState;
     public int m_stagePrice = 0;
+    public int stageID;
+    public string BoxName;
+    public IStageDataBox _stageDataBox;
 
 	// 分數相關
     public StageComplete m_stageComplete; 
@@ -75,6 +79,9 @@ public class IStageData
     public bool hasSet = false;
 
 	// ================= 初始設定方法 ===================
+    // 給BallCountProcessData用的
+    public IStageData(float CoolDown , string name, int ballCount, int[] primes, int[] composites){}
+
 	public IStageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
 		// 設定冷卻時間
@@ -90,7 +97,7 @@ public class IStageData
         m_plusNums = plusNums;
 
 		// 設定遊戲狀況
-		m_stageState = StageState.Open;
+		m_stageState = StageState.Lock; // 預設為關閉
 		m_stageComplete = StageComplete.UnComplete;
 		m_bestPoint = 0;
 
@@ -135,6 +142,10 @@ public class IStageData
         m_ballSpeed = speed;
     }
 
+    public void CompleteStage(){
+        _stageDataBox.CompleteStage(stageID);
+    }
+
     // ===========設定使用的策略=======
     public delegate void SetBallStrategyHandler(IBallStrategy ballStrategy);
 
@@ -155,7 +166,7 @@ public class IStageData
 	// ================= 重置 ===================
 
 	// 重置關卡
-	public void Reset()
+	public virtual void Reset()
 	{
         m_CoolDown = m_startCoolDown;
         m_gameTime = m_MaxGameTime;
@@ -193,25 +204,22 @@ public class IStageData
 
 	public virtual void GameStartProcess(){
         Reset();
-        // GradeInfoUI.PlayGameStartAnime();
         MusicManager.PlayMusic();
-        // SetGameProcess( GameProcess.StartAnime);
         SetGameProcess( GameProcess.WaitTouch);
-        PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
+        // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
 	}
 
     public virtual void GameWaitTouchProcess(){
         if(!AnimeHasPlay)
         {
             AnimeHasPlay = true;
-            // GradeInfoUI.PlayTextShowAnime(_startText);
             StartPanel.Show(this);
         }
         if(AnimeHadFinish)
         {
-            SetGameProcess( GameProcess.StartAnime);
+            SetGameProcess( GameProcess.NormalTime);
             InitAnimeVariable();
-            PhoneInputUI.EnableMoveBar(true); // 可以透過點擊螢幕來移動Bar
+            // PhoneInputUI.EnableMoveBar(true); // 可以透過點擊螢幕來移動Bar
         }
     }
 
@@ -227,7 +235,7 @@ public class IStageData
         {
             SetGameProcess( GameProcess.NormalTime);
             InitAnimeVariable();
-            PhoneInputUI.EnableMoveBar(true); // 可以透過點擊螢幕來移動Bar
+            // PhoneInputUI.EnableMoveBar(true); // 可以透過點擊螢幕來移動Bar
         }
     }
 
@@ -238,7 +246,7 @@ public class IStageData
     }
 
     // 時間倒數流程
-    public void NormalTimeProcess(){
+    public virtual void NormalTimeProcess(){
         
         // 判斷時間否到了
         if (m_gameTime <= 0){
@@ -318,12 +326,13 @@ public class IStageData
 
         // 增加錢
         int money = point;
-        if(missCombol == 0)
-            money *= 2;  // Full Combol 錢兩倍
+
         GameMeditor.Instance.AddMoney(point); // 增加錢
         PriceUI.Show(); // 開啟獎勵界面
         MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
-        PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
+        // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
+
+        CompleteStage(); // 完成關卡
 
         SetGameProcess(GameProcess.WaitStart);
     }
@@ -350,10 +359,15 @@ public class IStageData
         m_gameProcess = gameProcess;
     }
 
+
     // ---------------取的關卡資料------------------
 
     public float GetGameTime(){
         return m_gameTime;
+    }
+
+    public void SetGameTime(float time){
+        m_gameTime = time;
     }
 
     public string GetStageName(){

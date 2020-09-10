@@ -64,6 +64,15 @@ public class GameLoop : MonoBehaviour
         GameMeditor.Instance.LeaveStage();
     }
 
+    public void TimeUp(){
+        GameMeditor.Instance.SetGameTime(1);
+    }
+
+    public void AddMoney(){
+        GameMeditor.Instance.AddMoney(10000);
+        StageSelectUI.RefreshInfo(); // 更新金錢介面
+    }
+
  
 
 }

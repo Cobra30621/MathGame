@@ -99,6 +99,10 @@ public class GameMeditor
 		return stageSystem.GetGameTime();
 	}
 
+	public void SetGameTime(float time){
+        stageSystem.SetGameTime(time);
+    }
+
 	public int GetMissCombol(){
 		return stageSystem.GetMissCombol();
 	}
@@ -124,6 +128,11 @@ public class GameMeditor
 		stageSystem.EnterStage(stageID);
 	}
 
+	// 以BoxName, BoxId進入關卡
+	public void EnterStage(string BoxName, int stageID){
+		stageSystem.EnterStage(BoxName, stageID);
+	}
+
 	// 離開關卡
 	public void LeaveStage(){
 		stageSystem.LeaveStage();
@@ -143,6 +152,15 @@ public class GameMeditor
 	// 給予完成率
     public int GetCompletionRate(){
         return stageSystem.GetCompletionRate();
+    }
+
+	 // IStageDataCardBox 方法
+    public void AddStageCardBox(IStageDataCardBox cardBox){
+        stageSystem.AddStageCardBox(cardBox);
+    }
+
+    public void RefreshAllCard(){
+        stageSystem.RefreshAllCard();
     }
 
 	

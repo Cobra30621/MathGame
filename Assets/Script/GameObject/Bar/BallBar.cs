@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public enum MoveType{
     Stop, Right, Left
@@ -10,7 +11,8 @@ public enum MoveType{
 public class BallBar : MonoBehaviour
 {
     public int speed = 1;
-    private bool WhetherExist;
+    private bool WhetherExist = true;
+    public float moveTime =0.5f;
 
     private SpriteRenderer spriteRenderer;
 
@@ -35,10 +37,26 @@ public class BallBar : MonoBehaviour
     void Update()
     {
         InputProcess();
-        PhoneInputProcess();
+        // PhoneInputProcess();
     }
 
     private void InputProcess(){
+        if(Input.touchCount > 0){
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            // Vector2 v2 = Camera.main.ScreenToViewportPoint( Input.mousePosition );
+            // Vector2 temp = new Vector2( v2.x * this.width, v2.y * this.height );
+            // Vector3 touchPosition = touch.position;
+            touchPosition.z = 0f;
+            touchPosition.y = transform.position.y;
+            Debug.DrawLine(Vector3.zero, touchPosition, Color.red);
+
+            transform.DOMove(touchPosition, moveTime); // 移動BAr
+        }
+        
+
+
+        /*
         if(Input.GetKey(KeyCode.RightArrow))
             transform.position += new Vector3(speed * 0.1f,0,0);
         if(Input.GetKey(KeyCode.LeftArrow))
@@ -53,6 +71,7 @@ public class BallBar : MonoBehaviour
             WhetherExist = true;
             spriteRenderer.color = new Color(1f,1f,1f,1f);
         }
+        */
     }
 
     private void PhoneInputProcess(){

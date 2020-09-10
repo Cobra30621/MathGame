@@ -14,6 +14,7 @@ public class ResourceAssetFactory : IAssetFactory
 	public const string BallPath =  "Prefabs/";
 	public const string BallImagePath = "BallImage/";
 	public const string ImagePath = "Image/";
+	public const string StageInfoCardPath = "Prefabs/StageInfoCard";
 
 	// 讀取球物件
 	public override GameObject LoadBallPrefab( string AssetName ){
@@ -31,6 +32,10 @@ public class ResourceAssetFactory : IAssetFactory
 	public override Sprite LoadImageSprite(string SpriteName){
 		string BallStyle = GetBallStyle();
 		return Resources.Load(  BallStyle + ImagePath + SpriteName,typeof(Sprite)) as Sprite;
+	}
+
+	public GameObject LoadStageInfoCard(){
+		return Resources.Load(  StageInfoCardPath,typeof(GameObject)) as GameObject;
 	}
 
 	// 取的目前的造型

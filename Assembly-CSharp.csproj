@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Script\BaseClass\IUserInterface.cs" />
+     <Compile Include="Assets\Script\Debug\StageSelectDebug.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\IAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\ResourceAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\BallFactory.cs" />
@@ -84,15 +85,19 @@
      <Compile Include="Assets\Script\Stage\BallStrategy\CompositeToTwoStrategy.cs" />
      <Compile Include="Assets\Script\Stage\BallStrategy\IBallStrategy.cs" />
      <Compile Include="Assets\Script\Stage\BallStrategy\StageData.cs" />
+     <Compile Include="Assets\Script\Stage\StageCard\IStageDataCard.cs" />
+     <Compile Include="Assets\Script\Stage\StageCard\IStageDataCardBox.cs" />
+     <Compile Include="Assets\Script\Stage\StageCard\NormalStageCard.cs" />
+     <Compile Include="Assets\Script\Stage\StageCard\NormalStageCardBox.cs" />
+     <Compile Include="Assets\Script\Stage\StageData\BallCountProcessData.cs" />
      <Compile Include="Assets\Script\Stage\StageData\CatchPrimeStageData.cs" />
      <Compile Include="Assets\Script\Stage\StageData\IStageData.cs" />
      <Compile Include="Assets\Script\Stage\StageData\NoBossStageData.cs" />
-     <Compile Include="Assets\Script\Stage\StageDataCard\IStageDataCard.cs" />
-     <Compile Include="Assets\Script\Stage\StageDataCard\IStageDataCardBox.cs" />
-     <Compile Include="Assets\Script\Stage\StageDataCard\NormalStageCard.cs" />
+     <Compile Include="Assets\Script\Stage\StageDataBox\IStageDataBox.cs" />
      <Compile Include="Assets\Script\Stage\StageInfoPanel.cs" />
      <Compile Include="Assets\Script\Stage\StageSystem.cs" />
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
+     <Compile Include="Assets\Script\UI\GameTimeUI.cs" />
      <Compile Include="Assets\Script\UI\GradeInfoUI.cs" />
      <Compile Include="Assets\Script\UI\PhoneInputUI.cs" />
      <Compile Include="Assets\Script\UI\PriceUI.cs" />

@@ -97,7 +97,7 @@ public class StartPanel : MonoBehaviour
                     count ++;
                 }            
             }
-            SetBall(composites[primes.Length -1], CompsiteBalls, BallColor.Composite);
+            SetBall(composites[composites.Length -1], CompsiteBalls, BallColor.Composite);
             sequence.Append(SetPanelAnime(CompsiteBalls));
         }
         

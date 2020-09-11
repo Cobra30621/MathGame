@@ -107,6 +107,14 @@ public class GameMeditor
 		return stageSystem.GetMissCombol();
 	}
 
+	public void AddHasHitBallCount(){
+        stageSystem.AddHasHitBallCount();
+    }
+
+	public void LossHeart(int num){
+        stageSystem.LossHeart(num);
+    }
+
 	public StageComplete GetStageComplete(){
         return stageSystem.GetStageComplete();
     }

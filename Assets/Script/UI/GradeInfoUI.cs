@@ -7,23 +7,44 @@ using DG.Tweening;
 public class GradeInfoUI : MonoBehaviour
 {
     private static GradeInfoUI instance;
-    private Animator m_animator;
     private IStageData _stageData;
 
-    [SerializeField] private Text lab_point, lab_combol, lab_Time, lab_FullCombol, lab_stageName, lab_Info;
-
+    [SerializeField] private GameObject gameProcessBar, heartBar;
+    [SerializeField] private Text lab_point , lab_Info, lab_nowLevel, lab_nextLevel, lab_heart;
     float TextShowDur = 1f;
+    float lastGameProcess;
+    float nowGameProcess;
+
+    // 現在血量
+    float nowHeart{
+        get
+        {
+            if(_stageData.nowHeart <=0)
+                return 0;
+            else
+                return _stageData.nowHeart;
+        }
+    }
+    
 
     void Awake()
     {
         instance = this;
-        // m_animator = GetComponent<Animator>();
-        // Refresh();
     }
 
     public static void Initialize(IStageData stageData){
         instance.SetStageData(stageData);
         instance.Refresh();
+    }
+
+    public void Init(IStageData stageData){
+        SetStageData(stageData);
+        lab_nowLevel.text = $"{stageData.stageLevel}";
+        lab_nextLevel.text = $"{stageData.stageLevel + 1}";
+
+        Vector3 scale = gameProcessBar.transform.localScale;
+        gameProcessBar.transform.localScale = new Vector3(0,scale.y, scale.z );
+        Refresh();
     }
 
     public static void RefreshInfo(){
@@ -41,40 +62,15 @@ public class GradeInfoUI : MonoBehaviour
         else
             lab_point.text = $"$ {point}";
 
-        int combol = GameMeditor.Instance.GetCombol();
-        lab_combol.text = $"{combol}";
+        // 進度條顯示
+        gameProcessBar.transform.DOScaleX(_stageData._stageCompleteRate, 0.2f);
 
-        /* combol加成
-        int combolPlus = combol * 10;
-        if (combol == 0)
-            lab_combolPlus.text = "";
-        else
-            lab_combolPlus.text = $"+{combolPlus}%";
-        */
-
-        string stageName = GameMeditor.Instance.GetStageName();
-        lab_stageName.text = stageName;
-
-        RefreshTime();// 更新時間
+        // 血量顯示
+        float maxHeart = _stageData.maxHeart;
+        heartBar.transform.DOScaleX(nowHeart/maxHeart, 0.2f);
+        lab_heart.text = $"{nowHeart}/{maxHeart}";
         
-    }
-
-    public static void UpdateTime(){
-        instance.RefreshTime();
-    }
-
-    public void RefreshTime(){
-        float Rawtime = GameMeditor.Instance.GetGameTime();
-        int time;
-        if (Rawtime <= 0)
-            time = 0;
-        else
-            time = Mathf.FloorToInt(Rawtime) + 1;
-
-        if(time >= 31) // 避免時間顯示超過max
-            time = 0;
-
-        lab_Time.text = $"{time}";
+        // Debug.Log($"<color=B500FF></color>");
     }
 
     // =================動畫庫=================

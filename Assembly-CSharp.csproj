@@ -97,7 +97,6 @@
      <Compile Include="Assets\Script\Stage\StageInfoPanel.cs" />
      <Compile Include="Assets\Script\Stage\StageSystem.cs" />
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
-     <Compile Include="Assets\Script\UI\GameTimeUI.cs" />
      <Compile Include="Assets\Script\UI\GradeInfoUI.cs" />
      <Compile Include="Assets\Script\UI\PhoneInputUI.cs" />
      <Compile Include="Assets\Script\UI\PriceUI.cs" />

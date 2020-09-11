@@ -28,6 +28,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
             case BallType.Composite:
                 GameMeditor.Instance.MissCombol();
                 BallPointUI.CreateMissLabel(onBall.GetPosition());
+                GameMeditor.Instance.LossHeart(onBall.GetPoint()); // 損血
                 onBall.Release();
                 break;
             case BallType.Black:
@@ -37,6 +38,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 Debug.LogError("無法找到BallType");
                 break;
         }
+        GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
     }
 
     public override void DownWallOnBallEnter(Ball onBall){
@@ -45,6 +47,8 @@ public class BarCatchPrimeStrategy : IBallStrategy
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.MissCombol();
+                GameMeditor.Instance.LossHeart(onBall.GetPoint()); // 損血
+                // BallPointUI.CreateLossPointLabel()
                 BallPointUI.CreateMissLabel(onBall.GetPosition());
                 onBall.Release();
                 break;
@@ -60,6 +64,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 Debug.LogError("無法找到BallType");
                 break;
         }
+        GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
     }
 
     public override void UpWallOnBallEnter(Ball onBall){

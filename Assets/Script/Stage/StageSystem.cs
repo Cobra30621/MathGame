@@ -114,6 +114,13 @@ public class StageSystem : IGameSystem
         nowStageData.LeaveStage();
     }
 
+    public void AddHasHitBallCount(){
+        nowStageData.AddHasHitBallCount();
+    }
+
+    public void LossHeart(int num){
+        nowStageData.LossHeart(num);
+    }
 
     // 用不到了
     public void SetStageData(int level){
@@ -163,11 +170,25 @@ public class StageSystem : IGameSystem
     public void CreateStageCardBox1(){
         string name = "0~9 V1";
         IStageDataBox StageBox = new IStageDataBox(name, 0);
-        StageBox.AddStageData(CreateStagedate0To9_1 ()); // 第一關
+        StageBox.AddStageData(CreateStagedateTest ()); // 第一關
         StageBox.AddStageData(CreateStagedate0To9_2()); // 第二關
         StageBox.AddStageData(CreateStagedate0To9_3()); // 第三關
 
         stageBoxs.Add(name, StageBox); // 加入StageSystem管理器
+    }
+
+    private IStageData CreateStagedateTest (){// 第一關
+        string stageName = "01 接住紅蕃茄";
+        int[] primes ={2, 3};
+        int[] composites = {};
+        int[] plusNums = {};
+        int[] bossNums = {};
+        IStageData stageData = new BallCountProcessData(4f , stageName, 3, primes, composites);
+        stageData.SetBallProbability(0,0, 10,0); // Judge_Prime, Judge_Composite, P_prime, P_composites, Plus ，出現機率加總為10
+        stageData._startText = "接住紅番茄";
+        stageData.SetStageBallStrategy(new BarCatchPrimeStrategy(BallMoveMethon.Straight));
+        stageData.SetBallSpeed(0.9f);
+        return stageData;
     }
 
     private IStageData CreateStagedate0To9_1 (){// 第一關

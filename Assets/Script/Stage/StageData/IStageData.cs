@@ -28,6 +28,7 @@ public class IStageData
     public int[] m_composites;
     public int[] m_plusNums;
     public int[] m_bossNums;
+    public int stageLevel = 1; // 第幾關
 
     // 球產生的機率，為 P / 10
     public int P_JudgePrime = 4;
@@ -71,6 +72,29 @@ public class IStageData
 	public int m_bestPoint;
     public int completionRate;
 
+    // 血量
+    public int maxHeart = 100;
+
+    public int nowHeart;
+
+    // BallCountProcessData的資料
+    public int maxBallCount; // 這關得出球數量
+    public int hasCreateBallCount; // 已經產生的球數量
+    public int hasHitBallCount; // 玩家已經回擊的球數量
+    public float _stageCompleteRate{
+        get {
+            Debug.Log($"_stageCompleteRate{hasHitBallCount / maxBallCount}");
+            return (float)hasHitBallCount / (float)maxBallCount;
+            }
+        set{_stageCompleteRate = value;}
+    }
+
+    public int _stageCompleteRateHun{
+        get {return Mathf.RoundToInt((hasHitBallCount * 100) / maxBallCount);}
+        set{_stageCompleteRate = value;}
+    }
+
+
     public BGM m_bgm;
     public IBallStrategy ballStrategy;
 
@@ -81,6 +105,7 @@ public class IStageData
 	// ================= 初始設定方法 ===================
     // 給BallCountProcessData用的
     public IStageData(float CoolDown , string name, int ballCount, int[] primes, int[] composites){}
+
 
 	public IStageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
 	{
@@ -176,6 +201,11 @@ public class IStageData
         MaxCombol = 0;
         accumulateCombol = 0;
 
+        // 血量
+        maxHeart = 100;
+        nowHeart = maxHeart;
+        
+
         // 設定球回擊策略
         SetStrategy( );
         // SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
@@ -255,7 +285,7 @@ public class IStageData
         }
         // 更新遊戲時間
         m_gameTime -= Time.deltaTime;
-        GradeInfoUI.UpdateTime(); // 更新介面時間
+        // GradeInfoUI.UpdateTime(); // 更新介面時間
 
 		// 是否可以產生球
 		m_CoolDown -= Time.deltaTime;
@@ -305,7 +335,7 @@ public class IStageData
         if(!AnimeHasPlay)
         {
             AnimeHasPlay = true;
-            GradeInfoUI.PlayTextShowAnime(_endText);
+            GradeInfoUI.PlayTextShowOnceAnime(_endText);
         }
         if(AnimeHadFinish)
         {
@@ -370,8 +400,21 @@ public class IStageData
         m_gameTime = time;
     }
 
+    public void LossHeart(int num){
+        nowHeart -= num;
+    }
+
     public string GetStageName(){
         return stageName;
+    }
+
+    public void AddHasHitBallCount(){
+        hasHitBallCount++;
+        Debug.Log($"maxBallCount增加{maxBallCount}");
+        Debug.Log($"_stageCompleteRate{hasHitBallCount / maxBallCount}");
+        Debug.Log($"_stageCompleteRate:{(float)hasHitBallCount / (float)maxBallCount}");
+        Debug.Log($"HasHitCount{hasHitBallCount}");
+        GradeInfoUI.RefreshInfo();
     }
 
     // ---------------取的關卡資料------------------

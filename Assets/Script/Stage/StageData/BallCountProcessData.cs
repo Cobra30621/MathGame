@@ -6,17 +6,9 @@ using UnityEngine.SceneManagement;
 // 一般關卡資訊
 public class BallCountProcessData : IStageData
 {
-    public int maxBallCount; // 這關得出球數量
-    public int hasCreateBallCount; // 已經產生的球數量
-    public int hasHitBallCount; // 玩家已經回擊的球數量
+    
 
-    // 完成率 : 0% ~100%
-    public int _stageCompleteRate{
-        get {return Mathf.RoundToInt((hasHitBallCount * 100) / maxBallCount);}
-        set{_stageCompleteRate = value;}
-    }
 
-    public int stageLevel; // 第幾關
 
     // ================= 初始設定方法 ===================
 	public BallCountProcessData(float CoolDown , string name, int ballCount, int[] primes, int[] composites):base(CoolDown , name, ballCount, primes, composites)
@@ -35,7 +27,7 @@ public class BallCountProcessData : IStageData
         stageName = name;
         m_primes = primes;
         m_composites = composites;
-        
+
 		// 設定遊戲狀況
 		m_stageState = StageState.Lock; // 預設為關閉
 		m_stageComplete = StageComplete.UnComplete;
@@ -106,6 +98,13 @@ public class BallCountProcessData : IStageData
         hasCreateBallCount++; // 記錄多生產球
     }
 
+    public override void WaitNoBallProcess(){
+        int ballCount = GameMeditor.Instance.GetBallCount();
+        if (ballCount == 0)
+            SetGameProcess(GameProcess.EndAnime); // 遊戲結束
+
+    }
+
     public override void Reset()
 	{
         // 球的數量
@@ -115,5 +114,7 @@ public class BallCountProcessData : IStageData
         // 繼承原本的Reset
         base.Reset();
 	}
+
+    
 }
 

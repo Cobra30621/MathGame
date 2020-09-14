@@ -114,4 +114,19 @@ public class IStageDataBox
         }
     }
 
+    public bool WhetherCompleteStage(int id){
+        if (id == (stageDatas.Count-1)) // 所有關卡完成
+        {
+            _cardState = CardState.Complete;
+            Debug.Log($"完成{stageName}所有關卡");
+            UnlockNextStageBox(); // 可以買下一關
+            return true;
+        }
+        return false;
+    }
+
+    public int GetStageDataCount(){
+        return stageDatas.Count;
+    }
+
 }

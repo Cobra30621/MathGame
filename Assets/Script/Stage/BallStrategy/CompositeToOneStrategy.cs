@@ -31,7 +31,7 @@ public class CompositeToOneStrategy : IBallStrategy
             case BallType.Composite:
                 onBall.BecomeBlackBall(BallType.CompostieBlack);
                 onBall.ReboundY();
-                GameMeditor.Instance.AddPoint(onBall.GetPoint());
+                GameMeditor.Instance.AddMoney(onBall.GetPoint());
                 JudgeCreateWhichLabel(onBall); // 顯示加分
                 GameMeditor.Instance.AddCombol();
                 break;
@@ -47,7 +47,7 @@ public class CompositeToOneStrategy : IBallStrategy
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
-                GameMeditor.Instance.AddPoint(onBall.GetPoint());
+                GameMeditor.Instance.AddMoney(onBall.GetPoint());
                 JudgeCreateWhichLabel(onBall); // 顯示加分
                 onBall.Release();
                 break;

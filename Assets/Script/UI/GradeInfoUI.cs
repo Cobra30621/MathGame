@@ -10,7 +10,8 @@ public class GradeInfoUI : MonoBehaviour
     private IStageData _stageData;
 
     [SerializeField] private GameObject gameProcessBar, heartBar;
-    [SerializeField] private Text lab_point , lab_Info, lab_nowLevel, lab_nextLevel, lab_heart;
+    [SerializeField] private Text lab_point , lab_Info, lab_nowLevel, lab_nextLevel, lab_heart, lab_process;
+    [SerializeField] private  Text lab_money, lab_stageName;
     float TextShowDur = 1f;
     float lastGameProcess;
     float nowGameProcess;
@@ -39,8 +40,10 @@ public class GradeInfoUI : MonoBehaviour
 
     public void Init(IStageData stageData){
         SetStageData(stageData);
-        lab_nowLevel.text = $"{stageData.stageLevel}";
-        lab_nextLevel.text = $"{stageData.stageLevel + 1}";
+        lab_nowLevel.text = $"{stageData.stageID}";
+        lab_nextLevel.text = $"{stageData.stageID + 1}";
+        lab_process.text = "0%";
+        
 
         Vector3 scale = gameProcessBar.transform.localScale;
         gameProcessBar.transform.localScale = new Vector3(0,scale.y, scale.z );
@@ -56,19 +59,43 @@ public class GradeInfoUI : MonoBehaviour
     }
 
     public void Refresh(){
+        /*
         int point = GameMeditor.Instance.GetPoint();
         if(point < 0)
             lab_point.text = "$ 0";
         else
             lab_point.text = $"$ {point}";
+        */
+        int levelCount = _stageData.GetStageDataCount(); 
+        int nowLevel = _stageData.stageID + 1;
+        string stageName = _stageData._stageDataBox.stageName;
+        lab_stageName.text =  $"{stageName}({nowLevel}/{levelCount})";
+        
+    
+        int money = GameMeditor.Instance.GetMoney();
+        lab_money.text = $"{money}";
 
+        float rate = 0;    
+        if(_stageData._stageCompleteRate <= 1)
+            rate = _stageData._stageCompleteRate;
+        else
+            rate = 1;
+        
         // 進度條顯示
-        gameProcessBar.transform.DOScaleX(_stageData._stageCompleteRate, 0.2f);
+        gameProcessBar.transform.DOScaleX(rate, 0.2f);
+        lab_process.text = $"{_stageData._stageCompleteRateHun}%";
 
         // 血量顯示
         float maxHeart = _stageData.maxHeart;
         heartBar.transform.DOScaleX(nowHeart/maxHeart, 0.2f);
-        lab_heart.text = $"{nowHeart}/{maxHeart}";
+        lab_heart.text = $"血量：{nowHeart}/{maxHeart}";
+
+        // 用ID表示關卡
+        // lab_nowLevel.text = $"{_stageData.stageID + 1}";
+        // lab_nextLevel.text = _stageData.GetNextLevelText();
+
+        // lab_nowLevel.text = $"{_stageData.stageLevel}";
+        // lab_nextLevel.text = $"{_stageData.stageLevel + 1}";
         
         // Debug.Log($"<color=B500FF></color>");
     }

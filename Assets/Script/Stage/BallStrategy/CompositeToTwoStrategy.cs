@@ -44,7 +44,7 @@ public class CompositeToTwoStrategy : IBallStrategy
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
-                GameMeditor.Instance.AddPoint(onBall.GetPoint());
+                GameMeditor.Instance.AddMoney(onBall.GetPoint());
                 JudgeCreateWhichLabel(onBall); // 顯示加分
                 onBall.Release();
                 break;

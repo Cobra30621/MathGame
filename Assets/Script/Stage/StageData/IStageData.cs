@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
@@ -28,12 +29,10 @@ public class IStageData
     public int[] m_composites;
     public int[] m_plusNums;
     public int[] m_bossNums;
-    public int stageLevel = 1; // 第幾關
 
     // 球產生的機率，為 P / 10
     public int P_JudgePrime = 4;
     public int P_JudgeComposite = 4;
-
     public int P_prime = 0;
     public int P_composite = 0;
     public int P_PlusBall =2;
@@ -43,17 +42,10 @@ public class IStageData
 	public float m_MaxCoolDown = 0;	// 
     public float m_startCoolDown = 1f;
     public float m_ballSpeed = 1f; // 球掉落速度
+    public int m_ballCountCreateOnceTime = 1; 
+    public float m_ballIntervalCreateOnceTime = 0.3f;
 
-    // 遊戲時間與流程
-    public float m_gameTime = 0;
-    public float m_MaxGameTime = 30f;
-    public GameProcess m_gameProcess;
-    public bool AnimeHasPlay;
-    public bool AnimeHadFinish;
-
-    public string _startText = "採集紅番茄!";
-    public string _bossComingText =  "彩虹番茄要來了!";
-    public string _endText =  "Game End!";
+    
 
     // 解鎖相關
     public StageState m_stageState;
@@ -73,13 +65,12 @@ public class IStageData
     public int completionRate;
 
     // 血量
-    public int maxHeart = 100;
+    public int maxHeart ;
 
     public int nowHeart;
 
     // BallCountProcessData的資料
     public int maxBallCount; // 這關得出球數量
-    public int hasCreateBallCount; // 已經產生的球數量
     public int hasHitBallCount; // 玩家已經回擊的球數量
     public float _stageCompleteRate{
         get {
@@ -94,6 +85,17 @@ public class IStageData
         set{_stageCompleteRate = value;}
     }
 
+    // 遊戲時間與流程
+    public float m_gameTime = 0;
+    public float m_MaxGameTime = 30f;
+    public GameProcess m_gameProcess;
+    public bool AnimeHasPlay;
+    public bool AnimeHadFinish;
+
+    
+    public string _startText = $"採集顆紅番茄!";
+    public string _bossComingText =  "彩虹番茄要來了!";
+    public string _endText =  "採收完畢!!";
 
     public BGM m_bgm;
     public IBallStrategy ballStrategy;
@@ -171,6 +173,10 @@ public class IStageData
         _stageDataBox.CompleteStage(stageID);
     }
 
+    public void SetBallCountCreateOnceTime(int num){
+        m_ballCountCreateOnceTime = num;
+    }
+
     // ===========設定使用的策略=======
     public delegate void SetBallStrategyHandler(IBallStrategy ballStrategy);
 
@@ -202,7 +208,7 @@ public class IStageData
         accumulateCombol = 0;
 
         // 血量
-        maxHeart = 100;
+        maxHeart = GameMeditor.Instance.GetMaxHp();
         nowHeart = maxHeart;
         
 
@@ -258,6 +264,7 @@ public class IStageData
         if(!AnimeHasPlay)
         {
             AnimeHasPlay = true;
+            _startText = $"採集{maxBallCount}顆成熟(質數)番茄";
             GradeInfoUI.PlayTextShowAnime(_startText);
             // StartPanel.Show(this);
         }
@@ -275,7 +282,61 @@ public class IStageData
         AnimeHadFinish = false;
     }
 
-    // 時間倒數流程
+
+    bool canCreateBall; // 是否可以產生球 
+    int hasCreateBallCount ;  // 已經產生球的數量
+    float ballIntervalCoolDown; // 快速產生球的冷卻時間
+    // 遊戲流程：死亡式
+    public virtual void NormalTimeProcess(){
+        // 判斷是否死亡
+        if(nowHeart <= 0)
+        {
+            SetGameProcess(GameProcess.GameOver);
+        }
+
+        // 判斷是否打完球了
+        if (hasHitBallCount == maxBallCount){
+            SetGameProcess( GameProcess.TimeUp);
+        }
+
+        if(!canCreateBall)
+        {
+            // 球的冷卻時間
+            m_CoolDown -= Time.deltaTime;
+            if( m_CoolDown > 0)
+                return ;
+            m_CoolDown = m_MaxCoolDown;
+
+            canCreateBall = true;
+            hasCreateBallCount = 0;
+            ballIntervalCoolDown = 0;
+        }
+        else
+        {
+            ballIntervalCoolDown -= Time.deltaTime;
+            if( ballIntervalCoolDown > 0) 
+                return ;
+            
+            ballFactory = MainFactory.GetBallFactory();
+            ballFactory.SetBallSpeed(m_ballSpeed); // 設定球掉落速度
+            CreateBall();
+
+            hasCreateBallCount ++;
+            ballIntervalCoolDown = m_ballIntervalCreateOnceTime;
+
+            if(hasCreateBallCount == m_ballCountCreateOnceTime)
+                canCreateBall = false;
+        }
+
+    }
+
+    IEnumerator WaitAndCreateBall(){
+        yield return new WaitForSeconds(m_ballIntervalCreateOnceTime); // 暫停一下漏繼續出
+        CreateBall();
+    }
+
+    /*
+    // 時間倒數流程 
     public virtual void NormalTimeProcess(){
         
         // 判斷時間否到了
@@ -297,7 +358,7 @@ public class IStageData
         ballFactory = MainFactory.GetBallFactory();
         ballFactory.SetBallSpeed(m_ballSpeed); // 設定球掉落速度
         CreateBall();
-    }
+    }*/
 
     public virtual void WaitNoBallProcess(){
         int ballCount = GameMeditor.Instance.GetBallCount();
@@ -331,7 +392,7 @@ public class IStageData
             SetGameProcess(GameProcess.GameEnd);
     }
 
-    public void EndAnimeProcess(){
+    public virtual void EndAnimeProcess(){
         if(!AnimeHasPlay)
         {
             AnimeHasPlay = true;
@@ -344,7 +405,7 @@ public class IStageData
         }
     }
 
-    public void GameEndProcess(){
+    public virtual void GameEndProcess(){
 
         int point = GameMeditor.Instance.GetPoint();
 
@@ -353,11 +414,11 @@ public class IStageData
         if(completerate > m_bestPoint)
             m_bestPoint = completerate; // 記下最高紀錄
 
-
+        /*
         // 增加錢
         int money = point;
-
         GameMeditor.Instance.AddMoney(point); // 增加錢
+        */
         PriceUI.Show(); // 開啟獎勵界面
         MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
         // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
@@ -389,6 +450,16 @@ public class IStageData
         m_gameProcess = gameProcess;
     }
 
+    public void GoToNextLevel(){
+        // 進入下一關，還沒有設置防呆
+        GameMeditor.Instance.EnterStage(_stageDataBox.stageName, stageID + 1); 
+    }
+
+    public void GoToFirstLevel(){
+        // 進入下一關，還沒有設置防呆
+        GameMeditor.Instance.EnterStage(_stageDataBox.stageName, 0); 
+    }
+
 
     // ---------------取的關卡資料------------------
 
@@ -410,11 +481,20 @@ public class IStageData
 
     public void AddHasHitBallCount(){
         hasHitBallCount++;
-        Debug.Log($"maxBallCount增加{maxBallCount}");
-        Debug.Log($"_stageCompleteRate{hasHitBallCount / maxBallCount}");
-        Debug.Log($"_stageCompleteRate:{(float)hasHitBallCount / (float)maxBallCount}");
-        Debug.Log($"HasHitCount{hasHitBallCount}");
         GradeInfoUI.RefreshInfo();
+    }
+
+    public string GetNextLevelText(){ // 取得下一關的資訊
+        if(_stageDataBox.WhetherCompleteStage(stageID))
+            return "End";
+        else
+            return $"{stageID + 2}";
+    }
+
+    // 取得關卡數
+    public int GetStageDataCount(){
+        return _stageDataBox.GetStageDataCount();
+
     }
 
     // ---------------取的關卡資料------------------

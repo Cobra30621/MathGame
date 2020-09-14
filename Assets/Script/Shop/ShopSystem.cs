@@ -19,9 +19,12 @@ public class ShopSystem : IGameSystem
 	}
 
     public int m_money ;
+    public int m_maxHp;
+    
 
     public void Initialize(){
         m_money = 0; // 之後改讀取
+        m_maxHp = 10; // 初始化為10
     }
 
     // =========造型=========
@@ -67,6 +70,20 @@ public class ShopSystem : IGameSystem
 
     public int GetMoney(){
         return m_money;
+    }
+
+    //======Hp=========
+    public void BuyHp(){
+        int hpPrice = (m_maxHp-5) / 5;
+        if(WhetherBuyStage(hpPrice))
+        {
+            m_maxHp ++;
+            LessMoney(hpPrice);
+        }
+    }
+
+    public int GetHpNeedMoney(){
+        return (m_maxHp-5) / 5;
     }
 
 

@@ -21,8 +21,9 @@ public class BarCatchPrimeStrategy : IBallStrategy
         switch(ballType){
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
-                GameMeditor.Instance.AddPoint(onBall.GetPoint());
+                GameMeditor.Instance.AddMoney(onBall.GetPoint());
                 BallPointUI.CreateAddCombolLabel(onBall.GetPosition());
+                GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
                 onBall.Release();
                 break;
             case BallType.Composite:
@@ -38,7 +39,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 Debug.LogError("無法找到BallType");
                 break;
         }
-        GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
+        
     }
 
     public override void DownWallOnBallEnter(Ball onBall){
@@ -64,7 +65,7 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 Debug.LogError("無法找到BallType");
                 break;
         }
-        GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
+        // GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
     }
 
     public override void UpWallOnBallEnter(Ball onBall){

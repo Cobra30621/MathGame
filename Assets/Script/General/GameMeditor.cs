@@ -202,5 +202,17 @@ public class GameMeditor
     public int GetMoney(){
         return shopSystem.GetMoney();
     }
+	
+	public void BuyHp(){
+		shopSystem.BuyHp();
+	}
+
+	public int GetMaxHp(){
+		return shopSystem.m_maxHp;
+	}
+
+	public int GetHpNeedMoney(){
+		return shopSystem.GetHpNeedMoney();
+	}
 
 }

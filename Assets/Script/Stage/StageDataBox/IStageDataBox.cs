@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum CardState{
-    Lock , NeedMoney, EnoughMoney, HasBuy, Complete
+    Lock , HasNotStart, Processing, NeedMoney, EnoughMoney, HasBuy, Complete
 }
 
 public class IStageDataBox 
@@ -14,15 +14,47 @@ public class IStageDataBox
     public int _stagePrice;
     public CardState _cardState; //此卡的狀態
     public IStageDataBox _nextStageBox; // 下一關
+    public int nowLevelID; // 現在進行的關卡ID
+    
+    // 儲存用資料
+    public int saveLevelID{
+        get{
+            if(_cardState == CardState.Complete)
+                return stageDatas.Count -1;
+            else
+                return nowLevelID;
+        }
+        set {
+            saveLevelID = value;
+            nowLevelID = value;
+        }
+    }
 
+    public string nextLevelText{ 
+        get{
+        if(WhetherCompleteStage(nowLevelID))
+            return "End";
+        else
+            return $"{nowLevelID + 1}";
+        }
+    }
+    public int[] numRange = {1,1}; // 此大關數字的Range
+
+    public IStageDataBox(string name){
+        stageName = name;
+        _stagePrice = 0;
+        _cardState = CardState.Lock; // 預設鎖的
+        nowLevelID = 0;
+    }
 
     public IStageDataBox(string name, int price){
         stageName = name;
         _stagePrice = price;
-
+        _cardState = CardState.Lock; // 預設鎖的
+        nowLevelID = 0;
     }
 
-    // 設定下一關
+    // 設定下一大關
     public void SetNetStageBox(IStageDataBox box){
         _nextStageBox = box;
     }
@@ -32,37 +64,37 @@ public class IStageDataBox
             Debug.Log("關卡全破了");
         else
         {
-            _nextStageBox._cardState = CardState.NeedMoney; // 可以買下一關
+            _nextStageBox._cardState = CardState.HasNotStart; // 可以買玩下一關
         }
     }
 
-    public void Init(){
-        // 所有關卡關閉
-        SetStagesState(StageState.Lock);
+    public void SetNumRange(int firstNum, int lastNum){
+        numRange[0] = firstNum;
+        numRange[1] = lastNum;
+    }
 
-        // 如果價格為零，直接開啟
-        if (_stagePrice == 0)
-        {
-            _cardState = CardState.HasBuy;
-            stageDatas[0].m_stageState = StageState.Open; // 開啟第一關
-        }
+    public void SetCardState(CardState cardState){
+        _cardState = cardState;
     }
 
     public void UpdateCardState(){
         // 如果價格為零，直接開啟
+        /*
         if (_stagePrice == 0)
         {
             _cardState = CardState.HasBuy;
+            _cardState = CardState.HasNotStart; // 尚未開始
         }
+        */
 
 
         switch (_cardState){
             case CardState.Lock:
-                SetStagesState(StageState.Lock);
+                // SetStagesState(StageState.Lock);
                 break;
             case CardState.NeedMoney:
             case CardState.EnoughMoney:
-                SetStagesState(StageState.Lock);
+                // SetStagesState(StageState.Lock);
                 if(GameMeditor.Instance.WhetherBuyStage(_stagePrice)) // 如果錢夠
                 {
                     _cardState = CardState.EnoughMoney;
@@ -73,10 +105,11 @@ public class IStageDataBox
                 }
                 break;
             case CardState.HasBuy:
-                stageDatas[0].m_stageState = StageState.Open; // 開啟第一關
+            case CardState.HasNotStart:
+                // stageDatas[0].m_stageState = StageState.Open; // 開啟第一關
                 break;
             case CardState.Complete:
-                SetStagesState(StageState.Open);
+                // SetStagesState(StageState.Open);
                 break;
             default:
                 Debug.LogError("出現不該出現的CardState");
@@ -96,7 +129,7 @@ public class IStageDataBox
     public void AddStageData(IStageData stageData){
         int id = stageDatas.Count;
         stageData.stageID = id; // 設置卡片的ID
-        stageData.BoxName = stageName; // 設置CardBox的名稱
+        stageData._boxName = stageName; // 設置CardBox的名稱
         stageData._stageDataBox = this; // 加入自己給對方
         stageDatas.Add(id, stageData);
     }
@@ -110,16 +143,13 @@ public class IStageDataBox
         }
         else
         {
-            stageDatas[id + 1].m_stageState = StageState.Open; // 開啟下一關
+            // stageDatas[id + 1].m_stageState = StageState.Open; // 開啟下一關
         }
     }
 
     public bool WhetherCompleteStage(int id){
         if (id == (stageDatas.Count-1)) // 所有關卡完成
         {
-            _cardState = CardState.Complete;
-            Debug.Log($"完成{stageName}所有關卡");
-            UnlockNextStageBox(); // 可以買下一關
             return true;
         }
         return false;
@@ -129,4 +159,13 @@ public class IStageDataBox
         return stageDatas.Count;
     }
 
+    public void SetNowLevelID(int num){
+        nowLevelID = num;
+    }
+
 }
+
+/*
+
+
+*/

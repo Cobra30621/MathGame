@@ -43,7 +43,7 @@ public class IStageData
     public float m_startCoolDown = 1f;
     public float m_ballSpeed = 1f; // 球掉落速度
     public int m_ballCountCreateOnceTime = 1; 
-    public float m_ballIntervalCreateOnceTime = 0.3f;
+    public float m_ballIntervalCreateOnceTime = 0.4f;
 
     
 
@@ -51,7 +51,7 @@ public class IStageData
     public StageState m_stageState;
     public int m_stagePrice = 0;
     public int stageID;
-    public string BoxName;
+    public string _boxName;
     public IStageDataBox _stageDataBox;
 
 	// 分數相關
@@ -107,6 +107,7 @@ public class IStageData
 	// ================= 初始設定方法 ===================
     // 給BallCountProcessData用的
     public IStageData(float CoolDown , string name, int ballCount, int[] primes, int[] composites){}
+    public IStageData(float CoolDown , int ballCount, int[] primes, int[] composites){}
 
 
 	public IStageData(float CoolDown , string name, int[] primes, int[] composites, int[] plusNums, int[] bossNums)
@@ -122,6 +123,7 @@ public class IStageData
         m_composites = composites;
         m_bossNums = bossNums;
         m_plusNums = plusNums;
+        
 
 		// 設定遊戲狀況
 		m_stageState = StageState.Lock; // 預設為關閉
@@ -240,9 +242,9 @@ public class IStageData
 
 	public virtual void GameStartProcess(){
         Reset();
+        MusicManager.SwitchMusic(m_bgm);
         MusicManager.PlayMusic();
         SetGameProcess( GameProcess.WaitTouch);
-        // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
 	}
 
     public virtual void GameWaitTouchProcess(){
@@ -264,7 +266,6 @@ public class IStageData
         if(!AnimeHasPlay)
         {
             AnimeHasPlay = true;
-            _startText = $"採集{maxBallCount}顆成熟(質數)番茄";
             GradeInfoUI.PlayTextShowAnime(_startText);
             // StartPanel.Show(this);
         }
@@ -330,10 +331,6 @@ public class IStageData
 
     }
 
-    IEnumerator WaitAndCreateBall(){
-        yield return new WaitForSeconds(m_ballIntervalCreateOnceTime); // 暫停一下漏繼續出
-        CreateBall();
-    }
 
     /*
     // 時間倒數流程 
@@ -420,7 +417,7 @@ public class IStageData
         GameMeditor.Instance.AddMoney(point); // 增加錢
         */
         PriceUI.Show(); // 開啟獎勵界面
-        MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
+        // MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
         // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
 
         CompleteStage(); // 完成關卡
@@ -456,7 +453,6 @@ public class IStageData
     }
 
     public void GoToFirstLevel(){
-        // 進入下一關，還沒有設置防呆
         GameMeditor.Instance.EnterStage(_stageDataBox.stageName, 0); 
     }
 
@@ -469,6 +465,10 @@ public class IStageData
 
     public void SetGameTime(float time){
         m_gameTime = time;
+    }
+
+    public void AddHeart(int num){
+        nowHeart += num;
     }
 
     public void LossHeart(int num){
@@ -488,7 +488,7 @@ public class IStageData
         if(_stageDataBox.WhetherCompleteStage(stageID))
             return "End";
         else
-            return $"{stageID + 2}";
+            return $"{stageID + 1}";
     }
 
     // 取得關卡數

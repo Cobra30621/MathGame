@@ -22,14 +22,17 @@ public class BarCatchPrimeStrategy : IBallStrategy
             case BallType.Prime:
                 GameMeditor.Instance.AddCombol();
                 GameMeditor.Instance.AddMoney(onBall.GetPoint());
-                BallPointUI.CreateAddCombolLabel(onBall.GetPosition());
+                GradeInfoUI.PlayChangeMoneyAnime(); // 播放獲得錢的動畫
+                BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint());
                 GameMeditor.Instance.AddHasHitBallCount(); //增加球的進度
+                AudioSourceController.PlaySound("getPoint"); // 播放音效
                 onBall.Release();
                 break;
             case BallType.Composite:
                 GameMeditor.Instance.MissCombol();
-                BallPointUI.CreateMissLabel(onBall.GetPosition());
+                BallPointUI.CreateLossPointLabel(onBall.GetPosition(), onBall.GetPoint());
                 GameMeditor.Instance.LossHeart(onBall.GetPoint()); // 損血
+                AudioSourceController.PlaySound("miss"); // 播放音效
                 onBall.Release();
                 break;
             case BallType.Black:
@@ -50,12 +53,14 @@ public class BarCatchPrimeStrategy : IBallStrategy
                 GameMeditor.Instance.MissCombol();
                 GameMeditor.Instance.LossHeart(onBall.GetPoint()); // 損血
                 // BallPointUI.CreateLossPointLabel()
-                BallPointUI.CreateMissLabel(onBall.GetPosition());
+                BallPointUI.CreateLossPointLabel(onBall.GetPosition(), onBall.GetPoint());
+                AudioSourceController.PlaySound("miss"); // 播放音效
                 onBall.Release();
                 break;
             case BallType.Composite:
                 BallPointUI.CreateAddCombolLabel(onBall.GetPosition());
                 GameMeditor.Instance.AddCombol();
+                // AudioSourceController.PlaySound("getPoint"); // 播放音效
                 onBall.Release();
                 break;
             case BallType.Black:

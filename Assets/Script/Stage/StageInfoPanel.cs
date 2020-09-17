@@ -9,6 +9,7 @@ public class StageInfoPanel : MonoBehaviour
     private StageSystem stageSystem;
     [SerializeField] GameObject stageDataCardPrefab;
     [SerializeField] GameObject stageCardBoxPrefab;
+    
 
     private GameObject test;
 
@@ -44,8 +45,6 @@ public class StageInfoPanel : MonoBehaviour
         var l = g.GetComponent<IStageDataCardBox>();
         l.Initialize(stageBox); // 產生StageCrad
         // g.transform.DOMoveY(100f,100);
-        g.transform.localScale += new Vector3(0,0,100);
-        test = g;
     }
 
 

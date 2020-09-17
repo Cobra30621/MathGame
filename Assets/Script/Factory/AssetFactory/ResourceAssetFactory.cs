@@ -8,7 +8,7 @@ public class ResourceAssetFactory : IAssetFactory
 	public const string EnemyPath = "Characters/Enemy/";
 	public const string WeaponPath = "Weapons/";
 	public const string EffectPath = "Effects/";
-	public const string AudioPath  = "Audios/";
+	public const string AudioPath  = "Sound/";
 	public const string SpritePath = "Sprites/";
 	
 	public const string BallPath =  "Prefabs/";

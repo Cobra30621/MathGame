@@ -9,7 +9,7 @@ public class GradeInfoUI : MonoBehaviour
     private static GradeInfoUI instance;
     private IStageData _stageData;
 
-    [SerializeField] private GameObject gameProcessBar, heartBar;
+    [SerializeField] private GameObject gameProcessBar, heartBar, moneyIcon;
     [SerializeField] private Text lab_point , lab_Info, lab_nowLevel, lab_nextLevel, lab_heart, lab_process;
     [SerializeField] private  Text lab_money, lab_stageName;
     float TextShowDur = 1f;
@@ -140,6 +140,20 @@ public class GradeInfoUI : MonoBehaviour
     private void TextAnimeEnd(){
         lab_Info.transform.position = new Vector3(900, 0 ,0);
         _stageData.AnimeHadFinish = true;
+    }
+
+    // 賺錢時Icon變大
+    public static void PlayChangeMoneyAnime(){
+        instance.PlayScaleAnime(instance.moneyIcon);
+        instance.PlayScaleAnime(instance.lab_money.gameObject);
+    }
+
+    private void PlayScaleAnime(GameObject gameObject){
+        float rawScale = gameObject.transform.localScale.x;
+        float newScale =  rawScale * 1.2f;
+        Sequence scaleSequence = DOTween.Sequence()
+        .Append(gameObject.transform.DOScale(newScale, 0.3f).SetEase(Ease.OutQuart))
+        .Append(gameObject.transform.DOScale(rawScale, 0.3f).SetEase(Ease.OutQuart));
     }
 
 

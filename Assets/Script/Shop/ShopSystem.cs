@@ -20,6 +20,7 @@ public class ShopSystem : IGameSystem
 
     public int m_money ;
     public int m_maxHp;
+    public int m_hpPrice = 1;
     
 
     public void Initialize(){
@@ -62,7 +63,7 @@ public class ShopSystem : IGameSystem
     }
 
     public void LessMoney(int money){
-        if(m_money > money)
+        if(m_money >= money)
             m_money -= money;
         else
             Debug.LogError("錢不夠卻扣錢");
@@ -74,16 +75,17 @@ public class ShopSystem : IGameSystem
 
     //======Hp=========
     public void BuyHp(){
-        int hpPrice = (m_maxHp-5) / 5;
-        if(WhetherBuyStage(hpPrice))
+        m_hpPrice = (m_maxHp -7) / 3;
+        if(WhetherBuyStage(m_hpPrice))
         {
             m_maxHp ++;
-            LessMoney(hpPrice);
+            AudioSourceController.PlaySound("upGrade"); // 播放音效
+            LessMoney(m_hpPrice);
         }
     }
 
     public int GetHpNeedMoney(){
-        return (m_maxHp-5) / 5;
+        return m_hpPrice;
     }
 
 

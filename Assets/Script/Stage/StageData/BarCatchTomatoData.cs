@@ -23,6 +23,38 @@ public class BallCatchTomatoData : IStageData
         stageName = name;
         m_primes = primes;
         m_composites = composites;
+        _startText = $"採集{maxBallCount}顆成熟(質數)番茄";
+
+		// 設定遊戲狀況
+		m_stageState = StageState.Lock; // 預設為關閉
+		m_stageComplete = StageComplete.UnComplete;
+		m_bestPoint = 0;
+
+        m_bgm = BGM.Normal;
+
+        // 設定球回擊模式，預設回擊兩顆
+        ballStrategy = new BarCatchPrimeStrategy();
+
+        // 遊戲流程
+        m_gameProcess = GameProcess.WaitStart;
+		hasSet = true;
+	}
+
+    public BallCatchTomatoData(float CoolDown , int ballCount, int[] primes, int[] composites):base(CoolDown , ballCount, primes, composites)
+	{
+		// 設定冷卻時間
+		m_MaxCoolDown = CoolDown;
+		m_CoolDown = m_startCoolDown;
+        m_gameTime = m_MaxGameTime;
+
+        // 球的數量
+        maxBallCount = ballCount;
+        hasHitBallCount = 0;
+
+		// 設定關卡資訊
+        m_primes = primes;
+        m_composites = composites;
+        _startText = $"採集{maxBallCount}顆成熟(質數)番茄";
 
 		// 設定遊戲狀況
 		m_stageState = StageState.Lock; // 預設為關閉
@@ -76,6 +108,7 @@ public class BallCatchTomatoData : IStageData
 
     public override void GameStartProcess(){
         Reset();
+        MusicManager.SwitchMusic(m_bgm);
         MusicManager.PlayMusic();
         SetGameProcess( GameProcess.StartAnime);
 	}
@@ -118,7 +151,7 @@ public class BallCatchTomatoData : IStageData
         // GameMeditor.Instance.AddMoney(point); // 增加錢
         ChangeStageUI.ShowNextLevel(this); // 顯示前往下一關
         // PriceUI.Show(); // 開啟獎勵界面
-        MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
+        // MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
         // PhoneInputUI.EnableMoveBar(false); // 無法透過點擊螢幕來移動Bar
 
         CompleteStage(); // 完成關卡
@@ -128,11 +161,7 @@ public class BallCatchTomatoData : IStageData
 
     public void GameOverProcess()
     {
-        int point = GameMeditor.Instance.GetPoint();
-        // 增加錢
-        int money = point;
-
-        GameMeditor.Instance.AddMoney(point); // 增加錢
+        
         MusicManager.StopMusic(); // 關掉音樂，播放獎勵音樂
         ChangeStageUI.ShowDead(this); // 顯示死亡介面
         SetGameProcess(GameProcess.WaitStart);

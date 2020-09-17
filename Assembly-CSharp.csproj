@@ -56,6 +56,10 @@
      <Compile Include="Assets\Script\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Script\BaseClass\IUserInterface.cs" />
      <Compile Include="Assets\Script\Debug\StageSelectDebug.cs" />
+     <Compile Include="Assets\Script\Excel\BookHoder.cs" />
+     <Compile Include="Assets\Script\Excel\LoadStageData.cs" />
+     <Compile Include="Assets\Script\Excel\ReadHolders.cs" />
+     <Compile Include="Assets\Script\Excel\StageInfo.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\IAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\ResourceAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\BallFactory.cs" />
@@ -72,6 +76,7 @@
      <Compile Include="Assets\Script\GameObject\Wall\IWall.cs" />
      <Compile Include="Assets\Script\GameObject\Wall\RightLeftWall.cs" />
      <Compile Include="Assets\Script\GameObject\Wall\UpWall.cs" />
+     <Compile Include="Assets\Script\General\AudioSourceController.cs" />
      <Compile Include="Assets\Script\General\EventDetect.cs" />
      <Compile Include="Assets\Script\General\GameController.cs" />
      <Compile Include="Assets\Script\General\GameLoop.cs" />
@@ -102,6 +107,13 @@
      <Compile Include="Assets\Script\UI\ShowBall.cs" />
      <Compile Include="Assets\Script\UI\StageSelectUI.cs" />
      <Compile Include="Assets\Script\UI\StartPanel.cs" />
+     <Compile Include="Assets\SimpleLocalization\Downloader.cs" />
+     <Compile Include="Assets\SimpleLocalization\Example.cs" />
+     <Compile Include="Assets\SimpleLocalization\LocalizationManager.cs" />
+     <Compile Include="Assets\SimpleLocalization\LocalizationSync.cs" />
+     <Compile Include="Assets\SimpleLocalization\LocalizedDropdown.cs" />
+     <Compile Include="Assets\SimpleLocalization\LocalizedText.cs" />
+     <Compile Include="Assets\SimpleLocalization\Sheet.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/cobra/Unity專案/MathGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

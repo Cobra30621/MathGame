@@ -96,7 +96,7 @@ public class IStageDataCard : MonoBehaviour
      // 進入遊戲
     public void EnterStage(){
         // GameMeditor.Instance.EnterStage(stageData.stageName);
-        GameMeditor.Instance.EnterStage(stageData.BoxName, stageData.stageID);
+        GameMeditor.Instance.EnterStage(stageData._boxName, stageData.stageID);
     }
 
     // 購買關卡

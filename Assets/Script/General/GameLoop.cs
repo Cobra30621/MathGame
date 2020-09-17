@@ -49,11 +49,6 @@ public class GameLoop : MonoBehaviour
     
 
 
-    public void ResetStage(){
-        GameMeditor.Instance.SetStageData(level - 1);
-		GameMeditor.Instance.ResetStage();
-	}
-
     public void GoToStageSelect(){
         /* GameMeditor.Instance.RemoveAllBall();
         MusicManager.StopMusic();

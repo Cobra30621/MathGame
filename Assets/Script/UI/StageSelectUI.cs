@@ -26,6 +26,6 @@ public class StageSelectUI : MonoBehaviour
 
     public void Refresh(){
         int money = GameMeditor.Instance.GetMoney();
-        lab_money.text = $"$ {money}";
+        lab_money.text = $"{money}";
     }
 }

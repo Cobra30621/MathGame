@@ -111,6 +111,11 @@ public class GameMeditor
         stageSystem.AddHasHitBallCount();
     }
 
+
+	public void AddHeart(int num){
+        stageSystem.AddHeart(num);
+    }
+
 	public void LossHeart(int num){
         stageSystem.LossHeart(num);
     }
@@ -119,9 +124,6 @@ public class GameMeditor
         return stageSystem.GetStageComplete();
     }
 
-	public void SetStageData(int num){
-		stageSystem.SetStageData(num);
-	}
 
 	public string GetStageName(){
 		return stageSystem.GetStageName();
@@ -131,10 +133,7 @@ public class GameMeditor
         stageSystem.BossComingAnimeEnd();
     }
 
-	// 以ID進入關卡
-	public void EnterStage(string stageID){
-		stageSystem.EnterStage(stageID);
-	}
+	
 
 	// 以BoxName, BoxId進入關卡
 	public void EnterStage(string BoxName, int stageID){

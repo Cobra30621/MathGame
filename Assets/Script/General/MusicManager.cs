@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 public enum BGM{
-    Boss, Normal
+    Boss, Normal, Pass, Dead
 }
 public class MusicManager : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class MusicManager : MonoBehaviour
     // 音樂
     [SerializeField] AudioClip BossBGM;
     [SerializeField] AudioClip NormalBGM;
+    [SerializeField] AudioClip Pass;
+    [SerializeField] AudioClip Dead;
 
     void Awake () {
         if (instance==null)
@@ -28,7 +30,23 @@ public class MusicManager : MonoBehaviour
         
     }
 
+    public static void PlayMusicAtOnce (BGM bgm){
+        instance.Switch(bgm);
+        instance.musicPlayer.loop = false;
+        instance.musicPlayer.Play();
+        Debug.Log($"Playmusic{bgm}");
+    }
+
+
+    public static void PlayMusic (BGM bgm){
+        instance.Switch(bgm);
+        instance.musicPlayer.loop = true;
+        instance.musicPlayer.Play();
+        Debug.Log($"Playmusic{bgm}");
+    }
+
     public static void PlayMusic (){
+        instance.musicPlayer.loop = true;
         instance.musicPlayer.Play();
         Debug.Log("Playmusic");
     }
@@ -44,6 +62,12 @@ public class MusicManager : MonoBehaviour
                 break;
             case BGM.Boss:
                 musicPlayer.clip = BossBGM;
+                break;
+            case BGM.Pass:
+                musicPlayer.clip = Pass;
+                break;
+            case BGM.Dead:
+                musicPlayer.clip = Dead;
                 break;
 
         }

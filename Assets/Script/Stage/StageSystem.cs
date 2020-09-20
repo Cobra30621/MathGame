@@ -22,13 +22,30 @@ public class StageSystem : IGameSystem
 
     public Dictionary<string, IStageDataBox> stageBoxs = new Dictionary<string, IStageDataBox> ();
     public List<IStageDataCardBox> _cardBoxs = new List<IStageDataCardBox>();
+    private LoadStageData _loadStageData;
 
     public override void Initialize(){
         // InitializeStageData(); // 初始化所有關卡
-        LoadStageData loadStageData = new LoadStageData();
-        stageBoxs =  loadStageData.GetAllStageDataBox(); // 初始化所有關卡
-        
+        _loadStageData = new LoadStageData();
+        stageBoxs =  _loadStageData.GetAllStageDataBox(); // 初始化所有關卡
+
         SetStageData("第一農場", 0); // 設定現在是第幾關
+    }
+
+    // 儲存關卡進度資料
+    public void SaveLevelData(){
+        SaveData saveData = GameMeditor.Instance.GetSaveData();
+        Dictionary<string, int> saveLevelIDs  = new Dictionary<string, int>();
+
+        // 將現在所有關卡進度加入 saveLevelIDs
+        foreach ( var stage in stageBoxs )
+        {
+            // Debug.Log($"存檔{stage.Key}為{stage.Value.saveLevelID}");
+            saveLevelIDs.Add(stage.Key, stage.Value.saveLevelID);
+        }
+        saveData.saveLevelIDs = saveLevelIDs;
+
+        GameMeditor.Instance.SetSaveData(saveData); // 存入
     }
 
     // ============== Dictionary方法 ======================= 
@@ -83,10 +100,7 @@ public class StageSystem : IGameSystem
         SetGameProcess(GameProcess.Start); // 遊戲流程變成開始
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-
-
-
+    
     public override void Update(){
         if(nowStageData.hasSet == true)
             nowStageData.Update();
@@ -115,7 +129,9 @@ public class StageSystem : IGameSystem
         GradeInfoUI.RefreshInfo(); // 刷新分數介面
     }
 
-
+    public List<string> GetStageNames(){ // 取的關卡名稱清單
+        return  _loadStageData.GetStageNames();
+    }
 
     public IStageDataBox GetStageDataBox(string BoxName){
         if(stageBoxs.ContainsKey(BoxName))

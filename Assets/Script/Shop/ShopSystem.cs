@@ -24,8 +24,23 @@ public class ShopSystem : IGameSystem
     
 
     public void Initialize(){
-        m_money = 0; // 之後改讀取
-        m_maxHp = 10; // 初始化為10
+        // m_money = 0; // 之後改讀取
+        // m_maxHp = 10; // 初始化為10
+        LoadData();
+    }
+
+    // =========讀取資料==========
+    public void LoadData(){
+        SaveData save = meditor.GetSaveData();
+        m_money = save.money;
+        m_maxHp = save.maxHp;
+    }
+
+    public void SaveData(){
+        SaveData save = meditor.GetSaveData();
+        save.money = m_money;
+        save.maxHp = m_maxHp;
+        meditor.SetSaveData(save);
     }
 
     // =========造型=========
@@ -60,11 +75,15 @@ public class ShopSystem : IGameSystem
 
     public void AddMoney(int money){
         m_money += money;
+        SaveData(); // 儲存資料
     }
 
     public void LessMoney(int money){
         if(m_money >= money)
+        {
             m_money -= money;
+            SaveData(); // 儲存資料
+        }   
         else
             Debug.LogError("錢不夠卻扣錢");
     }
@@ -75,7 +94,7 @@ public class ShopSystem : IGameSystem
 
     //======Hp=========
     public void BuyHp(){
-        m_hpPrice = (m_maxHp -7) / 3;
+        m_hpPrice = (m_maxHp -7) / 2;
         if(WhetherBuyStage(m_hpPrice))
         {
             m_maxHp ++;

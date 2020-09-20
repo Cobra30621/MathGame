@@ -52,6 +52,7 @@ public class MusicManager : MonoBehaviour
     }
 
     public static void SwitchMusic(BGM bgm){
+        Debug.Log($"SwitchMusic{bgm}");
         instance.Switch(bgm);
     }
 

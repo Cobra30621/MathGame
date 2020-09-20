@@ -15,8 +15,66 @@ public class LoadStageData
     public Dictionary<string, IStageDataBox> stageBoxs = new Dictionary<string, IStageDataBox> ();
     public List<IStageData> stageDatas = new List<IStageData>(); // 儲存所有的StageData
 
+    List<string> saveLevelNames = new List<string>(); // 關卡的名稱清單
+
     public Dictionary<string, IStageDataBox> GetAllStageDataBox(){
         return CreateAllStageDataBox();
+    }
+
+    public List<string> GetStageNames(){
+        return saveLevelNames;
+    }
+
+    // 讀取資料
+    public void LoadData(){
+        Dictionary<string, int> saveLevelIDs = InitLevelData();  // 關卡資料建立基本架構
+
+        // 將資料讀進架構中，如果不在原資料的東西就定為0
+        saveLevelNames = new List<string>();
+        foreach ( var data in saveLevelIDs.Keys)
+        {
+            saveLevelNames.Add(data);
+        }
+
+        GameMeditor.Instance.LoadByJson(saveLevelNames); // 讀取關卡進度資料;
+        SaveData saveData = GameMeditor.Instance.GetSaveData(); // 讀取資料
+        Debug.Log(saveData);
+        Dictionary<string, int> saveLevelIDsLoad = saveData.saveLevelIDs;  // 讀取關卡進度資料;
+
+        foreach (string stageName in saveLevelNames)
+        {
+                // string stageName = "第一農場";
+            if(saveLevelIDsLoad.ContainsKey(stageName)) // 如果讀的資料有在裡面，賦予值
+            {
+                saveLevelIDs[stageName] = saveLevelIDsLoad[stageName];
+            }
+            else  // 如果讀的資料有在裡面，值給予0
+            {
+                saveLevelIDs[stageName] = 0;
+                Debug.Log($"初始化{stageName}為0");
+            }
+        }
+        
+        // 將所有的資料放入
+        foreach ( string stageName in saveLevelNames )
+        {
+            if(stageBoxs.ContainsKey(stageName))
+                stageBoxs[stageName].saveLevelID = saveLevelIDs[stageName];
+            else
+                Debug.LogError($"找不到在stageBoxs的{stageName}，有點問題歐");
+            stageBoxs[stageName].InitNowLevelID(); // 初始化所有的NowLevelID;
+        }
+    }
+
+    private Dictionary<string, int> InitLevelData(){
+        Dictionary<string, int> saveLevelIDs = new Dictionary<string, int>(); 
+
+        // 將現在所有關卡進度加入 saveLevelIDs
+        foreach ( var stage in stageBoxs )
+        {
+            saveLevelIDs.Add(stage.Key, 0);
+        }
+        return saveLevelIDs;
     }
 
     private Dictionary<string, IStageDataBox> CreateAllStageDataBox(){
@@ -40,6 +98,8 @@ public class LoadStageData
 
             CreateStageDataBox(stageName, numRange, preStage); // 創造關卡
         }
+
+        LoadData();// 讀取關卡進度資料
         return stageBoxs;
     }
 
@@ -105,6 +165,7 @@ public class LoadStageData
 
             info._stageName = row[0];
             info._primes = Array.ConvertAll(row[1].Split(' '), int.Parse);
+            Debug.Log("row[2].Split(' ')"+ row[2].Split(' '));
             info._composites = Array.ConvertAll(row[2].Split(' '), int.Parse) ;
             info._probability = Array.ConvertAll(row[3].Split(' '), int.Parse) ;
             info._startText = row[4];
@@ -112,26 +173,55 @@ public class LoadStageData
             info._fallingSpeed = float.Parse(row[6]);
             info._ballCountOnce = int.Parse(row[7]);
             info._CoolDown = int.Parse(row[8]);
+
             // 球的路徑
-            if (row[9] == "S")
-                info._ballMoveMethon = BallMoveMethon.Straight;
-            else if (row[9] == "R")
-                info._ballMoveMethon = BallMoveMethon.Ramdom;
+            switch (row[9]){
+                case "S":
+                    info._ballMoveMethon = BallMoveMethon.Straight;
+                    break;
+                case "R":
+                    info._ballMoveMethon = BallMoveMethon.Ramdom;
+                    break;
+                default :
+                    Debug.Log("路徑輸入錯誤"+ row[9]);
+                    break;
+            }
 
             // BGM
-            if (row[10] == "Normal")
-                info._bgm = BGM.Normal;
-            else if (row[10] == "Boss")
-                info._bgm = BGM.Boss;
+            string bgm = row[10];
+            switch (bgm){
+                case "Boss":
+                    info._bgm = BGM.Boss;
+                    break;
+                case "Normal":
+                    info._bgm = BGM.Normal;
+                    break;
+                default :
+                    Debug.Log("輸入錯誤"+ row[10]);
+                    break;
+            }
 
+            /*
+            if (row[10] == "Boss")
+            {
+                info._bgm = BGM.Boss;
+                Debug.Log($"BGM.Boss:{row[10]}");
+            }
+                
+            if (row[10] == "Normal")
+            {
+                Debug.Log($"BGM.Normal:{row[10]}");
+                info._bgm = BGM.Normal;
+            }
+            */
+            
+
+            Debug.Log($"info._bgm:{info._bgm}");
             //probability	startText	ballCounts	fallingSpeed	ballCountCreate	CoolDown	BallStrategy
 
             stageInfos.Add(info);
         }
 
-        foreach(StageInfo info in stageInfos){
-            Debug.Log($"Info:{info._primes[0]} {info._composites[0]}");
-        }
     }
 
 }

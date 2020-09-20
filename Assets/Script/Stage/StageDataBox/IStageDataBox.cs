@@ -16,19 +16,20 @@ public class IStageDataBox
     public IStageDataBox _nextStageBox; // 下一關
     public int nowLevelID; // 現在進行的關卡ID
     
+    public int saveLevelID;
     // 儲存用資料
+    /*
     public int saveLevelID{
         get{
-            if(_cardState == CardState.Complete)
-                return stageDatas.Count -1;
-            else
-                return nowLevelID;
+            return saveLevelID;
         }
         set {
-            saveLevelID = value;
-            nowLevelID = value;
+            if(_cardState == CardState.Complete)
+                saveLevelID =  stageDatas.Count -1;
+            else
+                saveLevelID = value;
         }
-    }
+    }*/
 
     public string nextLevelText{ 
         get{
@@ -75,6 +76,20 @@ public class IStageDataBox
 
     public void SetCardState(CardState cardState){
         _cardState = cardState;
+    }
+
+    public void InitNowLevelID(){
+        Debug.Log($"將{stageName}的nowLevelID設為{saveLevelID}");
+        if(saveLevelID == stageDatas.Count) // 如果進度為滿的，CardState.Complete
+        {
+            nowLevelID = 0; // 關卡重置
+            SetCardState(CardState.Complete);
+            UnlockNextStageBox();
+        }
+        else{
+            nowLevelID = saveLevelID;
+        }
+            
     }
 
     public void UpdateCardState(){
@@ -138,13 +153,19 @@ public class IStageDataBox
         if (id == (stageDatas.Count-1)) // 所有關卡完成
         {
             _cardState = CardState.Complete;
+            saveLevelID = stageDatas.Count; 
             Debug.Log($"完成{stageName}所有關卡");
             UnlockNextStageBox(); // 可以買下一關
         }
         else
         {
+            Debug.Log($"完成{stageName}的地{id+1}關:");
+            if(_cardState != CardState.Complete)
+                Debug.Log($"完成{stageName}的地{id+1}關");
+                saveLevelID = id + 1;
             // stageDatas[id + 1].m_stageState = StageState.Open; // 開啟下一關
         }
+        GameMeditor.Instance.SaveLevelData(); // 純檔
     }
 
     public bool WhetherCompleteStage(int id){
@@ -164,8 +185,3 @@ public class IStageDataBox
     }
 
 }
-
-/*
-
-
-*/

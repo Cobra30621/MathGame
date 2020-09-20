@@ -38,9 +38,10 @@ public class ChangeStageUI : MonoBehaviour
         instance.WhetherEnd();
     }
 
-    public void WhetherEnd(){
+    public void WhetherEnd(){ // 這應該夜放在stageData中
         // AudioSourceController.PlaySound("pass"); // 播放音效
         MusicManager.PlayMusicAtOnce(BGM.Pass);
+        
         IStageDataBox stageBox = _stageData._stageDataBox;
         if(stageBox.WhetherCompleteStage(_stageData.stageID))
         {

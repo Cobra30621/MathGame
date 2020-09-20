@@ -35,4 +35,8 @@ public class StageSelectDebug : MonoBehaviour
         StageSelectUI.RefreshInfo(); // 更新金錢介面
     }
 
+    public void ClearSaveData(){
+        GameMeditor.Instance.ClearSavaData();
+    }
+
 }

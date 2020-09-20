@@ -56,10 +56,6 @@
      <Compile Include="Assets\Script\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Script\BaseClass\IUserInterface.cs" />
      <Compile Include="Assets\Script\Debug\StageSelectDebug.cs" />
-     <Compile Include="Assets\Script\Excel\BookHoder.cs" />
-     <Compile Include="Assets\Script\Excel\LoadStageData.cs" />
-     <Compile Include="Assets\Script\Excel\ReadHolders.cs" />
-     <Compile Include="Assets\Script\Excel\StageInfo.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\IAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\AssetFactory\ResourceAssetFactory.cs" />
      <Compile Include="Assets\Script\Factory\BallFactory.cs" />
@@ -84,6 +80,8 @@
      <Compile Include="Assets\Script\General\MusicManager.cs" />
      <Compile Include="Assets\Script\General\PhoneInput.cs" />
      <Compile Include="Assets\Script\Practice\BallMove.cs" />
+     <Compile Include="Assets\Script\SaveSystem\SaveData.cs" />
+     <Compile Include="Assets\Script\SaveSystem\SaveSystem.cs" />
      <Compile Include="Assets\Script\Shop\ShopSystem.cs" />
      <Compile Include="Assets\Script\Stage\BallStrategy\BarCatchPrimeStrategy.cs" />
      <Compile Include="Assets\Script\Stage\BallStrategy\CompositeToOneStrategy.cs" />
@@ -99,6 +97,8 @@
      <Compile Include="Assets\Script\Stage\StageDataBox\IStageDataBox.cs" />
      <Compile Include="Assets\Script\Stage\StageInfoPanel.cs" />
      <Compile Include="Assets\Script\Stage\StageSystem.cs" />
+     <Compile Include="Assets\Script\StageData\LoadStageData.cs" />
+     <Compile Include="Assets\Script\StageData\StageInfo.cs" />
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
      <Compile Include="Assets\Script\UI\ChangeStageUI.cs" />
      <Compile Include="Assets\Script\UI\GradeInfoUI.cs" />

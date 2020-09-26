@@ -26,6 +26,8 @@ public class StageInfoPanel : MonoBehaviour
 
     private void Initialize(){
         // 讀取關卡Box資料，產生字卡
+        Debug.Log("stageSystem:"+ stageSystem);
+        Debug.Log("stageSystem.stageBoxs:"+ stageSystem.stageBoxs);
         Dictionary<string, IStageDataBox> stages = stageSystem.stageBoxs;
         foreach ( var stage in stages )
         {

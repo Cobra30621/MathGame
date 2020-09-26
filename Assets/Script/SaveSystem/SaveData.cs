@@ -10,7 +10,6 @@ public class SaveData{
     public int money; 
     [SerializeField]
     public int maxHp;
-    public bool WhetherFirstTime = true;
 
     public SaveData(){
         money = 0;

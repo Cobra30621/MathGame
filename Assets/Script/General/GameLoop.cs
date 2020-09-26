@@ -5,11 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
-    public int level ;
-
-    private BallFactory ballFactory;
     
-    int [] numList =  {2, 3, 4,5,6,7,8,9};
     static GameLoop instance;
 
     public GameProcess gameProcess;
@@ -20,7 +16,6 @@ public class GameLoop : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
             GameMeditor.Instance.Initinal();
-            ballFactory = MainFactory.GetBallFactory();
         }
         else if (this!=instance)
         {
@@ -34,8 +29,8 @@ public class GameLoop : MonoBehaviour
         gameProcess =  GameMeditor.Instance.GetNowGameProcess(); // 確認現在遊戲流程
     }
 
+    // ============== Debug ================
     public void Test(){
-        
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene("MainGame");
     }
@@ -47,20 +42,8 @@ public class GameLoop : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
-
-
     public void GoToStageSelect(){
-        /* GameMeditor.Instance.RemoveAllBall();
-        MusicManager.StopMusic();
-        GameMeditor.Instance.ResetStage();
-        GameMeditor.Instance.SetGameProcess(GameProcess.WaitStart);
-        SceneManager.LoadScene("StageSelect");
-        */
         GameMeditor.Instance.LeaveStage();
-    }
-
-    public void TimeUp(){
-        GameMeditor.Instance.SetGameTime(1);
     }
 
     public void AddMoney(){

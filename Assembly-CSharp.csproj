@@ -114,6 +114,7 @@
      <Compile Include="Assets\SimpleLocalization\LocalizedDropdown.cs" />
      <Compile Include="Assets\SimpleLocalization\LocalizedText.cs" />
      <Compile Include="Assets\SimpleLocalization\Sheet.cs" />
+     <None Include="Assets\LunarConsole\readme.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/cobra/Unity專案/MathGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -688,6 +689,10 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{DA94E744-7FC7-9AE2-2AE9-0D22E0EE7AAC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="LunarConsole.csproj">
+      <Project>{EE78E9B6-8CD4-D1DD-2B83-6E600DBBF042}</Project>      <Name>LunarConsole</Name>    </ProjectReference>
+    <ProjectReference Include="LunarConsoleEditor.csproj">
+      <Project>{514A3F84-3E9C-28C9-A4B9-D394526A0BF9}</Project>      <Name>LunarConsoleEditor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

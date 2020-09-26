@@ -25,10 +25,9 @@ public class StageSystem : IGameSystem
     private LoadStageData _loadStageData;
 
     public override void Initialize(){
-        // InitializeStageData(); // 初始化所有關卡
+        Debug.Log("CreateStageSystem");
         _loadStageData = new LoadStageData();
         stageBoxs =  _loadStageData.GetAllStageDataBox(); // 初始化所有關卡
-
         SetStageData("第一農場", 0); // 設定現在是第幾關
     }
 

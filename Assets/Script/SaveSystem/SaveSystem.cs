@@ -56,23 +56,12 @@ public class SaveSystem : IGameSystem
         _saveData = JsonUtility.FromJson<SaveData>(saveJsonStr);
         Debug.Log($"<color=blue>讀取：{saveJsonStr}</color>");
 
-
-        // 建立用來存stageName的清單
-        // List<string> saveLevelNames = new List<string>();
-        /*
-        foreach ( var data in _saveData.saveLevelIDs.Keys)
-        {
-            saveLevelNames.Add(data);
-        }*/
-
         foreach (string stageName in stageNames)
         {
             // string stageName = "第一農場";
             _saveData.saveLevelIDs.Add( stageName,  PlayerPrefs.GetInt(stageName));
             Debug.Log($"<color=blue>讀檔{stageName}為{_saveData.saveLevelIDs[stageName]}</color>");
         }
-
-        // 將現在所有關卡進度加入 saveLevelIDs
         
     }
 }

@@ -54,9 +54,7 @@ public class BallBar : MonoBehaviour
             transform.DOMove(touchPosition, moveTime); // 移動BAr
         }
         
-
-
-        /*
+        
         if(Input.GetKey(KeyCode.RightArrow))
             transform.position += new Vector3(speed * 0.1f,0,0);
         if(Input.GetKey(KeyCode.LeftArrow))
@@ -71,7 +69,7 @@ public class BallBar : MonoBehaviour
             WhetherExist = true;
             spriteRenderer.color = new Color(1f,1f,1f,1f);
         }
-        */
+        
     }
 
     private void PhoneInputProcess(){

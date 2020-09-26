@@ -26,9 +26,9 @@ public class GameMeditor
 	private GameMeditor(){}
 
 	public void Initinal(){
+		stageSystem = new StageSystem(this);
 		saveSystem = new SaveSystem(this);
 		ballSystem = new BallSystem(this);
-		stageSystem = new StageSystem(this);
 		shopSystem = new ShopSystem(this);
 		
 

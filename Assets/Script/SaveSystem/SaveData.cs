@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveData{
     [SerializeField]
-    public Dictionary<string, int> saveLevelIDs = new Dictionary<string, int>();
+    public Dictionary<string, int> stageBoxProgresses = new Dictionary<string, int>();
     
     [SerializeField]
     public int money; 
@@ -12,26 +12,32 @@ public class SaveData{
     public int maxHp;
 
     public SaveData(){
-        money = 0;
-        maxHp = 10;
+        InitSaveData();
     }
 
     public void InitSaveData(){
         money = 0;
         maxHp = 10;
-        saveLevelIDs = InitLevelData();
+        stageBoxProgresses = CreateStageBoxProgressesFrame();
+    }
+    
+    public void AddStageBoxProcress(string name, int progress){
+        if(stageBoxProgresses.ContainsKey(name))
+            stageBoxProgresses[name] = progress;
+        else
+            stageBoxProgresses.Add(name, progress);
     }
 
-    private Dictionary<string, int> InitLevelData(){
-        Dictionary<string, int> saveLevelIDs = new Dictionary<string, int>(); 
+    private Dictionary<string, int> CreateStageBoxProgressesFrame(){
+        Dictionary<string, int> stageBoxProgresses = new Dictionary<string, int>(); 
 
-        List<string> stageNames = GameMeditor.Instance.GetStageNames();
-        // 將現在所有關卡進度加入 saveLevelIDs
+        List<string> stageNames = GameMeditor.Instance.GetStageBoxNames();
+        // 將現在所有關卡進度加入 stageBoxProgresses
         foreach ( string name in stageNames )
         {
-            saveLevelIDs.Add(name, 0);
+            stageBoxProgresses.Add(name, 0);
         }
-        return saveLevelIDs;
+        return stageBoxProgresses;
     }
 
 }

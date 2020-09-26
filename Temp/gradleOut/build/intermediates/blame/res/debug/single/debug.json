@@ -1,0 +1,466 @@
+[
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_more.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_more.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_actions_empty_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_actions_empty_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/anim_lunar_console_slide_in_top.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/anim/lunar_console_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_settings.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_settings.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_settings.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_settings.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_base_button_selector.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_base_button_selector.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-ldpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-ldpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_log_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_log_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_clear.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_clear.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_unlock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_unlock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_clear.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_clear.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xxxhdpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xxxhdpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_log_details_dialog.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_log_details_dialog.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_switch_thumb.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_console.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_console.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_console_view.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_console_view.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_more.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_more.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_variable_value_text.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_variable_value_text.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/anim_lunar_console_slide_out_top.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/anim/lunar_console_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_log_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_log_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_log_error.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_log_error.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_more.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_more.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_actions_empty_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_actions_empty_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_switch_track_off.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_switch_track_off.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_close.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_close.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_selector_value_text.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_selector_value_text.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_log_error.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_log_error.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_settings.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_settings.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_email.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_email.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_switch_track_on.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_switch_track_on.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_close.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_close.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_actions_empty_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_actions_empty_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_warning.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_warning.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_console_log_view.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_console_log_view.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_lock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_lock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_variable_help.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_variable_help.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_email.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_email.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-hdpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-hdpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_clear.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_clear.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_console_log_entry.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_console_log_entry.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_clipboard.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_clipboard.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_log_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_log_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_lock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_lock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_resize_hor.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_resize_hor.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_email.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_email.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_filter_text.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_filter_text.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_clear.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_clear.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_unlock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_unlock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_unlock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_unlock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_close.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_close.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_move_resize.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_move_resize.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xhdpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xhdpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_console.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_console.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_variable_help.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_variable_help.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_variable_help.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_variable_help.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_resize_ver.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_resize_ver.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_resize_hor.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_resize_hor.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_settings_property.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_settings_property.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_more.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_more.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_log_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_log_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xxxhdpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xxxhdpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-mdpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-mdpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_resize_ver.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_resize_ver.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_email.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_email.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi_app_banner.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/drawable-xhdpi/app_banner.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_variable_help.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_variable_help.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_close.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_close.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_clipboard.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_clipboard.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_close.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_close.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_resize_hor.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_resize_hor.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xxhdpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xxhdpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-ldpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-ldpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_resize_hor.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_resize_hor.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_more.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_more.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_actions_empty_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_actions_empty_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_console.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_console.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_switch_track.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_switch_track.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_activity_settings.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_activity_settings.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_clipboard.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_clipboard.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_settings.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_settings.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_button_clipboard.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_button_clipboard.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_log_error.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_log_error.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_unlock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_unlock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_log.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_log.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_console.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_console.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_log_error.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_log_error.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_clear.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_clear.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xxhdpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xxhdpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_move_resize.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_move_resize.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_email.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_email.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_resize_ver.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_resize_ver.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_console.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_console.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-xhdpi_app_icon.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-xhdpi/app_icon.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/menu_lunar_console_more_options_menu.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/menu/lunar_console_more_options_menu.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_actions_empty_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_actions_empty_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-hdpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-hdpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_settings_header.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_settings_header.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_log_warning.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_log_warning.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_button_lock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_button_lock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_log.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_log.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_button_unlock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_button_unlock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/layout_lunar_console_layout_console_action_view.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/layout/lunar_console_layout_console_action_view.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_lock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_lock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_variable_help.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_variable_help.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_resize_ver.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_resize_ver.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_resize_hor.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_resize_hor.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_button_settings.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_button_settings.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_lunar_console_icon_log.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxhdpi-v4/lunar_console_icon_log.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_log.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_log.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_clipboard.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_clipboard.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xhdpi-v4_lunar_console_icon_button_lock.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xhdpi-v4/lunar_console_icon_button_lock.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_icon_log_error.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_icon_log_error.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-hdpi-v4_lunar_console_icon_log.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-hdpi-v4/lunar_console_icon_log.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/mipmap-mdpi_app_icon_round.png.flat",
+        "source": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/src/main/res/mipmap-mdpi/app_icon_round.png"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable_lunar_console_shape_collapse_text_background.xml.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable/lunar_console_shape_collapse_text_background.xml"
+    },
+    {
+        "merged": "/Users/cobra/Unity專案/MathGame/Temp/gradleOut/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_lunar_console_icon_resize_ver.png.flat",
+        "source": "/Users/cobra/.gradle/caches/transforms-1/files-1.1/lunar-console.aar/2ed6ea6325808cddf577ac688b48a493/res/drawable-xxxhdpi-v4/lunar_console_icon_resize_ver.png"
+    }
+]

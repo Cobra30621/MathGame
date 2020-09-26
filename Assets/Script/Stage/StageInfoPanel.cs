@@ -14,7 +14,7 @@ public class StageInfoPanel : MonoBehaviour
     private GameObject test;
 
 
-    void Awake(){
+    void Start(){
         stageSystem = GameMeditor.Instance.GetStageSystem();
         Initialize();
     }

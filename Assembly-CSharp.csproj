@@ -97,7 +97,7 @@
      <Compile Include="Assets\Script\Stage\StageDataBox\IStageDataBox.cs" />
      <Compile Include="Assets\Script\Stage\StageInfoPanel.cs" />
      <Compile Include="Assets\Script\Stage\StageSystem.cs" />
-     <Compile Include="Assets\Script\StageData\LoadStageData.cs" />
+     <Compile Include="Assets\Script\StageData\LoadDataSystem.cs" />
      <Compile Include="Assets\Script\StageData\StageInfo.cs" />
      <Compile Include="Assets\Script\UI\BallPointUI.cs" />
      <Compile Include="Assets\Script\UI\ChangeStageUI.cs" />

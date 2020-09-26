@@ -18,6 +18,7 @@ public class GameMeditor
 	}
 
 	// 遊戲系統
+	private LoadDataSystem loadDataSystem;
 	private BallSystem ballSystem; 
 	private StageSystem stageSystem;
 	private ShopSystem shopSystem;
@@ -26,20 +27,30 @@ public class GameMeditor
 	private GameMeditor(){}
 
 	public void Initinal(){
-		stageSystem = new StageSystem(this);
+		loadDataSystem = new LoadDataSystem(this);
 		saveSystem = new SaveSystem(this);
+		stageSystem = new StageSystem(this);
 		ballSystem = new BallSystem(this);
 		shopSystem = new ShopSystem(this);
 		
-
 	}
 
 	public void Update(){
-		ballSystem.Update();
-		stageSystem.Update();
-		shopSystem.Update();
+		loadDataSystem.Update();
 		saveSystem.Update();
+		stageSystem.Update();
+		ballSystem.Update();
+		shopSystem.Update();
 	}
+
+	// ===============LoadDataSystem================
+	public Dictionary<string, IStageDataBox> GetStageBoxs(){
+        return loadDataSystem.GetStageBoxs();
+    }
+
+    public List<string> GetStageBoxNames(){
+        return loadDataSystem.GetStageBoxNames();
+    }
 
 	// ----------------BallSystem------------------
 	public void AddBall(Ball ball){
@@ -179,9 +190,6 @@ public class GameMeditor
         stageSystem.SaveLevelData();
     }
 
-	public List<string> GetStageNames(){ // 取的關卡名稱清單
-        return  stageSystem.GetStageNames();
-    }
 	
 
 	// =============ShopSystem================
@@ -228,7 +236,7 @@ public class GameMeditor
 
 	// ========================== 存檔系統 ==========================
 	public SaveData GetSaveData(){
-        return saveSystem._saveData;
+        return saveSystem.GetSaveData();
     }
 
     public void SetSaveData(SaveData saveData){
@@ -239,9 +247,5 @@ public class GameMeditor
         saveSystem.ClearSavaData();
     }
 
-	public void LoadByJson(List<string> stageNames)
-    { 
-		saveSystem.LoadByJson(stageNames);
-	}
 
 }

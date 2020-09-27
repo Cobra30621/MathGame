@@ -24,8 +24,6 @@ public class ShopSystem : IGameSystem
     
 
     public void Initialize(){
-        // m_money = 0; // 之後改讀取
-        // m_maxHp = 10; // 初始化為10
         LoadData();
     }
 

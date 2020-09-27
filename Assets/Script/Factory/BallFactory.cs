@@ -14,16 +14,6 @@ public class BallFactory : IBallFactory
     // BallImage
     private Sprite img_judge, img_prime, img_boss, img_composite, img_dead;
 
-    // 設定球的分數
-    private Dictionary< BallColor, int > points = new Dictionary< BallColor, int >()
-        { 
-            {BallColor.Judge, 100},
-            {BallColor.Prime, 50},
-            {BallColor.Boss, 500},
-            {BallColor.Composite, 100},
-            {BallColor.Dead, 250}
-        };
-
     public void SetBallSpeed(float speed){
         ballSpeed = speed;
     }
@@ -254,7 +244,6 @@ public class BallFactory : IBallFactory
         }
 
         List<int> numsList = new List<int>();
-        bool WhetherFind = false;
 
         // 找出所有因數
         for(int i = 1; i <= num; i++){

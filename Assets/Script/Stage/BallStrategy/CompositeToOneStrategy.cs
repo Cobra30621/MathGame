@@ -76,8 +76,6 @@ public class CompositeToOneStrategy : IBallStrategy
         {
             BallPointUI.CreateGetPointLabel(onBall.GetPosition(), onBall.GetPoint()); // 顯示加分
         }
-
-
     }
 
     public override void UpWallOnBallEnter(Ball onBall){

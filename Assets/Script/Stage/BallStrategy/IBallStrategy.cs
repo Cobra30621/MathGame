@@ -22,13 +22,13 @@ public class IBallStrategy
         _ballMoveMethon = ballMoveMethon; // 可以改成非隨機
     }
 
-    public virtual void BarOnBallEnter(Ball onBall){}
+    public virtual void BarOnBallEnter(Ball onBall){} // 底下Bar的回擊方式
 
-    public virtual void DownWallOnBallEnter(Ball onBall){}
+    public virtual void DownWallOnBallEnter(Ball onBall){} // 底部牆壁的回擊方式
 
-    public virtual void UpWallOnBallEnter(Ball onBall){}
+    public virtual void UpWallOnBallEnter(Ball onBall){} // 上方牆壁的回擊方式
 
-    public virtual int GetMaxCombol(int num){ return 0;}
+    public virtual int GetMaxCombol(int num){ return 0;} // 計算Combol的方法
 
     public void CreateBall(int num, BallColor color){
         if (ballFactory == null) // 產生球工廠

@@ -98,7 +98,7 @@ public class GameMeditor
         stageSystem.AddCombol();
     }
     
-    public void MissCombol (){
+    public void  MissCombol (){
         stageSystem.MissCombol();
     }
 
